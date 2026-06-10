@@ -15,9 +15,6 @@ Produce a Docker image that:
 - Serves everything as a web UI (no external API keys required if possible)
 
 ## Design
-
-The UI follows an **ASCII / runic aesthetic**: monospace fonts, Unicode box-drawing characters, rune-like glyphs, dark background, minimal color (think terminal / ancient script). This theme applies to all visual elements — moon phase display, sky map, constellation labels, and layout chrome.
-
 ## Architecture (planned)
 
 - **Single container** — one `Dockerfile`, one process (or small process supervisor if needed)
