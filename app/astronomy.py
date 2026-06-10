@@ -105,7 +105,7 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
 
     # Rise / set
     location = wgs84.latlon(lat, lon)
-    t0 = ts.now()
+    t0 = t
     t1 = ts.tt_jd(t0.tt + 1.0)
     rise_str = set_str = transit_str = None
 
