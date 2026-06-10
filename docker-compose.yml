@@ -1,0 +1,8 @@
+services:
+  moondocker:
+    build: .
+    ports:
+      - "7432:7432"
+    environment:
+      LAT: ""   # fallback latitude; leave blank to use browser geolocation
+      LON: ""   # fallback longitude
