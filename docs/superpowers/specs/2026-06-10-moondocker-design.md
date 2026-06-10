@@ -20,6 +20,7 @@ A single Docker container that serves a web UI showing the current moon phase, i
 | Astronomy | `skyfield` (moon phase, star positions, rise/set, constellation visibility) |
 | Star catalog | Hipparcos (bundled with skyfield, downloaded at image build time) |
 | Constellation data | Bundled `constellations.json` — per constellation: IAU name/abbr, list of HIP star pairs (line segments), list of HIP star IDs for visibility check |
+| Mythology data | Bundled `mythology.json` — multiple trivia entries per constellation; server picks one daily using date as seed |
 | Sky map | Server-side SVG embedded in API response |
 | Frontend | Static HTML/CSS/JS served by FastAPI's StaticFiles |
 
@@ -67,6 +68,10 @@ Returns JSON:
     ...
   ],
   "skymap_svg": "<svg ...>...</svg>",
+  "mythology": {
+    "constellation": "Orion",
+    "text": "Orion was a giant huntsman in Greek myth, placed among the stars by Zeus at the request of Artemis after his death. His belt of three stars was known to the Egyptians as the resting place of Osiris."
+  },
   "computed_at": "2026-06-10T22:00:00Z",
   "location": { "lat": 40.71, "lon": -74.01 }
 }
@@ -123,6 +128,12 @@ Browser
 │  Gemini (Gem)    Rise 19:55  Set 03:30   ▲ ABOVE  │
 │  ...                                               │
 └────────────────────────────────────────────────────┘
+
+┌─── ᛚᛖᚷᛖᚾᛞ : Orion ────────────────────────────────┐
+│  Orion was a giant huntsman in Greek myth, placed  │
+│  among the stars by Zeus at the request of         │
+│  Artemis after his death...                        │
+└────────────────────────────────────────────────────┘
 ```
 
 Rune glyphs used as section headers (ᛗᛟᛟᚾ = "MOON", ᚾᛁᚷᚺᛏ ᛋᚲᚤ = "NIGHT SKY", etc.).
@@ -139,6 +150,7 @@ Using `skyfield`:
 - **Moon rise/set/transit:** `skyfield.almanac.find_risings`/`find_settings` for the current day at observer location.
 - **Visible constellations:** Load the bundled constellation JSON (see below). A constellation is "visible tonight" if the average altitude of its stick-figure stars is above −10° at local midnight for the observer — accounts for partial visibility near the horizon.
 - **Star positions for sky map:** For all Hipparcos stars brighter than magnitude 5.5, compute alt/az at the current time for the observer. Filter to `alt > 0` (above horizon). Pass to `skymap.py`.
+- **Mythology trivia:** Load `mythology.json` (structure: `{ "Orion": ["trivia1", "trivia2", ...], ... }`). Filter keys to visible constellations. Use `hash(today's date string)` as a deterministic seed to pick one constellation and one entry — changes daily, never repeats until the full list cycles. The same request on the same day always returns the same trivia (consistent for all users/refreshes).
 
 ---
 
@@ -189,6 +201,7 @@ services:
 - `/api/sky` called with invalid lat/lon → FastAPI returns 422 with a clear message.
 - Skyfield data missing at runtime (shouldn't happen if Dockerfile is correct) → 500 with logged traceback; container logs explain the issue.
 - Rise/set computation: if the moon doesn't rise or set (polar conditions) → display "Circumpolar" or "Below horizon all day" instead.
+- Mythology API call with no visible constellations that have trivia → fall back to any entry in the full `mythology.json`.
 
 ---
 
