@@ -1,1 +1,112 @@
-/* placeholder */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #0a0a0f;
+  color: #7aab7a;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 1.25rem;
+}
+
+#app {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+#status {
+  color: #4a7a4a;
+  padding: 0.5rem 0;
+}
+
+#status.error {
+  color: #8a4a4a;
+}
+
+/* ── Panels ─────────────────────────────────────────── */
+
+.panel {
+  border: 1px solid #2a3a2a;
+  margin-bottom: 1.25rem;
+}
+
+.panel-hdr {
+  background: #0d150d;
+  border-bottom: 1px solid #2a3a2a;
+  padding: 0.25rem 0.75rem;
+  color: #4a7a4a;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+}
+
+.panel > div {
+  padding: 0.75rem;
+}
+
+/* ── Moon panel ─────────────────────────────────────── */
+
+.moon-phase {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.moon-glyph {
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.dim {
+  color: #4a7a4a;
+}
+
+.moon-times {
+  color: #6a9a6a;
+}
+
+.moon-times span {
+  margin-right: 1.5rem;
+}
+
+/* ── Sky map ────────────────────────────────────────── */
+
+#skymap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ── Constellations ─────────────────────────────────── */
+
+.const-row {
+  display: flex;
+  gap: 0.6rem;
+  padding: 0.15rem 0;
+  border-bottom: 1px solid #131f13;
+}
+
+.const-row:last-child {
+  border-bottom: none;
+}
+
+.const-marker.above { color: #7aab7a; }
+.const-marker.below { color: #334433; }
+
+.const-name { flex: 1; }
+
+.const-abbr { color: #4a7a4a; }
+
+/* ── Legend / mythology ─────────────────────────────── */
+
+.myth-text {
+  color: #6a9a6a;
+  line-height: 1.75;
+}

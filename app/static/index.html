@@ -2,10 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>moondocker</title>
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+  <div id="app">
+    <p id="status">locating…</p>
+    <div id="panels" hidden>
+      <section class="panel">
+        <header class="panel-hdr">ᛗᛟᛟᚾ</header>
+        <div id="moon"></div>
+      </section>
+      <section class="panel">
+        <header class="panel-hdr">ᚾᛁᚷᚺᛏ ᛋᚲᚤ</header>
+        <div id="skymap"></div>
+      </section>
+      <section class="panel">
+        <header class="panel-hdr">ᚲᛟᚾᛋᛏᛖᛚᛚᚨᛏᛁᛟᚾᛋ</header>
+        <div id="constellations"></div>
+      </section>
+      <section class="panel">
+        <header class="panel-hdr" id="legend-hdr">ᛚᛖᚷᛖᚾᛞ</header>
+        <div id="legend"></div>
+      </section>
+    </div>
+  </div>
   <script src="/static/app.js"></script>
 </body>
 </html>
