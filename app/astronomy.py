@@ -1,11 +1,13 @@
 import math
 import hashlib
+import logging
 import os
 from datetime import date as _date
 
+logger = logging.getLogger(__name__)
+
 SKYFIELD_DATA_DIR = os.environ.get("SKYFIELD_DATA", "/skyfield-data")
 
-# Lazy-loaded skyfield globals (populated in Task 5 functions)
 _loader = None
 _eph = None
 _stars_df = None
@@ -20,7 +22,7 @@ _PHASES: list[tuple[float, str, str]] = [
     (202.5, "Full Moon",       "🌕"),
     (247.5, "Waning Gibbous",  "🌖"),
     (292.5, "Last Quarter",    "🌗"),
-    (360.0, "Waning Crescent", "🌘"),
+    (337.5, "Waning Crescent", "🌘"),
 ]
 
 
@@ -29,7 +31,7 @@ def phase_name_from_elongation(elongation: float) -> tuple[str, str]:
     for threshold, name, glyph in _PHASES:
         if elongation < threshold:
             return name, glyph
-    return "New Moon", "🌑"
+    return "Waning Crescent", "🌘"
 
 
 # ── Mythology selection ───────────────────────────────────────────────────────
@@ -46,7 +48,7 @@ def pick_mythology(
     """
     if date_str is None:
         date_str = _date.today().isoformat()
-    seed = int(hashlib.md5(date_str.encode()).hexdigest(), 16)
+    seed = int(hashlib.md5(date_str.encode(), usedforsecurity=False).hexdigest(), 16)
 
     candidates = [n for n in visible_names if n in mythology]
     if not candidates:
@@ -54,7 +56,9 @@ def pick_mythology(
 
     chosen = candidates[seed % len(candidates)]
     entries = mythology[chosen]
-    entry = entries[(seed // max(len(candidates), 1)) % len(entries)]
+    # Use a different bit-range of the seed to avoid entropy collapse from
+    # the integer division that would occur if we used seed // len(candidates).
+    entry = entries[(seed >> 8) % len(entries)]
     return {"constellation": chosen, "text": entry}
 
 
@@ -84,7 +88,7 @@ def _get_stars_df():
     return _stars_df
 
 
-def get_moon_data(ts, lat: float, lon: float) -> dict:
+def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
     """Return moon phase, illumination, and rise/set/transit times (UTC strings)."""
     from skyfield.api import wgs84
     from skyfield import almanac
@@ -92,7 +96,8 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
     from skyfield.searchlib import find_maxima
 
     eph = _get_eph()
-    t = ts.now()
+    if t is None:
+        t = ts.now()
 
     # Phase angle via ecliptic longitude difference
     earth = eph["earth"]
@@ -103,9 +108,10 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
     illumination = round((1 - math.cos(math.radians(elongation))) / 2 * 100, 1)
     phase_name, phase_glyph = phase_name_from_elongation(elongation)
 
-    # Rise / set
     location = wgs84.latlon(lat, lon)
-    t0 = t
+    # Search from UTC midnight today so we capture a moonrise that already happened
+    utc_dt = t.utc_datetime()
+    t0 = ts.from_datetime(utc_dt.replace(hour=0, minute=0, second=0, microsecond=0))
     t1 = ts.tt_jd(t0.tt + 1.0)
     rise_str = set_str = transit_str = None
 
@@ -118,9 +124,8 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
             elif evt == 0 and set_str is None:
                 set_str = t_evt.utc_strftime("%H:%M")
     except Exception:
-        pass  # polar conditions — leave None
+        logger.exception("moon rise/set lookup failed (lat=%s lon=%s)", lat, lon)
 
-    # Transit (altitude maximum)
     try:
         observer = earth + location
 
@@ -128,12 +133,12 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
             alt, _, _ = observer.at(t_inner).observe(eph["moon"]).apparent().altaz()
             return alt.degrees
 
-        _moon_alt.rough_period = 0.5
+        _moon_alt.rough_period = 1.0  # Moon transits ~once per diurnal day
         transit_times, _ = find_maxima(t0, t1, _moon_alt)
         if len(transit_times) > 0:
             transit_str = transit_times[0].utc_strftime("%H:%M")
     except Exception:
-        pass
+        logger.exception("moon transit lookup failed (lat=%s lon=%s)", lat, lon)
 
     return {
         "phase_name":       phase_name,
@@ -146,7 +151,7 @@ def get_moon_data(ts, lat: float, lon: float) -> dict:
 
 
 def get_visible_constellations(
-    ts, lat: float, lon: float, constellation_data: list[dict]
+    ts, lat: float, lon: float, constellation_data: list[dict], t=None
 ) -> list[dict]:
     """
     Return constellations whose average stick-figure star altitude > -10°.
@@ -157,16 +162,32 @@ def get_visible_constellations(
     eph = _get_eph()
     stars_df = _get_stars_df()
     observer = eph["earth"] + wgs84.latlon(lat, lon)
-    t = ts.now()
+    if t is None:
+        t = ts.now()
+
+    # Collect all unique HIP IDs across all constellations, then do a single
+    # vectorized observation instead of one Skyfield call per star.
+    all_hip_ids = sorted({
+        hip_id
+        for const in constellation_data
+        for hip_id in const["hip_ids"]
+        if hip_id in stars_df.index
+    })
+
+    if not all_hip_ids:
+        return []
+
+    batch_df = stars_df.loc[all_hip_ids]
+    stars_obj = Star.from_dataframe(batch_df)
+    alt_arr, _, _ = observer.at(t).observe(stars_obj).apparent().altaz()
+    hip_alt: dict[int, float] = {
+        int(hip_id): float(a)
+        for hip_id, a in zip(all_hip_ids, alt_arr.degrees)
+    }
 
     visible = []
     for const in constellation_data:
-        alts = []
-        for hip_id in const["hip_ids"]:
-            if hip_id in stars_df.index:
-                star = Star.from_dataframe(stars_df.loc[hip_id:hip_id])
-                alt, _, _ = observer.at(t).observe(star).apparent().altaz()
-                alts.append(float(alt.degrees))
+        alts = [hip_alt[h] for h in const["hip_ids"] if h in hip_alt]
         if alts and (sum(alts) / len(alts)) > -10.0:
             visible.append({
                 "name":          const["name"],
@@ -177,7 +198,7 @@ def get_visible_constellations(
 
 
 def get_skymap_stars(
-    ts, lat: float, lon: float, constellation_data: list[dict]
+    ts, lat: float, lon: float, constellation_data: list[dict], t=None
 ) -> tuple[list[dict], list[dict]]:
     """
     Return (star_list, const_lines) for sky map rendering.
@@ -189,7 +210,8 @@ def get_skymap_stars(
     eph = _get_eph()
     stars_df = _get_stars_df()
     observer = eph["earth"] + wgs84.latlon(lat, lon)
-    t = ts.now()
+    if t is None:
+        t = ts.now()
 
     bright = stars_df[stars_df["magnitude"] <= 5.5]
     stars_obj = Star.from_dataframe(bright)
