@@ -33,36 +33,32 @@
   hash. Fix: in `main.py` do `from . import astronomy, skymap` and call
   `astronomy.pick_mythology(...)` etc., **or** patch `app.main.*` in the tests. Pick one and
   apply it consistently.
-- [ ] **T6.2. Static-file test ordering.** `test_static_css_served` / `test_static_js_served`
-  need files created in Task 7. Either create the static files as part of Task 6, or mark
-  those two tests to run after Task 7. Don't leave them red.
-- [ ] **T6.3. Run with the venv:** `.venv/bin/python -m pytest tests/test_main.py -v`.
+- [x] **T6.2. Static-file test ordering.** Static files exist; `test_static_css_served` /
+  `test_static_js_served` both pass in the full suite.
+- [x] **T6.3. Run with the venv:** confirmed — full suite runs green with `.venv/bin/python -m pytest`.
 
 ## Task 7 (frontend) — corrections
 
-- [ ] **T7.1. Fix runic header typo in `app.js`.** `renderMythology` sets the header to
-  `'ᛚᛖᛖᛖᛚ : '` (malformed). It should be `'ᛚᛖᚷᛖᚾᛞ : '` (LEGEND) to match `index.html`
-  and the spec layout.
-- [ ] **T7.2. After Task 7, full suite green:** `.venv/bin/python -m pytest -v` including the
-  two static-file tests.
+- [x] **T7.1. Fix runic header typo in `app.js`.** Done — `renderMythology` now sets the
+  header to `'ᛚᛖᚷᛖᚾᛞ : '` (LEGEND), matching `index.html` and the spec layout.
+- [x] **T7.2. After Task 7, full suite green:** confirmed — `.venv/bin/python -m pytest -v`
+  reports 32 passed, including the two static-file tests.
 
 ## Decision needed (spec deviation)
 
-- [ ] **D1. Constellation visibility time.** Design spec §151 says "at local midnight";
-  `get_visible_constellations` uses `ts.now()`. **Recommend keeping `now`** (consistent with
-  the live sky map, more useful) — just confirm it's intentional and note it in the spec.
+- [x] **D1. Constellation visibility time.** Decided: keep `ts.now()` (consistent with the
+  live sky map, more useful). Documented as intentional in CLAUDE.md "Known issues" (D1).
 
 ## Housekeeping (any time)
 
-- [ ] **H1. Untrack stray brainstorm artifacts.** `.superpowers/brainstorm/*/state/server.{log,pid}`
-  are committed; `.superpowers/` isn't gitignored. `git rm -r --cached .superpowers/` and add
-  `.superpowers/` to `.gitignore`.
+- [x] **H1. Untrack stray brainstorm artifacts.** Done — `.superpowers/` is in `.gitignore`
+  and `git ls-files .superpowers/` returns nothing (no longer tracked).
 
 ## Optional / defer
 
-- [ ] **O1. Vectorize `get_visible_constellations`.** It does ~100 single-star skyfield
-  observations in a nested loop and re-calls `observer.at(t)` per star. Hoist `observer.at(t)`
-  and/or batch like `get_skymap_stars`. Perf only, not correctness.
+- [x] **O1. Vectorize `get_visible_constellations`.** Done — it now collects all unique HIP
+  IDs across constellations and does a single batched `observer.at(t).observe(Star.from_dataframe(...))`
+  call (astronomy.py:173–190), instead of one observation per star.
 
 ---
 

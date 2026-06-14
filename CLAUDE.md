@@ -63,5 +63,3 @@ data/mythology.json       — Per-constellation mythology blurbs, keyed by const
 
 - **Mock binding (T6.1):** `conftest.py` patches are on `app.main.*`; ensure `main.py` keeps using `from .astronomy import …` (direct name binding) so the patches stay effective. If you switch to `astronomy.get_moon_data(...)` style calls, update the patch targets to `app.astronomy.*`.
 - **Constellation visibility time (D1):** The spec says "at local midnight" but `get_visible_constellations` uses `ts.now()`. This is intentional — `now` is more useful for a live sky view.
-- **`.superpowers/` artifacts (H1):** The `.superpowers/brainstorm/` directory is not gitignored and contains server log/pid files. Add `.superpowers/` to `.gitignore` and run `git rm -r --cached .superpowers/` to untrack them.
-- **`get_visible_constellations` performance (O1):** Makes one skyfield observation per star in a loop (~100 iterations). Could be batched like `get_skymap_stars` does. Correctness is fine; this is a speed-only improvement.
