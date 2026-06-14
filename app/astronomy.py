@@ -84,7 +84,11 @@ def _get_stars_df():
     if _stars_df is None:
         from skyfield.data import hipparcos
         with _get_loader().open("hip_main.dat") as f:
-            _stars_df = hipparcos.load_dataframe(f)
+            df = hipparcos.load_dataframe(f)
+        dropped = df["ra_hours"].isna() | df["dec_degrees"].isna()
+        if dropped.any():
+            logger.warning("dropping %d Hipparcos stars with NaN ra/dec", dropped.sum())
+        _stars_df = df[~dropped]
     return _stars_df
 
 
