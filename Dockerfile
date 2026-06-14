@@ -2,15 +2,18 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
-# Pre-download skyfield data at build time so the container runs offline
-RUN python - <<'EOF'
-from skyfield.api import Loader
-from skyfield.data import hipparcos
-load = Loader('/skyfield-data')
-load('de421.bsp')
-with load.open('hip_main.dat') as f:
-    hipparcos.load_dataframe(f)
-EOF
+# Pre-download skyfield data at build time so the container runs offline.
+# Uses python -c (not a heredoc) so it works with both the legacy builder and BuildKit.
+# hip_main.dat is fetched via hipparcos.URL — load.open(filename) only opens local files.
+# If your build environment lacks outbound network, pass --network=host to docker build.
+RUN python -c "\
+from skyfield.api import Loader; \
+from skyfield.data import hipparcos; \
+load = Loader('/skyfield-data'); \
+load('de421.bsp'); \
+hipparcos.load_dataframe(load.open(hipparcos.URL))" && \
+    test -s /skyfield-data/de421.bsp && \
+    test -s /skyfield-data/hip_main.dat
 COPY data/ ./data/
 COPY app/ ./app/
 ENV LAT="" LON="" PORT=7432 SKYFIELD_DATA=/skyfield-data
