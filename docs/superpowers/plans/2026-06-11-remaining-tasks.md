@@ -20,20 +20,13 @@
 
 ## Blockers — fix before resuming Task 6
 
-- [ ] **B1. Add `pandas` to `requirements.txt`.** Without it the Dockerfile's build-time
-  `hipparcos.load_dataframe(f)` fails, and `_get_stars_df()` fails at runtime. Add
-  `pandas>=2.2` and `.venv/bin/pip install pandas` for local runs.
-- [ ] **B2. Decide how to run Task 8 (no Docker here).** Options: (a) install Docker, (b) run
-  Task 8 on another machine, or (c) substitute a local smoke test — run uvicorn from `.venv`
-  with `SKYFIELD_DATA` pointed at a locally-downloaded data dir, curl `/api/sky` and `/`.
-- [ ] **B3. Local skyfield data dir for any real run.** `SKYFIELD_DATA` defaults to
-  `/skyfield-data` (the container path). Download `de421.bsp` + `hip_main.dat` into a local
-  dir and export `SKYFIELD_DATA` before running the app locally. (Unit tests mock skyfield,
-  so they don't need this — only real runs / local smoke test do.)
+- [x] **B1. Add `pandas` to `requirements.txt`.** Done — `pandas>=2.2` added, installed in `.venv`.
+- [x] **B2. Task 8 Docker strategy.** Docker is installed on this machine. Build + smoke test completed 2026-06-13.
+- [x] **B3. Local skyfield data dir.** Downloaded `de421.bsp` (17 MB) and `hip_main.dat` (51 MB) to `/tmp/skyfield-data` for local runs. Container bakes both files at build time via `--network=host`.
 
 ## Task 6 (FastAPI app) — corrections to the plan as written
 
-- [ ] **T6.1. Fix mock binding.** `main.py` uses `from .astronomy import get_moon_data, …`,
+- [x] **T6.1. Fix mock binding.** `main.py` uses `from .astronomy import get_moon_data, …`,
   binding the names into `app.main` at import. `test_sky_api_success` patches
   `app.astronomy.*`, which then has no effect — so the **real, date-seeded `pick_mythology`
   runs** and `data["mythology"]["constellation"] == "Orion"` passes only by chance of today's
