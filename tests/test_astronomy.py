@@ -1,5 +1,9 @@
 import pytest
-from app.astronomy import phase_name_from_elongation, pick_mythology
+from app.astronomy import (
+    phase_name_from_elongation,
+    pick_mythology,
+    polar_visibility_note,
+)
 
 
 # ── phase_name_from_elongation ────────────────────────────────────────────────
@@ -64,3 +68,26 @@ def test_mythology_text_belongs_to_chosen_constellation():
     result = pick_mythology(["Orion", "Leo"], MYTH, date_str="2026-06-10")
     expected_texts = MYTH[result["constellation"]]
     assert result["text"] in expected_texts
+
+
+# ── polar_visibility_note ─────────────────────────────────────────────────────
+
+def test_polar_note_none_when_moon_rises():
+    assert polar_visibility_note("13:20", None, -5.0) is None
+
+
+def test_polar_note_none_when_moon_sets():
+    assert polar_visibility_note(None, "03:09", 20.0) is None
+
+
+def test_polar_note_circumpolar_when_transit_above_horizon():
+    assert polar_visibility_note(None, None, 12.5) == "Circumpolar (up all day)"
+
+
+def test_polar_note_below_horizon_when_transit_below():
+    assert polar_visibility_note(None, None, -8.0) == "Below horizon all day"
+
+
+def test_polar_note_none_when_transit_unknown():
+    # transit altitude could not be computed → cannot classify
+    assert polar_visibility_note(None, None, None) is None

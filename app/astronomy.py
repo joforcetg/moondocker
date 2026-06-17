@@ -34,6 +34,21 @@ def phase_name_from_elongation(elongation: float) -> tuple[str, str]:
     return "Waning Crescent", "🌘"
 
 
+def polar_visibility_note(
+    rise: str | None, set_: str | None, transit_alt: float | None
+) -> str | None:
+    """
+    Classify the moon when it neither rises nor sets in the search window.
+
+    At high latitudes the moon can stay above (circumpolar) or below the horizon
+    for the whole day, so there is no rise/set event. The transit (highest point)
+    altitude distinguishes the two. Returns None when a normal rise or set exists.
+    """
+    if rise is None and set_ is None and transit_alt is not None:
+        return "Circumpolar (up all day)" if transit_alt > 0 else "Below horizon all day"
+    return None
+
+
 # ── Mythology selection ───────────────────────────────────────────────────────
 
 def pick_mythology(
@@ -130,6 +145,7 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
     except Exception:
         logger.exception("moon rise/set lookup failed (lat=%s lon=%s)", lat, lon)
 
+    transit_alt = None
     try:
         observer = earth + location
 
@@ -141,6 +157,7 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
         transit_times, _ = find_maxima(t0, t1, _moon_alt)
         if len(transit_times) > 0:
             transit_str = transit_times[0].utc_strftime("%H:%M")
+            transit_alt = float(_moon_alt(transit_times[0]))
     except Exception:
         logger.exception("moon transit lookup failed (lat=%s lon=%s)", lat, lon)
 
@@ -151,6 +168,7 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
         "rise":             rise_str,
         "set":              set_str,
         "transit":          transit_str,
+        "note":             polar_visibility_note(rise_str, set_str, transit_alt),
     }
 
 
@@ -222,20 +240,27 @@ def get_skymap_stars(
     astrometric = observer.at(t).observe(stars_obj)
     alt_arr, az_arr, _ = astrometric.apparent().altaz()
 
-    star_list: list[dict] = []
-    hip_above: set[int] = set()
+    # Vectorized filter to stars above the horizon. iterrows() is row-by-row
+    # Python and dominates this call for the ~1300 bright stars; numpy masking
+    # over the already-computed alt/az arrays is the same result, far faster.
+    alts = alt_arr.degrees
+    azs = az_arr.degrees
+    hip_ids = bright.index.to_numpy()
+    mags = bright["magnitude"].to_numpy()
+    above_mask = alts > 0
 
-    for i, (hip_id, row) in enumerate(bright.iterrows()):
-        a = float(alt_arr.degrees[i])
-        z = float(az_arr.degrees[i])
-        if a > 0:
-            star_list.append({
-                "alt":       a,
-                "az":        z,
-                "magnitude": float(row["magnitude"]),
-                "hip_id":    int(hip_id),
-            })
-            hip_above.add(int(hip_id))
+    star_list: list[dict] = [
+        {
+            "alt":       float(a),
+            "az":        float(z),
+            "magnitude": float(m),
+            "hip_id":    int(h),
+        }
+        for a, z, m, h in zip(
+            alts[above_mask], azs[above_mask], mags[above_mask], hip_ids[above_mask]
+        )
+    ]
+    hip_above: set[int] = {int(h) for h in hip_ids[above_mask]}
 
     const_lines: list[dict] = []
     for const in constellation_data:

@@ -22,6 +22,7 @@ def test_sky_api_success(client):
     assert data["skymap_svg"] == MOCK_SVG
     assert data["mythology"]["constellation"] == "Orion"
     assert data["location"] == {"lat": 40.71, "lon": -74.01}
+    assert data["computed_at"].endswith("Z")
 
 
 def test_sky_api_rejects_invalid_lat(client):
