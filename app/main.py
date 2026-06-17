@@ -79,6 +79,7 @@ async def get_sky(
         "constellations": consts,
         "skymap_svg":     svg,
         "mythology":      myth,
+        "computed_at":    t.utc_iso(),
         "location":       {"lat": lat, "lon": lon},
     }
 

@@ -74,6 +74,11 @@ body {
   margin-right: 1.5rem;
 }
 
+.moon-note {
+  color: #6a9a6a;
+  font-style: italic;
+}
+
 /* ── Sky map ────────────────────────────────────────── */
 
 #skymap svg {

@@ -68,7 +68,7 @@ If neither browser geolocation nor `LAT`/`LON` are available, the page shows a m
 
 ## What it shows
 
-- **Moon** — phase name, Unicode glyph, illumination %, and today's rise / transit / set times (UTC).
+- **Moon** — phase name, Unicode glyph, illumination %, and today's rise / transit / set times (UTC). At polar latitudes where the moon never crosses the horizon, it shows "Circumpolar" or "Below horizon all day" instead.
 - **Night sky map** — SVG projection of stars brighter than magnitude 5.5 with constellation stick figures, cardinal directions, and zenith at center.
 - **Constellations** — list of 20 constellations sorted by whether they are above the horizon (▲) or rising/setting (▽).
 - **Mythology** — a daily rotation of mythology entries, seeded by date (same entry for all users on the same day).
