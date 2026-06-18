@@ -40,7 +40,7 @@ def generate_skymap(
             x2, y2 = hip_xy[b]
             lines_svg.append(
                 f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
-                f'stroke="#3a5a3a" stroke-width="0.8" stroke-opacity="0.7"/>'
+                f'stroke="#7a5230" stroke-width="0.8" stroke-opacity="0.7"/>'
             )
 
     stars_svg = []
@@ -48,7 +48,7 @@ def generate_skymap(
         x, y = hip_xy[s["hip_id"]]
         r = star_radius(s["magnitude"])
         stars_svg.append(
-            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="#c8e6c8" fill-opacity="0.9"/>'
+            f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="#ece0c0" fill-opacity="0.9"/>'
         )
 
     cardinals = [("N", 0), ("E", 90), ("S", 180), ("W", 270)]
@@ -59,7 +59,7 @@ def generate_skymap(
         lx = CX + (x - CX) * scale
         ly = CY + (y - CY) * scale
         cardinal_svg.append(
-            f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#556655" font-size="10" '
+            f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#6b5a44" font-size="10" '
             f'text-anchor="middle" dominant-baseline="middle" '
             f'font-family="monospace">{label}</text>'
         )
@@ -67,8 +67,8 @@ def generate_skymap(
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" '
         f'viewBox="0 0 {VIEWBOX_SIZE} {VIEWBOX_SIZE}" '
-        f'width="{VIEWBOX_SIZE}" height="{VIEWBOX_SIZE}" style="background:#050510">',
-        f'<circle cx="{CX:.1f}" cy="{CY:.1f}" r="{R:.1f}" fill="#050510" stroke="#223322" stroke-width="1"/>',
+        f'width="{VIEWBOX_SIZE}" height="{VIEWBOX_SIZE}" style="background:#0a0705">',
+        f'<circle cx="{CX:.1f}" cy="{CY:.1f}" r="{R:.1f}" fill="#0a0705" stroke="#3a2c1d" stroke-width="1"/>',
         *lines_svg,
         *stars_svg,
         *cardinal_svg,

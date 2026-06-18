@@ -1,13 +1,14 @@
 :root {
-  --bg:     #0a0a0f;
-  --dim:    #3a5a3a;
-  --mid:    #6a9a6a;
-  --bright: #9fd09f;
-  --accent: #d0a24a;
-  --error:  #c06a6a;
-  --line:   #1d2a1d;
-  --line-2: #2a3a2a;
-  --glow:   0 0 6px rgba(159, 208, 159, 0.35);
+  --bg:     #100b09;  /* warm ink-black */
+  --dim:    #6b5a44;  /* faded sepia */
+  --mid:    #c9b48a;  /* aged parchment */
+  --bright: #e8d6ad;  /* lit parchment */
+  --accent: #d08a3a;  /* candle gold (moon) */
+  --blood:  #8c3b2e;  /* oxblood */
+  --error:  #b5503f;
+  --line:   #2a1f16;  /* faint sepia hairline */
+  --line-2: #3a2c1d;
+  --glow:   0 0 7px rgba(208, 138, 58, 0.30);  /* ember glow */
 }
 
 *, *::before, *::after {
@@ -25,20 +26,21 @@ body {
   padding: 1.25rem;
 }
 
-/* Subtle CRT scanline overlay */
+/* Warm candlelight: a glow from above, vignette into the dark at the edges */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9999;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0,
-    rgba(0, 0, 0, 0) 2px,
-    rgba(0, 0, 0, 0.18) 3px,
-    rgba(0, 0, 0, 0) 4px
-  );
+  background:
+    radial-gradient(120% 90% at 50% -10%,
+      rgba(208, 138, 58, 0.10) 0%,
+      rgba(208, 138, 58, 0.03) 30%,
+      rgba(0, 0, 0, 0) 60%),
+    radial-gradient(140% 120% at 50% 45%,
+      rgba(0, 0, 0, 0) 55%,
+      rgba(0, 0, 0, 0.55) 100%);
 }
 
 #app {
@@ -103,23 +105,22 @@ body::before {
 /* ── Panels ──────────────────────────────────────────── */
 
 .panel {
-  border: 1px solid var(--line-2);
   display: flex;
   flex-direction: column;
 }
 
 .panel-hdr {
-  background: #0d150d;
+  padding: 0 0 0.4rem 0;
+  margin-bottom: 0.7rem;
   border-bottom: 1px solid var(--line-2);
-  padding: 0.3rem 0.75rem;
-  color: var(--bright);
-  letter-spacing: 0.1em;
-  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.22em;
+  font-size: 14px;
   text-shadow: var(--glow);
 }
 
 .panel > div {
-  padding: 0.85rem;
+  padding: 0;
 }
 
 /* ── Moon panel ──────────────────────────────────────── */
@@ -175,12 +176,13 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 1.25rem 0.5rem;
   background:
     radial-gradient(circle at center,
-      rgba(159, 208, 159, 0.05) 0%,
+      rgba(208, 138, 58, 0.06) 0%,
       rgba(0, 0, 0, 0) 70%),
-    #05070a;
+    #0a0705;
+  border-radius: 2px;
 }
 
 #skymap {
@@ -195,7 +197,7 @@ body::before {
   height: auto;
   max-width: min(520px, 70vh);
   margin: 0 auto;
-  filter: drop-shadow(0 0 4px rgba(159, 208, 159, 0.25));
+  filter: drop-shadow(0 0 5px rgba(208, 138, 58, 0.22));
 }
 
 /* ── Constellations ──────────────────────────────────── */
@@ -210,17 +212,18 @@ body::before {
   display: inline-flex;
   align-items: baseline;
   gap: 0.35rem;
-  border: 1px solid var(--line);
-  padding: 0.15rem 0.55rem;
 }
 
 .const-chip.above {
   color: var(--bright);
-  border-color: var(--line-2);
 }
 
 .const-chip.below {
   color: var(--dim);
+}
+
+.const-chip.above .const-marker {
+  color: var(--accent);
 }
 
 .const-chip .const-abbr {
@@ -276,8 +279,7 @@ body::before {
   .panel > div   { padding: 1.15rem; }
   .moon-glyph    { font-size: 3rem; }
   .moon-times span { margin-right: 2rem; }
-  #constellations { gap: 0.7rem 1.1rem; }
-  .const-chip    { padding: 0.3rem 0.75rem; }
+  #constellations { gap: 0.6rem 1.3rem; }
   .const-chip .const-abbr { font-size: 13px; }
   .myth-text     { font-size: 16px; line-height: 1.9; }
 }
