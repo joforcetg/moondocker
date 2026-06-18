@@ -1,10 +1,10 @@
 import pytest
 from app.astronomy import (
     phase_name_from_elongation,
-    pick_mythology,
     pick_default_folklore,
     pick_constellation_myth,
     polar_visibility_note,
+    _date_seed,
 )
 
 
@@ -26,50 +26,6 @@ def test_phase_name_from_elongation(elongation, expected_name, expected_glyph):
     name, glyph = phase_name_from_elongation(elongation)
     assert name == expected_name
     assert glyph == expected_glyph
-
-
-# ── pick_mythology ────────────────────────────────────────────────────────────
-
-MYTH = {
-    "Orion":  ["Orion fact A", "Orion fact B"],
-    "Leo":    ["Leo fact A"],
-    "Gemini": ["Gemini fact A", "Gemini fact B"],
-}
-
-
-def test_mythology_restricts_to_visible_constellations():
-    result = pick_mythology(["Orion"], MYTH, date_str="2026-01-01")
-    assert result["constellation"] == "Orion"
-
-
-def test_mythology_falls_back_when_no_visible_match():
-    result = pick_mythology([], MYTH, date_str="2026-01-01")
-    assert result["constellation"] in MYTH
-
-
-def test_mythology_falls_back_when_visible_have_no_entry():
-    result = pick_mythology(["Taurus"], MYTH, date_str="2026-01-01")
-    assert result["constellation"] in MYTH
-
-
-def test_mythology_is_deterministic_for_same_date():
-    r1 = pick_mythology(["Orion", "Leo", "Gemini"], MYTH, date_str="2026-06-10")
-    r2 = pick_mythology(["Orion", "Leo", "Gemini"], MYTH, date_str="2026-06-10")
-    assert r1 == r2
-
-
-def test_mythology_result_has_required_keys():
-    result = pick_mythology(["Orion"], MYTH, date_str="2026-06-10")
-    assert "constellation" in result
-    assert "text" in result
-    assert isinstance(result["text"], str)
-    assert len(result["text"]) > 0
-
-
-def test_mythology_text_belongs_to_chosen_constellation():
-    result = pick_mythology(["Orion", "Leo"], MYTH, date_str="2026-06-10")
-    expected_texts = MYTH[result["constellation"]]
-    assert result["text"] in expected_texts
 
 
 # ── polar_visibility_note ─────────────────────────────────────────────────────
@@ -138,6 +94,17 @@ def test_myth_none_when_absent():
 def test_myth_role_ordering_lead_first():
     # Orion is lead in m1 only; pool=[m1]; Scorpius is lead in m2, second in m1
     assert pick_constellation_myth("Orion", _MYTHS, date_str="2026-06-18")["title"] == "M1"
+
+
+def test_myth_role_ordering_prefers_lead():
+    # Scorpius pool sorted by role: [m2 (lead), m1 (second)]; pick a date whose
+    # daily index resolves to 0 and assert the lead-role myth (m2/"M2") wins.
+    for d in range(1, 60):
+        ds = f"2026-06-{d:02d}" if d <= 30 else f"2026-07-{d - 30:02d}"
+        if _date_seed(ds) % 2 == 0:
+            assert pick_constellation_myth("Scorpius", _MYTHS, date_str=ds)["title"] == "M2"
+            return
+    raise AssertionError("no date produced index 0")
 
 
 def test_myth_is_daily_deterministic():

@@ -51,32 +51,6 @@ def polar_visibility_note(
 
 # ── Mythology selection ───────────────────────────────────────────────────────
 
-def pick_mythology(
-    visible_names: list[str],
-    mythology: dict[str, list[str]],
-    date_str: str | None = None,
-) -> dict[str, str]:
-    """
-    Pick one mythology entry deterministically by date.
-    Candidates are filtered to visible constellations that have entries;
-    falls back to the full mythology dict if none match.
-    """
-    if date_str is None:
-        date_str = _date.today().isoformat()
-    seed = int(hashlib.md5(date_str.encode(), usedforsecurity=False).hexdigest(), 16)
-
-    candidates = [n for n in visible_names if n in mythology]
-    if not candidates:
-        candidates = list(mythology.keys())
-
-    chosen = candidates[seed % len(candidates)]
-    entries = mythology[chosen]
-    # Use a different bit-range of the seed to avoid entropy collapse from
-    # the integer division that would occur if we used seed // len(candidates).
-    entry = entries[(seed >> 8) % len(entries)]
-    return {"constellation": chosen, "text": entry}
-
-
 def _date_seed(date_str: str | None) -> int:
     if date_str is None:
         date_str = _date.today().isoformat()
