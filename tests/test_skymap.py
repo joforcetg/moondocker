@@ -52,3 +52,24 @@ def test_cardinal_labels_present():
     svg = generate_skymap([], [])
     for label in ("N", "S", "E", "W"):
         assert f">{label}<" in svg
+
+
+def test_lines_tagged_with_constellation():
+    stars = [
+        {"alt": 80, "az": 0, "magnitude": 1.0, "hip_id": 1},
+        {"alt": 70, "az": 90, "magnitude": 1.0, "hip_id": 2},
+        {"alt": 60, "az": 180, "magnitude": 4.0, "hip_id": 9},  # background
+    ]
+    lines = [{"hip_a": 1, "hip_b": 2, "constellation": "Orion"}]
+    svg = generate_skymap(stars, lines)
+    assert 'data-constellation="Orion"' in svg
+    assert '<line' in svg and 'data-constellation="Orion"' in svg
+    # figure stars (1,2) tagged; background star (9) not
+    assert svg.count('class="figstar"') == 2
+    assert svg.count('data-constellation') == 3  # 1 line + 2 figure stars
+
+
+def test_no_constellation_attr_on_background_star():
+    stars = [{"alt": 60, "az": 180, "magnitude": 4.0, "hip_id": 9}]
+    svg = generate_skymap(stars, [])
+    assert "data-constellation" not in svg
