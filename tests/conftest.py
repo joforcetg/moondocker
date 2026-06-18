@@ -10,21 +10,20 @@ MOCK_MOON = {
     "transit": "00:00",
     "note": None,
 }
-MOCK_CONSTELLATIONS = [
-    {"name": "Orion", "abbr": "Ori", "above_horizon": True},
-    {"name": "Gemini", "abbr": "Gem", "above_horizon": True},
-]
-MOCK_MYTHOLOGY = {"constellation": "Orion", "text": "Orion was a hunter."}
+MOCK_LEGEND = {"id": "x", "title": "The Wendigo", "culture": "Algonquian", "text": "..."}
 MOCK_SVG = "<svg></svg>"
 
 
 @pytest.fixture()
 def client():
     with patch("app.main.get_moon_data", return_value=MOCK_MOON), \
-         patch("app.main.get_visible_constellations", return_value=MOCK_CONSTELLATIONS), \
+         patch("app.main.get_visible_constellations", return_value=[
+             {"name": "Orion", "abbr": "Ori", "above_horizon": True},
+             {"name": "Gemini", "abbr": "Gem", "above_horizon": True},
+         ]), \
          patch("app.main.get_skymap_stars", return_value=([], [])), \
          patch("app.main.generate_skymap", return_value=MOCK_SVG), \
-         patch("app.main.pick_mythology", return_value=MOCK_MYTHOLOGY):
+         patch("app.main.pick_default_folklore", return_value=MOCK_LEGEND):
         from fastapi.testclient import TestClient
         from app.main import app
         yield TestClient(app)
