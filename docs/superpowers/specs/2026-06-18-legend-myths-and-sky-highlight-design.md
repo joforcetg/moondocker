@@ -19,8 +19,11 @@ backend work. Five threads:
    classical-period artwork fetched live from Wikimedia Commons (cached).
 5. **Sky highlight** — clicking a constellation card lights up that
    constellation's stick figure in the night-sky SVG.
+6. **Visual refresh** — gothic/baroque type, a near monochrome (black & white)
+   palette with the warm accents kept sparse, and a themed b/w moon illustration
+   replacing the emoji phase glyph.
 
-This keeps the Candlelit Grimoire theme, vanilla JS, no build step. It changes
+This keeps the Candlelit Grimoire mood, vanilla JS, no build step. It changes
 the `/api/sky` contract (one field renamed, several additive fields) and adds
 one new endpoint and one new external-network module.
 
@@ -32,13 +35,17 @@ one new endpoint and one new external-network module.
 - Moon panel shows next new/full dates.
 - The live external fetch is isolated, cached, and degrades gracefully to text
   when offline or unmatched — the core sky view stays self-contained.
+- Gothic/baroque typography, a near-monochrome palette, and a themed moon
+  illustration, self-hosted (no CDN, no build step).
 
 ## Non-goals (YAGNI)
 
 - No JS framework, bundler, or build step.
 - No per-user state, accounts, or persistence beyond an in-memory cache.
 - No backend almanac features beyond next new/full moon.
-- No image generation — artwork is real, sourced from Wikimedia Commons.
+- No image generation — myth artwork is real, sourced from Wikimedia Commons;
+  the moon illustration is drawn programmatically as SVG (not an asset).
+- No web-font CDN — fonts are bundled woff2 files served from `/static`.
 - No new colors beyond the existing Candlelit Grimoire palette (candle-gold is
   reused for the highlight).
 
@@ -57,6 +64,49 @@ one new endpoint and one new external-network module.
   category per constellation; server pulls a random category member.
 - **Sky highlight:** clicking a card highlights that constellation's stick
   figure (lines + member stars) in the SVG.
+- **Typography:** gothic **blackletter for titles** (wordmark, panel headers,
+  legend/myth titles); **baroque old-style serif for body** (prose, labels).
+- **Palette:** keep the Candlelit Grimoire hues but push **toward black &
+  white** — ink-black background, bone/off-white text; candle-gold and oxblood
+  demoted to sparse accents (highlight, key values) only.
+- **Moon illustration:** replace the emoji phase glyph with a **themed b/w SVG
+  moon** (engraving look), drawn client-side from illumination + waxing/waning.
+
+## Visual refresh
+
+### Typography
+
+- **Blackletter (titles):** an open-licensed gothic display face (e.g.
+  UnifrakturCook or Pirata One, SIL OFL) for the `moondocker` wordmark, the runic
+  panel headers' companion text, and legend/myth titles.
+- **Baroque serif (body):** an old-style serif (e.g. EB Garamond or Cormorant,
+  SIL OFL) for myth/folklore prose, field labels, and values.
+- **Self-hosted:** woff2 files in `app/static/fonts/`, declared via `@font-face`
+  in `style.css`. No CDN, no build step. Monospace is dropped from the UI chrome;
+  the sky-map cardinal labels may stay a simple serif/mono for legibility.
+- Runic panel headers (user loves them) are kept.
+
+### Palette (near-monochrome)
+
+- Background: ink-black (existing warm ink-black, slightly desaturated).
+- Text: bone / off-white at a few brightness steps for hierarchy (replacing the
+  saturated aged-parchment tone with a more neutral bone).
+- **Accents, used sparingly:** candle-gold for the moon illustration, the active
+  sky highlight, and a few key values (e.g. `% lit`); oxblood for an occasional
+  emphasis. Everything else is grayscale.
+- The sky-map SVG default colors shift toward monochrome too: bone stars on
+  near-black, neutral-gray stick-figure lines, gray cardinals — so the
+  candle-gold `.hl` highlight reads strongly against a b/w field.
+
+### Moon illustration
+
+- A client-side SVG disk with a shaded terminator, rendered from
+  `moon.illumination_pct` and the waxing/waning sense derived from
+  `moon.phase_name` ("Waxing"/"Waning"/"New"/"Full"). Engraving/woodcut b/w
+  styling: bone-lit limb, deep-shadow dark side, a fine outline; candle-gold used
+  only as a faint glow, in keeping with the sparse-accent rule.
+- `moon.phase_glyph` (emoji) stays in the `/api/sky` response for compatibility
+  but is no longer displayed.
 
 ## Data model
 
@@ -197,6 +247,10 @@ key).
   known-safe ASCII/Latin (e.g. `Boötes`).
 - Matched in the frontend via the whitespace-token selector
   `[data-constellation~="Name"]`.
+- **Monochrome recolor:** default star/line/cardinal colors shift to a
+  near-b/w scheme (bone stars, neutral-gray lines, gray cardinals) so the
+  candle-gold `.hl` highlight stands out. Color values are still set in
+  `skymap.py`; the highlight color lives in `style.css` via the `.hl` class.
 
 ## Frontend
 
@@ -210,6 +264,11 @@ key).
 
 - **`render`:** legend shows `data.legend` (default folklore: title · culture ·
   text), no image, on load.
+- **`renderMoon` → SVG moon:** instead of printing `moon.phase_glyph`, build a
+  themed b/w SVG moon disk with a shaded terminator from `moon.illumination_pct`
+  and the waxing/waning sense parsed from `moon.phase_name`. Engraving styling
+  per the Visual refresh section. Drawn with the same safe DOM construction
+  (no raw-string `innerHTML` of untrusted data).
 - **`renderConstellations` → cards:** name, abbr, `▲/▽` marker, above-first sort
   (kept). A card is clickable only when its constellation entry has
   `has_myth: true`; non-clickable cards are dimmed. Cards are keyboard
@@ -229,12 +288,23 @@ key).
 - SVG injection stays `DOMParser` + `importNode` (unchanged); the inline SVG
   nodes are queryable for highlighting.
 
+### `app/static/fonts/` (new)
+
+Bundled woff2 files: one blackletter display face (titles) and one baroque
+old-style serif (body), both SIL OFL. Declared via `@font-face` in `style.css`.
+
 ### `app/static/style.css`
 
-- **Typography pass:** refine type scale, spacing rhythm, hierarchy across panels
-  within the Candlelit Grimoire palette.
+- **`@font-face`** for the bundled blackletter + serif; apply blackletter to
+  titles (wordmark, panel headers, legend/myth titles) and serif to body.
+- **Palette shift:** move CSS custom properties toward near-monochrome
+  (ink-black bg, bone text at a few steps); candle-gold / oxblood reduced to
+  sparse-accent variables (highlight, key values).
+- **Typography pass:** type scale, spacing rhythm, hierarchy across panels in the
+  new palette.
 - **Card styles:** active / clickable / dimmed states.
 - **Figure / credit styles** for the legend artwork.
+- **Moon SVG styles** for the engraving look (limb, terminator, faint glow).
 - **Highlight styles:** `#skymap line.hl` candle-gold + glow; `#skymap
   circle.hl` brighter/larger; `#skymap.has-hl line:not(.hl)` dimmed. All
   transitions gated behind `prefers-reduced-motion: reduce`.
@@ -281,6 +351,12 @@ key).
     highlight.
   - Non-`has_myth` cards are visibly non-clickable.
   - Moon panel shows next new/full dates.
+  - Moon SVG matches the phase (correct lit fraction + waxing/waning side) at
+    new, crescent, quarter, gibbous, and full.
+  - Blackletter renders on titles, serif on body; fonts load from `/static`
+    (no network/CDN).
+  - Palette reads near-b/w with sparse gold/oxblood accents; sky-map highlight
+    pops in candle-gold.
   - `prefers-reduced-motion` disables highlight/fade transitions.
 - `.venv/bin/python -m pytest -v` green.
 
