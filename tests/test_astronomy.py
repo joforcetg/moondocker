@@ -7,6 +7,7 @@ from app.astronomy import (
     pick_constellation_myth,
     polar_visibility_note,
     _date_seed,
+    _build_const_lines,
 )
 
 
@@ -132,3 +133,19 @@ def test_next_phase_fields_present():
         out = astro._merge_next_phases({"phase_name": "Full Moon"}, fake)
         assert out["next_full_in_days"] == 21
         assert out["next_new_date"] == "2026-06-25"
+
+
+# ── _build_const_lines ────────────────────────────────────────────────────────
+
+def test_const_lines_carry_constellation_name():
+    consts = [{"name": "Orion", "lines": [[1, 2], [2, 3]]}]
+    hip_above = {1, 2, 3}
+    lines = _build_const_lines(consts, hip_above)
+    assert {"hip_a": 1, "hip_b": 2, "constellation": "Orion"} in lines
+    assert all("constellation" in seg for seg in lines)
+
+
+def test_const_lines_skip_below_horizon():
+    consts = [{"name": "Orion", "lines": [[1, 2], [2, 9]]}]
+    lines = _build_const_lines(consts, {1, 2})  # 9 missing
+    assert lines == [{"hip_a": 1, "hip_b": 2, "constellation": "Orion"}]

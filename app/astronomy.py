@@ -257,13 +257,32 @@ def get_visible_constellations(
     return visible
 
 
+def _build_const_lines(constellation_data: list[dict], hip_above: set[int]) -> list[dict]:
+    """
+    Build constellation line segments with constellation names.
+
+    Args:
+        constellation_data: List of constellation dicts with 'name' and 'lines' keys.
+        hip_above: Set of Hipparcos IDs above the horizon.
+
+    Returns:
+        List of dicts with 'hip_a', 'hip_b', and 'constellation' keys.
+    """
+    lines = []
+    for const in constellation_data:
+        for hip_a, hip_b in const["lines"]:
+            if hip_a in hip_above and hip_b in hip_above:
+                lines.append({"hip_a": hip_a, "hip_b": hip_b, "constellation": const["name"]})
+    return lines
+
+
 def get_skymap_stars(
     ts, lat: float, lon: float, constellation_data: list[dict], t=None
 ) -> tuple[list[dict], list[dict]]:
     """
     Return (star_list, const_lines) for sky map rendering.
     star_list:   [{"alt", "az", "magnitude", "hip_id"}, ...]  — above horizon, mag ≤ 5.5
-    const_lines: [{"hip_a", "hip_b"}, ...]  — only segments where both stars are above horizon
+    const_lines: [{"hip_a", "hip_b", "constellation"}, ...]  — only segments where both stars are above horizon
     """
     from skyfield.api import wgs84, Star
 
@@ -300,10 +319,6 @@ def get_skymap_stars(
     ]
     hip_above: set[int] = {int(h) for h in hip_ids[above_mask]}
 
-    const_lines: list[dict] = []
-    for const in constellation_data:
-        for hip_a, hip_b in const["lines"]:
-            if hip_a in hip_above and hip_b in hip_above:
-                const_lines.append({"hip_a": hip_a, "hip_b": hip_b})
+    const_lines = _build_const_lines(constellation_data, hip_above)
 
     return star_list, const_lines
