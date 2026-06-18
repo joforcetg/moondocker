@@ -37,23 +37,17 @@ def generate_skymap(
     lines_svg = []
     for seg in const_lines:
         a, b = seg["hip_a"], seg["hip_b"]
-        name = seg.get("constellation")
+        name = seg["constellation"]
         if a in hip_xy and b in hip_xy:
             x1, y1 = hip_xy[a]
             x2, y2 = hip_xy[b]
-            if name:
-                lines_svg.append(
-                    f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
-                    f'data-constellation="{name}" '
-                    f'stroke="#6b6256" stroke-width="0.8" stroke-opacity="0.7"/>'
-                )
-                fig_members.setdefault(a, set()).add(name)
-                fig_members.setdefault(b, set()).add(name)
-            else:
-                lines_svg.append(
-                    f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
-                    f'stroke="#6b6256" stroke-width="0.8" stroke-opacity="0.7"/>'
-                )
+            lines_svg.append(
+                f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
+                f'data-constellation="{name}" '
+                f'stroke="#6b6256" stroke-width="0.8" stroke-opacity="0.7"/>'
+            )
+            fig_members.setdefault(a, set()).add(name)
+            fig_members.setdefault(b, set()).add(name)
 
     stars_svg = []
     for s in stars:

@@ -36,14 +36,15 @@ def test_constellation_line_drawn_when_both_stars_visible():
         {"alt": 45.0, "az": 0.0, "magnitude": 2.0, "hip_id": 1},
         {"alt": 45.0, "az": 90.0, "magnitude": 2.0, "hip_id": 2},
     ]
-    lines = [{"hip_a": 1, "hip_b": 2}]
+    lines = [{"hip_a": 1, "hip_b": 2, "constellation": "TestCon"}]
     svg = generate_skymap(stars, lines)
     assert "<line" in svg
+    assert 'data-constellation="TestCon"' in svg
 
 
 def test_constellation_line_omitted_when_star_missing():
     stars = [{"alt": 45.0, "az": 0.0, "magnitude": 2.0, "hip_id": 1}]
-    lines = [{"hip_a": 1, "hip_b": 999}]  # hip_b not in star list
+    lines = [{"hip_a": 1, "hip_b": 999, "constellation": "TestCon"}]  # hip_b not in star list
     svg = generate_skymap(stars, lines)
     assert "<line" not in svg
 
