@@ -111,6 +111,39 @@ def _get_stars_df():
     return _stars_df
 
 
+def _merge_next_phases(moon: dict, phases: dict) -> dict:
+    moon.update(phases)
+    return moon
+
+
+_EMPTY_PHASES = {
+    "next_new_date": None, "next_new_in_days": None,
+    "next_full_date": None, "next_full_in_days": None,
+}
+
+
+def _next_phase_dates(ts, eph, t) -> dict:
+    """Next New (event 0) and Full (event 2) moon after t, via skyfield almanac."""
+    from skyfield import almanac
+    try:
+        t1 = ts.tt_jd(t.tt + 40.0)  # one synodic month fits in 40 days
+        f = almanac.moon_phases(eph)
+        times, events = almanac.find_discrete(t, t1, f)
+        out = dict(_EMPTY_PHASES)
+        today = t.utc_datetime().date()
+        for t_evt, evt in zip(times, events):
+            d = t_evt.utc_datetime().date()
+            days = (d - today).days
+            if evt == 0 and out["next_new_date"] is None:
+                out["next_new_date"], out["next_new_in_days"] = d.isoformat(), days
+            elif evt == 2 and out["next_full_date"] is None:
+                out["next_full_date"], out["next_full_in_days"] = d.isoformat(), days
+        return out
+    except Exception:
+        logger.exception("next moon-phase lookup failed")
+        return dict(_EMPTY_PHASES)
+
+
 def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
     """Return moon phase, illumination, and rise/set/transit times (UTC strings)."""
     from skyfield.api import wgs84
@@ -165,7 +198,7 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
     except Exception:
         logger.exception("moon transit lookup failed (lat=%s lon=%s)", lat, lon)
 
-    return {
+    result = {
         "phase_name":       phase_name,
         "phase_glyph":      phase_glyph,
         "illumination_pct": illumination,
@@ -174,6 +207,7 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
         "transit":          transit_str,
         "note":             polar_visibility_note(rise_str, set_str, transit_alt),
     }
+    return _merge_next_phases(result, _next_phase_dates(ts, eph, t))
 
 
 def get_visible_constellations(

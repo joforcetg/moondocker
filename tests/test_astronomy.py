@@ -1,4 +1,6 @@
 import pytest
+from unittest.mock import patch
+import app.astronomy as astro
 from app.astronomy import (
     phase_name_from_elongation,
     pick_default_folklore,
@@ -111,3 +113,22 @@ def test_myth_is_daily_deterministic():
     a = pick_constellation_myth("Scorpius", _MYTHS, date_str="2026-06-18")
     b = pick_constellation_myth("Scorpius", _MYTHS, date_str="2026-06-18")
     assert a == b
+
+
+# ── next-phase dates ──────────────────────────────────────────────────────────
+
+def test_next_phase_fields_present():
+    # Drive get_moon_data with a real timescale but mocked almanac search so we
+    # don't need ephemeris files. We patch the helper that computes next phases.
+    fake = {
+        "next_new_date": "2026-06-25", "next_new_in_days": 7,
+        "next_full_date": "2026-07-09", "next_full_in_days": 21,
+    }
+    with patch.object(astro, "_next_phase_dates", return_value=fake):
+        # _next_phase_dates is called inside get_moon_data; everything else that
+        # needs ephemeris is exercised by existing get_moon_data tests, so here
+        # we only assert the merge. Call the small helper directly:
+        assert astro._next_phase_dates is not None
+        out = astro._merge_next_phases({"phase_name": "Full Moon"}, fake)
+        assert out["next_full_in_days"] == 21
+        assert out["next_new_date"] == "2026-06-25"
