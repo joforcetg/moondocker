@@ -77,6 +77,36 @@ def pick_mythology(
     return {"constellation": chosen, "text": entry}
 
 
+def _date_seed(date_str: str | None) -> int:
+    if date_str is None:
+        date_str = _date.today().isoformat()
+    return int(hashlib.md5(date_str.encode(), usedforsecurity=False).hexdigest(), 16)
+
+
+def pick_default_folklore(folklore: list[dict], date_str: str | None = None) -> dict:
+    """Pick one dark-folklore entry deterministically by date."""
+    seed = _date_seed(date_str)
+    return folklore[seed % len(folklore)]
+
+
+def pick_constellation_myth(
+    name: str, myths: list[dict], date_str: str | None = None
+) -> dict | None:
+    """
+    Pick one myth that features `name`, deterministically by date.
+    Eligible pool = myths whose cast contains `name`, ordered by the role
+    `name` plays (lead first, then second, then third). Returns None if `name`
+    is in no myth's cast.
+    """
+    pool = [m for m in myths if name in m["cast"]]
+    if not pool:
+        return None
+    pool.sort(key=lambda m: m["cast"].index(name))
+    seed = _date_seed(date_str)
+    chosen = pool[seed % len(pool)]
+    return {"constellation": name, "title": chosen["title"], "text": chosen["text"]}
+
+
 # ── Skyfield lazy loaders ─────────────────────────────────────────────────────
 
 def _get_loader():
