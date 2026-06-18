@@ -9,20 +9,31 @@
       .replace(/"/g, '&quot;');
   }
 
-  function setStatus(msg, isError) {
+  function setStatus(msg, isError, loading) {
     var el = document.getElementById('status');
-    el.textContent = msg;
     el.className = isError ? 'error' : '';
+    el.textContent = msg;
+    if (loading) {
+      var cur = document.createElement('span');
+      cur.className = 'cursor';
+      cur.textContent = '▊';
+      el.appendChild(cur);
+    }
+  }
+
+  function setCoords(lat, lon) {
+    var el = document.getElementById('coords');
+    el.textContent = Number(lat).toFixed(3) + ', ' + Number(lon).toFixed(3);
   }
 
   function fetchSky(lat, lon) {
-    setStatus('fetching sky data…');
+    setStatus('fetching sky data… ', false, true);
     fetch('/api/sky?lat=' + lat + '&lon=' + lon)
       .then(function (r) {
         if (!r.ok) throw new Error('server error ' + r.status);
         return r.json();
       })
-      .then(render)
+      .then(function (data) { render(data, lat, lon); })
       .catch(function (err) {
         setStatus('error: ' + err.message, true);
       });
@@ -36,17 +47,16 @@
     var timesRow = moon.note
       ? '<div class="moon-note">' + esc(moon.note) + '</div>'
       : '<div class="moon-times">' +
-          '<span><span class="dim">rise</span> ' + esc(rise) + '</span>' +
-          '<span><span class="dim">transit</span> ' + esc(transit) + '</span>' +
-          '<span><span class="dim">set</span> ' + esc(set) + '</span>' +
+          '<span><span class="dim">rise</span> <span class="val">' + esc(rise) + '</span></span>' +
+          '<span><span class="dim">transit</span> <span class="val">' + esc(transit) + '</span></span>' +
+          '<span><span class="dim">set</span> <span class="val">' + esc(set) + '</span></span>' +
         '</div>';
 
     document.getElementById('moon').innerHTML =
       '<div class="moon-phase">' +
         '<span class="moon-glyph">' + esc(moon.phase_glyph) + '</span>' +
-        '<span>' + esc(moon.phase_name) + '</span>' +
-        '<span class="dim">illumination:</span>' +
-        '<span>' + esc(String(moon.illumination_pct)) + '%</span>' +
+        '<span class="moon-name">' + esc(moon.phase_name) + '</span>' +
+        '<span class="moon-illum">' + esc(String(moon.illumination_pct)) + '% lit</span>' +
       '</div>' +
       timesRow;
   }
@@ -60,21 +70,22 @@
   }
 
   function renderConstellations(list) {
+    var container = document.getElementById('constellations');
     if (!list.length) {
-      document.getElementById('constellations').textContent = 'none visible';
+      container.innerHTML = '<span class="const-empty">none visible</span>';
       return;
     }
     var sorted = list.slice().sort(function (a, b) {
       return (b.above_horizon ? 1 : 0) - (a.above_horizon ? 1 : 0);
     });
-    document.getElementById('constellations').innerHTML = sorted.map(function (c) {
+    container.innerHTML = sorted.map(function (c) {
       var cls    = c.above_horizon ? 'above' : 'below';
       var marker = c.above_horizon ? '▲' : '▽';
-      return '<div class="const-row">' +
-        '<span class="const-marker ' + cls + '">' + marker + '</span>' +
+      return '<span class="const-chip ' + cls + '">' +
+        '<span class="const-marker">' + marker + '</span>' +
         '<span class="const-name">' + esc(c.name) + '</span>' +
-        '<span class="const-abbr">(' + esc(c.abbr) + ')</span>' +
-      '</div>';
+        '<span class="const-abbr">' + esc(c.abbr) + '</span>' +
+      '</span>';
     }).join('');
   }
 
@@ -89,7 +100,8 @@
     el.appendChild(p);
   }
 
-  function render(data) {
+  function render(data, lat, lon) {
+    setCoords(lat, lon);
     renderMoon(data.moon);
     renderSkymap(data.skymap_svg);
     renderConstellations(data.constellations);
@@ -116,7 +128,7 @@
 
   function init() {
     if (navigator.geolocation) {
-      setStatus('locating…');
+      setStatus('locating… ', false, true);
       navigator.geolocation.getCurrentPosition(
         function (pos) { fetchSky(pos.coords.latitude, pos.coords.longitude); },
         tryFallback
