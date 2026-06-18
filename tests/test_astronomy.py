@@ -2,6 +2,8 @@ import pytest
 from app.astronomy import (
     phase_name_from_elongation,
     pick_mythology,
+    pick_default_folklore,
+    pick_constellation_myth,
     polar_visibility_note,
 )
 
@@ -91,3 +93,54 @@ def test_polar_note_below_horizon_when_transit_below():
 def test_polar_note_none_when_transit_unknown():
     # transit altitude could not be computed → cannot classify
     assert polar_visibility_note(None, None, None) is None
+
+
+# ── pick_default_folklore ─────────────────────────────────────────────────────
+
+_FOLK = [
+    {"id": "a", "title": "A", "culture": "x", "text": "ta"},
+    {"id": "b", "title": "B", "culture": "y", "text": "tb"},
+    {"id": "c", "title": "C", "culture": "z", "text": "tc"},
+]
+
+
+def test_folklore_is_daily_deterministic():
+    a = pick_default_folklore(_FOLK, date_str="2026-06-18")
+    b = pick_default_folklore(_FOLK, date_str="2026-06-18")
+    assert a == b
+    assert a in _FOLK
+
+
+def test_folklore_varies_by_date():
+    days = {pick_default_folklore(_FOLK, date_str=f"2026-06-{d:02d}")["id"]
+            for d in range(1, 29)}
+    assert len(days) > 1  # not stuck on one entry
+
+
+# ── pick_constellation_myth ───────────────────────────────────────────────────
+
+_MYTHS = [
+    {"id": "m1", "title": "M1", "text": "t1", "cast": ["Orion", "Scorpius"]},
+    {"id": "m2", "title": "M2", "text": "t2", "cast": ["Scorpius"]},
+    {"id": "m3", "title": "M3", "text": "t3", "cast": ["Lyra"]},
+]
+
+
+def test_myth_filters_by_cast_membership():
+    m = pick_constellation_myth("Lyra", _MYTHS, date_str="2026-06-18")
+    assert m == {"constellation": "Lyra", "title": "M3", "text": "t3"}
+
+
+def test_myth_none_when_absent():
+    assert pick_constellation_myth("Gemini", _MYTHS, date_str="2026-06-18") is None
+
+
+def test_myth_role_ordering_lead_first():
+    # Orion is lead in m1 only; pool=[m1]; Scorpius is lead in m2, second in m1
+    assert pick_constellation_myth("Orion", _MYTHS, date_str="2026-06-18")["title"] == "M1"
+
+
+def test_myth_is_daily_deterministic():
+    a = pick_constellation_myth("Scorpius", _MYTHS, date_str="2026-06-18")
+    b = pick_constellation_myth("Scorpius", _MYTHS, date_str="2026-06-18")
+    assert a == b
