@@ -8,21 +8,27 @@
 </head>
 <body>
   <div id="app">
+    <header class="topbar">
+      <span class="wordmark">moondocker</span>
+      <span id="coords" class="coords"></span>
+    </header>
+
     <p id="status">locating…</p>
+
     <div id="panels" hidden>
-      <section class="panel">
+      <section class="panel panel-moon">
         <header class="panel-hdr">ᛗᛟᛟᚾ</header>
         <div id="moon"></div>
       </section>
-      <section class="panel">
+      <section class="panel panel-sky">
         <header class="panel-hdr">ᚾᛁᚷᚺᛏ ᛋᚲᚤ</header>
         <div id="skymap"></div>
       </section>
-      <section class="panel">
+      <section class="panel panel-const">
         <header class="panel-hdr">ᚲᛟᚾᛋᛏᛖᛚᛚᚨᛏᛁᛟᚾᛋ</header>
         <div id="constellations"></div>
       </section>
-      <section class="panel">
+      <section class="panel panel-legend">
         <header class="panel-hdr" id="legend-hdr">ᛚᛖᚷᛖᚾᛞ</header>
         <div id="legend"></div>
       </section>
