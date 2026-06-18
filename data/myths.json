@@ -1,0 +1,188 @@
+[
+  {
+    "id": "orion-scorpius",
+    "title": "The Hunter and the Scorpion",
+    "text": "Orion boasted he could slay every beast on earth. Gaia sent a scorpion that stung him dead; the two were set in the sky on opposite sides so the hunter still flees as the scorpion rises.",
+    "cast": ["Orion", "Scorpius"]
+  },
+  {
+    "id": "perseus-andromeda",
+    "title": "The Chained Princess",
+    "text": "Cassiopeia's boast doomed her daughter Andromeda to the sea-monster Cetus. Perseus, still carrying the Gorgon's head, turned the beast to stone and freed her.",
+    "cast": ["Perseus", "Andromeda", "Cassiopeia"]
+  },
+  {
+    "id": "callisto-bears",
+    "title": "The Bear Mother",
+    "text": "Callisto was changed into a bear and nearly slain by her own son before Zeus cast them both into the sky as the Great and Little Bears, circling forever without rest.",
+    "cast": ["Ursa Major", "Ursa Minor", "Boötes"]
+  },
+  {
+    "id": "orpheus-lyre",
+    "title": "The Lyre of Orpheus",
+    "text": "Orpheus charmed stones and rivers with his playing, and descended to Hades itself to reclaim his wife. When he was torn apart by the Maenads, the gods placed his golden lyre among the stars so its music would never be silenced.",
+    "cast": ["Lyra"]
+  },
+  {
+    "id": "cygnus-phaethon",
+    "title": "Swan of Grief",
+    "text": "When Phaethon fell blazing from the sky after losing control of the sun-chariot, his friend Cycnus wandered the riverbank weeping until the gods pitied him and transformed him into a swan, lifting him into the heavens.",
+    "cast": ["Cygnus"]
+  },
+  {
+    "id": "zeus-eagle",
+    "title": "The Eagle of Zeus",
+    "text": "Aquila was the great eagle that Zeus dispatched to carry his thunderbolts and to abduct the beautiful shepherd Ganymede from the hills of Troy, bringing him to Olympus to serve as cupbearer to the gods.",
+    "cast": ["Aquila", "Aquarius"]
+  },
+  {
+    "id": "castor-pollux",
+    "title": "The Twin Stars",
+    "text": "Castor and Pollux were born of the same mother but different fathers — one mortal, one divine. When Castor fell in battle, Pollux begged Zeus to share his immortality with his brother; the god placed them together in the sky, shining side by side for eternity.",
+    "cast": ["Gemini"]
+  },
+  {
+    "id": "zeus-europa",
+    "title": "The Bull Across the Sea",
+    "text": "Zeus disguised himself as a snow-white bull to enchant the Phoenician princess Europa. She climbed upon his back, and he carried her across the wine-dark sea to Crete, where he revealed his true form. The bull that bore her was set among the stars as Taurus.",
+    "cast": ["Taurus"]
+  },
+  {
+    "id": "demeter-virgo",
+    "title": "The Harvest Goddess",
+    "text": "When Persephone was taken to the underworld, her mother Demeter wandered the earth in grief and all crops withered. Some say the figure holding a sheaf of grain among the stars is Demeter herself, keeping watch for the half of the year her daughter walks in darkness.",
+    "cast": ["Virgo"]
+  },
+  {
+    "id": "nemean-lion",
+    "title": "The Unconquerable Beast",
+    "text": "The Nemean Lion could not be wounded by any weapon; its hide turned blades aside like smoke. Hercules wrestled it to death with his bare hands and wore its pelt ever after. Hera placed the lion in the sky as a memorial to the beast her champion had defeated.",
+    "cast": ["Leo", "Hercules"]
+  },
+  {
+    "id": "erichthonius-chariot",
+    "title": "The Lame King and His Chariot",
+    "text": "Erichthonius, lame from birth, was said to have invented the four-horse chariot so he could move as swiftly as the gods. Some say Auriga the charioteer is his image, fixed forever in the stars as a reward for gifting that invention to humankind.",
+    "cast": ["Auriga"]
+  },
+  {
+    "id": "orion-canis",
+    "title": "The Faithful Hounds",
+    "text": "When Orion strode across the heavens hunting, his great hound Sirius ran at his heel, brightest of all the star-dogs. Canis Major was said to be this faithful companion, bounding at the heel of the immortal hunter through the winter sky.",
+    "cast": ["Orion", "Canis Major"]
+  },
+  {
+    "id": "sagittarius-chiron",
+    "title": "The Wise Archer",
+    "text": "Chiron was the gentlest of centaurs — healer, teacher, and archer — who tutored Achilles and Asclepius in the art of medicine. Accidentally wounded by a poisoned arrow, he surrendered his immortality to end the agony and was placed among the stars as the Archer.",
+    "cast": ["Sagittarius"]
+  },
+  {
+    "id": "hercules-labors",
+    "title": "The Labors Written in Stars",
+    "text": "After madness drove Hercules to slaughter his own family, he was condemned to twelve labors to expiate the crime. He killed the Nemean lion, bound Cerberus, and stole the apples of the Hesperides. When he died and was consumed on a pyre, Zeus raised him to the sky to shine forever.",
+    "cast": ["Hercules"]
+  },
+  {
+    "id": "bootes-ploughman",
+    "title": "The Ploughman Who Would Not Stop",
+    "text": "Boötes is sometimes called Arcas, son of Callisto, who unknowingly chased his mother through the forest before Zeus froze both of them in the sky. Others say he is a ploughman who invented the wagon and was honoured with a place among the stars.",
+    "cast": ["Boötes", "Ursa Major"]
+  },
+  {
+    "id": "perseus-gorgon",
+    "title": "The Head That Turned Worlds to Stone",
+    "text": "Perseus was sent to fetch the head of Medusa, whose gaze turned all who looked upon her to stone. He used a mirrored shield to approach her as she slept, struck her neck, and fled with the head in a sealed bag. The blood that dripped from it as he flew over Libya became the desert's serpents.",
+    "cast": ["Perseus"]
+  },
+  {
+    "id": "cassiopeia-pride",
+    "title": "The Queen in Her Chair",
+    "text": "Cassiopeia was so proud of her own beauty that she claimed to outshine the Nereids, daughters of the sea. Poseidon punished her by chaining her daughter to a rock and placing the queen herself in the sky, forced to circle the pole and spend half her time hanging upside down as punishment for her vanity.",
+    "cast": ["Cassiopeia", "Andromeda"]
+  },
+  {
+    "id": "scorpius-artemis",
+    "title": "Artemis and the Scorpion",
+    "text": "When Orion threatened to hunt every beast on earth to extinction, Artemis — who loved him — was powerless to stop Gaia's wrath. The scorpion she sent rose to meet him and both were placed in the sky, forever chasing each other around the horizon so they never meet.",
+    "cast": ["Scorpius", "Orion"]
+  },
+  {
+    "id": "cygnus-zeus",
+    "title": "Zeus and Leda",
+    "text": "Zeus took the form of a swan to visit Leda of Sparta beside the river. From that union came eggs that hatched Castor and Pollux, and Helen of Troy. The swan's shape was honoured with a place among the stars — some say in thanks, others as a reminder of divine cunning.",
+    "cast": ["Cygnus", "Gemini"]
+  },
+  {
+    "id": "aquarius-deucalion",
+    "title": "The Water-Bearer and the Flood",
+    "text": "Zeus decreed a great flood to purge the world of a wicked generation. Deucalion, warned by his father Prometheus, built a chest and survived nine days on the waters. Some name the Water-Bearer in the sky as Deucalion himself, forever pouring out the waters that once swallowed the world.",
+    "cast": ["Aquarius"]
+  },
+  {
+    "id": "taurus-pleiades",
+    "title": "The Bull and the Seven Sisters",
+    "text": "The Pleiades were daughters of Atlas who caught the eye of Orion; Zeus placed them in the bull's shoulder to protect them, but Orion still pursues them across the sky. Sailors of the ancient world steered by their rising, calling them the rainy ones for the storms their setting brought.",
+    "cast": ["Taurus", "Orion"]
+  },
+  {
+    "id": "ursa-minor-pole",
+    "title": "The Unchanging Star",
+    "text": "Ursa Minor circles so close to the pole that it barely moves across the sky. Sailors called its tail's tip the Pole Star and steered all courses by it. In myth the Little Bear is sometimes Arcas, the son who was raised by hunters and never knew his mother had been transformed into the beast he nearly slew.",
+    "cast": ["Ursa Minor"]
+  },
+  {
+    "id": "leo-nemean",
+    "title": "Child of Echidna",
+    "text": "The Nemean Lion was no natural beast but offspring of the monsters Typhon and Echidna, placed by Hera to ravage the countryside. Its golden hide was impenetrable; no spear could touch it. Hercules throttled it with his hands and its image was raised into the sky as testimony to a deed no other mortal could have done.",
+    "cast": ["Leo"]
+  },
+  {
+    "id": "lyra-sirens",
+    "title": "Music Against the Darkness",
+    "text": "When the Argonauts sailed past the island of the Sirens, Orpheus played his lyre so loudly that the sailors could hear nothing else — and so they passed in safety where others had perished. His music held death at bay until the day it could not, and the lyre was given a place in the heavens.",
+    "cast": ["Lyra"]
+  },
+  {
+    "id": "virgo-persephone",
+    "title": "The Maiden Returned",
+    "text": "Persephone was plucked from a meadow by Hades and carried to the underworld. Her mother's grief turned the world to winter. A bargain was struck: six months below, six above. The figure of Virgo appears each spring as Persephone returns to the living world, then fades as she descends again.",
+    "cast": ["Virgo"]
+  },
+  {
+    "id": "auriga-myrtilus",
+    "title": "The Cursed Charioteer",
+    "text": "Myrtilus was the charioteer of Oenomaus, bribed to sabotage his master's axle with wax so that Pelops could win the fatal race. When Pelops threw him into the sea rather than pay the promised reward, Myrtilus cursed the house of Pelops as he drowned. His form was lifted to the stars as witness to that treachery.",
+    "cast": ["Auriga"]
+  },
+  {
+    "id": "aquila-prometheus",
+    "title": "The Eagle of Punishment",
+    "text": "After Prometheus stole fire from the gods, Zeus had him chained to a mountain and sent an eagle to devour his liver each day. Each night the liver regrew; each dawn the eagle returned. The torture continued until Hercules killed the eagle with an arrow and broke the chains.",
+    "cast": ["Aquila", "Hercules"]
+  },
+  {
+    "id": "canis-major-laelaps",
+    "title": "The Hound That Always Caught Its Quarry",
+    "text": "Laelaps was a magical dog destined never to miss its prey. When it was set to chase the Teumessian Fox — a beast destined never to be caught — Zeus froze them both in stone to resolve the paradox and placed them in the sky, the hound still running at Orion's heel.",
+    "cast": ["Canis Major"]
+  },
+  {
+    "id": "sagittarius-dionysus",
+    "title": "The Satyr Who Taught the Vine",
+    "text": "Crotus, son of Pan and companion of the Muses, was said to have invented the art of archery on the slopes where Dionysus tended his vines. The Muses petitioned Zeus to honour their friend, and he placed the great archer among the stars, bow drawn toward the heart of the galaxy.",
+    "cast": ["Sagittarius"]
+  },
+  {
+    "id": "perseus-atlas",
+    "title": "The Gorgon and the Titan",
+    "text": "On his return flight from Libya, Perseus passed the garden of Atlas, who refused him hospitality. Perseus drew Medusa's head from his bag and the Titan was turned to stone; his shoulders became the mountains and his beard the forests, and he stood forever bearing the sky above the western sea.",
+    "cast": ["Perseus"]
+  },
+  {
+    "id": "bootes-arcas",
+    "title": "The Son Who Did Not Know",
+    "text": "Arcas grew up to be a hunter without knowing his mother Callisto had been turned into a bear. He nearly speared her in the forest before Zeus intervened. The king of the gods placed them both in the sky, Arcas as Boötes the guardian, forever circling his mother who ambles endlessly around the pole.",
+    "cast": ["Boötes", "Ursa Major", "Ursa Minor"]
+  }
+]
