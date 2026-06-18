@@ -33,6 +33,14 @@
     var transit = moon.transit || '—';
     var set     = moon.set     || '—';
 
+    var timesRow = moon.note
+      ? '<div class="moon-note">' + esc(moon.note) + '</div>'
+      : '<div class="moon-times">' +
+          '<span><span class="dim">rise</span> ' + esc(rise) + '</span>' +
+          '<span><span class="dim">transit</span> ' + esc(transit) + '</span>' +
+          '<span><span class="dim">set</span> ' + esc(set) + '</span>' +
+        '</div>';
+
     document.getElementById('moon').innerHTML =
       '<div class="moon-phase">' +
         '<span class="moon-glyph">' + esc(moon.phase_glyph) + '</span>' +
@@ -40,11 +48,7 @@
         '<span class="dim">illumination:</span>' +
         '<span>' + esc(String(moon.illumination_pct)) + '%</span>' +
       '</div>' +
-      '<div class="moon-times">' +
-        '<span><span class="dim">rise</span> ' + esc(rise) + '</span>' +
-        '<span><span class="dim">transit</span> ' + esc(transit) + '</span>' +
-        '<span><span class="dim">set</span> ' + esc(set) + '</span>' +
-      '</div>';
+      timesRow;
   }
 
   function renderSkymap(svg) {

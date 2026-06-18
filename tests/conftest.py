@@ -8,6 +8,7 @@ MOCK_MOON = {
     "rise": "18:00",
     "set": "06:00",
     "transit": "00:00",
+    "note": None,
 }
 MOCK_CONSTELLATIONS = [
     {"name": "Orion", "abbr": "Ori", "above_horizon": True},
