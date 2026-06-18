@@ -1,0 +1,122 @@
+[
+  {
+    "id": "wendigo",
+    "title": "The Wendigo",
+    "culture": "Algonquian",
+    "text": "A gaunt spirit of insatiable winter hunger is said to walk the frozen forests, growing taller the more it devours. To hear it call your name across the snow is to be already lost."
+  },
+  {
+    "id": "la-llorona",
+    "title": "La Llorona",
+    "culture": "Mexican",
+    "text": "By night a weeping woman drifts along the water's edge, mourning the children she drowned. Those who follow her cries to the river are seldom seen at dawn."
+  },
+  {
+    "id": "strigoi",
+    "title": "The Strigoi",
+    "culture": "Romanian",
+    "text": "The strigoi does not rest in its grave but returns to drain the warmth from sleeping kin. Villagers would sometimes open the coffin of the recently dead and drive a stake of hawthorn through the heart to ensure it stayed where it was put."
+  },
+  {
+    "id": "baba-yaga",
+    "title": "Baba Yaga",
+    "culture": "Slavic",
+    "text": "Deep in the forest, past counting, stands a hut on chicken legs, fenced with bones topped by glowing skulls. The old woman inside may help you or may devour you — she decides on a whim, and the wrong answer to her riddle is a pot of boiling water."
+  },
+  {
+    "id": "kuchisake-onna",
+    "title": "The Slit-Mouthed Woman",
+    "culture": "Japanese",
+    "text": "She approaches on quiet streets wearing a surgical mask, and asks if you find her beautiful. Answer yes and she removes the mask to reveal the wound that splits her face ear to ear, asking again. There is no good answer, and she carries scissors."
+  },
+  {
+    "id": "the-ankou",
+    "title": "The Ankou",
+    "culture": "Breton",
+    "text": "The last person to die in a parish each year becomes the Ankou — the death-servant — and drives a creaking cart through the lanes of the living to collect souls throughout the twelve months that follow. You hear the wheels before you see him, and by then it is too late to run."
+  },
+  {
+    "id": "aswang",
+    "title": "The Aswang",
+    "culture": "Filipino",
+    "text": "By day the aswang keeps a stall in the market and smiles like a neighbor. By night it takes wing and hunts the sick, threading a long hollow tongue through roof-thatch to steal the life from those who sleep below. Vinegar and dogs will sometimes drive it away."
+  },
+  {
+    "id": "nuckelavee",
+    "title": "The Nuckelavee",
+    "culture": "Orcadian",
+    "text": "From the sea it comes: a skinless horse-creature, its black blood visible in the exposed veins, its single giant eye red as fire. It withers crops, poisons wells, and spreads plague across the islands. Only crossing a freshwater stream will stop its pursuit."
+  },
+  {
+    "id": "preta",
+    "title": "The Hungry Ghost",
+    "culture": "Buddhist",
+    "text": "The preta wanders the border between worlds, afflicted by a throat too narrow to swallow and a belly hollow as a cavern. Every morsel it reaches for bursts into flame at the touch of its lips. The tradition of offering food to ancestors arose in part from fear of what the neglected dead might become."
+  },
+  {
+    "id": "rawhead",
+    "title": "Rawhead and Bloody Bones",
+    "culture": "English",
+    "text": "Rawhead lurks beneath staircases and in the dark water at the bottom of wells, collecting the bones of disobedient children to add to his pile. Nurses once spoke his name aloud to keep children from wandering too close to the well at night."
+  },
+  {
+    "id": "mara",
+    "title": "The Night-Mare",
+    "culture": "Germanic",
+    "text": "The Mara slips through the keyhole at midnight and sits upon the chest of the sleeping, pressing down until the breath comes in gasps and the dreams turn to horror. Salt across the threshold, an iron horseshoe above the door — these were the old protections."
+  },
+  {
+    "id": "cihuateteo",
+    "title": "The Cihuateteo",
+    "culture": "Aztec",
+    "text": "Women who died in childbirth became divine and terrible — the Cihuateteo — descending on crossroads at night to steal children and drive men to madness. Their faces were white as chalk, their hands tipped with claws. Offerings were left at crossroads to appease them and buy safe passage."
+  },
+  {
+    "id": "nachzehrer",
+    "title": "The Nachzehrer",
+    "culture": "German",
+    "text": "The Nachzehrer rises in its grave and gnaws its own burial shroud, then begins to eat its own flesh. As it feeds, the living relatives sicken and weaken in distant houses, their strength draining away until the creature is discovered and its coin-stuffed mouth forced open."
+  },
+  {
+    "id": "banshee",
+    "title": "The Banshee",
+    "culture": "Irish",
+    "text": "She does not kill — she announces. The keen of the banshee, once heard beneath a window on a winter night, means a death is already decided for that house. She mourns the great old families of Ireland and was considered a mark of ancient lineage, however terrible the gift."
+  },
+  {
+    "id": "yuki-onna",
+    "title": "The Snow Woman",
+    "culture": "Japanese",
+    "text": "She appears to travelers lost in blizzards, pale as the snow itself, her breath a killing wind. Sometimes she shows mercy and walks away; other times she leans close and breathes until the warmth is gone. Those she spares she sometimes follows home."
+  },
+  {
+    "id": "black-shuck",
+    "title": "Black Shuck",
+    "culture": "East Anglian",
+    "text": "A great black dog with eyes like burning coals is said to roam the fens and coastal roads of East Anglia. To meet it is a death omen — not tonight, but soon. In 1577 it reportedly burst through the doors of a church in Bungay and killed two members of the congregation."
+  },
+  {
+    "id": "draugr",
+    "title": "The Draugr",
+    "culture": "Norse",
+    "text": "The draugr does not merely haunt — it rises bodily from the burial mound and wanders with the physical strength of ten men. It can swell to enormous size, carry the stench of decay, and herd livestock to death. The only recourse was to wrestle it back into the grave and burn the mound."
+  },
+  {
+    "id": "penanggalan",
+    "title": "The Penanggalan",
+    "culture": "Malay",
+    "text": "By night the penanggalan detaches its head, leaving its body behind, and floats through the air trailing coils of stomach and intestine, still wet and gleaming. It seeks the blood of newborns and laboring mothers. Thorns hung around the birthing room were meant to catch its trailing entrails before it could enter."
+  },
+  {
+    "id": "chuchunya",
+    "title": "The Chuchunya",
+    "culture": "Siberian Yakut",
+    "text": "In the permafrost forests of eastern Siberia, hunters spoke of a tall, dark figure that walked upright through the snow and raided camps for smoked fish and sleeping children. Unlike spirits, it left footprints. Whether it was beast, man, or something between, no one who followed the tracks came back with certainty."
+  },
+  {
+    "id": "soucouyant",
+    "title": "The Soucouyant",
+    "culture": "Trinidad and Tobago",
+    "text": "By day she is an old woman you might pass in the market. By night she sheds her skin, hides it under a mortar, and flies as a ball of fire across the island, entering houses through keyholes to drink blood. Scatter rice or salt — she must count every grain before sunrise, and dawn will take her skin before she can return to it."
+  }
+]
