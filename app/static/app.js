@@ -111,7 +111,7 @@
 
   function renderLegendDefault(legend) {
     document.getElementById('legend-hdr').textContent =
-      'ᛚᛖᚷᛖᚾᛞ : ' + (legend.title || '');
+      legend.title ? 'Legend : ' + legend.title : 'Legend';
     var el = document.getElementById('legend');
     el.innerHTML = '';
     if (legend.culture) {
@@ -154,7 +154,7 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (m) {
         if (!m || !m.text) return;
-        document.getElementById('legend-hdr').textContent = 'ᛚᛖᚷᛖᚾᛞ : ' + name;
+        document.getElementById('legend-hdr').textContent = 'Legend : ' + name;
         var el = document.getElementById('legend');
         el.innerHTML = '';
         if (m.title) {
