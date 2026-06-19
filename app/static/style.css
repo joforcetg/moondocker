@@ -110,7 +110,7 @@ body::after {
 
 .wordmark {
   font-family: var(--font-title);
-  color: var(--bone);
+  color: var(--gold);
   letter-spacing: 0.02em;
   font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem);
   line-height: 1;
@@ -150,24 +150,31 @@ body::after {
 .panel-rune {
   font-family: var(--font-rune);
   color: var(--rune);
-  font-size: 0.8rem;
-  letter-spacing: 0.18em;
-  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  margin-bottom: 0.12rem;
   line-height: 1;
   user-select: none;
+  opacity: 0.75;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   @keyframes glitch {
-    0%, 88%, 100% { transform: none; text-shadow: none; clip-path: none; }
-    90%  { transform: translate(-2px, 0); text-shadow:  2px 0 rgba(255,255,255,0.25); }
-    92%  { transform: translate( 2px, 0); text-shadow: -2px 0 rgba(200,200,210,0.2); clip-path: inset(0 0 60% 0); }
-    94%  { transform: translate(-1px, 1px); clip-path: inset(40% 0 0 0); }
-    96%  { transform: none; text-shadow: none; clip-path: none; }
+    0%, 82%, 100% { transform: none; text-shadow: none; clip-path: none; opacity: 1; }
+    84%  { opacity: 0.82; }
+    86%  { transform: translate(-2px, 0); text-shadow: 2px 0 rgba(255,255,255,0.3); opacity: 1; }
+    88%  { transform: translate(2px, 0); clip-path: inset(0 0 58% 0); text-shadow: -2px 0 rgba(200,210,220,0.22); }
+    90%  { transform: translate(-1px, 0); clip-path: inset(42% 0 0 0); opacity: 0.9; }
+    92%  { transform: translate(1px, -1px); clip-path: none; text-shadow: none; }
+    94%  { transform: none; opacity: 1; }
   }
   .panel-hdr {
-    animation: glitch 9s ease-in-out infinite;
+    animation: glitch 11s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+  .panel-moon   .panel-hdr { animation-delay: 0s; }
+  .panel-sky    .panel-hdr { animation-delay: 2.8s; }
+  .panel-const  .panel-hdr { animation-delay: 5.5s; }
+  .panel-legend .panel-hdr { animation-delay: 8.1s; }
 }
 
 .panel-hdr {
@@ -204,7 +211,7 @@ body::after {
 .moon-svg {
   width: 96px;
   height: 96px;
-  filter: drop-shadow(0 0 6px rgba(208, 162, 74, 0.25));
+  filter: drop-shadow(0 0 8px rgba(210, 215, 220, 0.18));
 }
 
 .moon-shadow { fill: #0d0c10; }
@@ -264,7 +271,7 @@ body::after {
   padding: 1.25rem 0.5rem;
   background:
     radial-gradient(circle at center,
-      rgba(232, 226, 208, 0.03) 0%,
+      rgba(210, 218, 228, 0.04) 0%,
       rgba(0, 0, 0, 0) 70%),
     var(--ink);
   border-radius: 2px;
@@ -282,7 +289,7 @@ body::after {
   height: auto;
   max-width: min(520px, 70vh);
   margin: 0 auto;
-  filter: drop-shadow(0 0 4px rgba(232, 226, 208, 0.12));
+  filter: drop-shadow(0 0 4px rgba(210, 218, 228, 0.1));
 }
 
 /* Constellation highlight: glow the picked figure, dim the rest */
