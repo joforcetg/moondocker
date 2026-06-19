@@ -1,6 +1,7 @@
 import json
 import logging
 import random
+import re
 import time
 import urllib.parse
 import urllib.request
@@ -60,7 +61,6 @@ def _fetch_art(category: str) -> dict | None:
 
 def _strip(html: str) -> str:
     """Crude tag strip — Artist value is often wrapped in <a>…</a>."""
-    import re
     return re.sub(r"<[^>]+>", "", html).strip()
 
 

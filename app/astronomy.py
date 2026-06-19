@@ -111,11 +111,6 @@ def _get_stars_df():
     return _stars_df
 
 
-def _merge_next_phases(moon: dict, phases: dict) -> dict:
-    moon.update(phases)
-    return moon
-
-
 _EMPTY_PHASES = {
     "next_new_date": None, "next_new_in_days": None,
     "next_full_date": None, "next_full_in_days": None,
@@ -207,7 +202,8 @@ def get_moon_data(ts, lat: float, lon: float, t=None) -> dict:
         "transit":          transit_str,
         "note":             polar_visibility_note(rise_str, set_str, transit_alt),
     }
-    return _merge_next_phases(result, _next_phase_dates(ts, eph, t))
+    result.update(_next_phase_dates(ts, eph, t))
+    return result
 
 
 def get_visible_constellations(
@@ -258,16 +254,7 @@ def get_visible_constellations(
 
 
 def _build_const_lines(constellation_data: list[dict], hip_above: set[int]) -> list[dict]:
-    """
-    Build constellation line segments with constellation names.
-
-    Args:
-        constellation_data: List of constellation dicts with 'name' and 'lines' keys.
-        hip_above: Set of Hipparcos IDs above the horizon.
-
-    Returns:
-        List of dicts with 'hip_a', 'hip_b', and 'constellation' keys.
-    """
+    """Line segments [{hip_a, hip_b, constellation}] for segments with both stars above horizon."""
     lines = []
     for const in constellation_data:
         for hip_a, hip_b in const["lines"]:
