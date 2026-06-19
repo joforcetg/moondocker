@@ -1,5 +1,4 @@
 import pytest
-from unittest.mock import patch
 import app.astronomy as astro
 from app.astronomy import (
     phase_name_from_elongation,
@@ -118,21 +117,14 @@ def test_myth_is_daily_deterministic():
 
 # ── next-phase dates ──────────────────────────────────────────────────────────
 
-def test_next_phase_fields_present():
-    # Drive get_moon_data with a real timescale but mocked almanac search so we
-    # don't need ephemeris files. We patch the helper that computes next phases.
-    fake = {
-        "next_new_date": "2026-06-25", "next_new_in_days": 7,
-        "next_full_date": "2026-07-09", "next_full_in_days": 21,
-    }
-    with patch.object(astro, "_next_phase_dates", return_value=fake):
-        # _next_phase_dates is called inside get_moon_data; everything else that
-        # needs ephemeris is exercised by existing get_moon_data tests, so here
-        # we only assert the merge. Call the small helper directly:
-        assert astro._next_phase_dates is not None
-        out = astro._merge_next_phases({"phase_name": "Full Moon"}, fake)
-        assert out["next_full_in_days"] == 21
-        assert out["next_new_date"] == "2026-06-25"
+def test_next_phase_dates_graceful_on_failure():
+    # Bad args trip the except branch: returns all-None phases, never raises,
+    # and returns a fresh copy (not the shared _EMPTY_PHASES constant).
+    out = astro._next_phase_dates(None, None, None)
+    assert out == astro._EMPTY_PHASES
+    assert out is not astro._EMPTY_PHASES
+    assert set(out) == {"next_new_date", "next_new_in_days",
+                        "next_full_date", "next_full_in_days"}
 
 
 # ── _build_const_lines ────────────────────────────────────────────────────────
