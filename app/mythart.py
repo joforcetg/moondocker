@@ -5,6 +5,7 @@ import re
 import time
 import urllib.parse
 import urllib.request
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -14,6 +15,12 @@ TIMEOUT = 5.0
 CACHE_TTL_SECONDS = 7 * 24 * 3600
 
 _CACHE: dict[str, tuple[float, dict]] = {}
+
+_MYTH_ART_PATH = Path(__file__).parent.parent / "data" / "myth_art.json"
+try:
+    _MYTH_ART: dict = json.loads(_MYTH_ART_PATH.read_text())
+except Exception:
+    _MYTH_ART = {}
 
 
 def _get_json(url: str) -> dict:
@@ -42,12 +49,11 @@ def _category_titles(category: str) -> list[str]:
     return _image_titles([m.get("title", "") for m in members])
 
 
-def _search_titles(name: str) -> list[str]:
-    """Fallback when a configured category is wrong/empty: search Commons files
-    by constellation name, biased toward artwork."""
+def _search_titles(query: str) -> list[str]:
+    """Search Commons files by arbitrary query string."""
     results = _api({
         "action": "query", "list": "search",
-        "srsearch": f"{name} mythology", "srnamespace": "6", "srlimit": "40",
+        "srsearch": query, "srnamespace": "6", "srlimit": "40",
     }).get("query", {}).get("search", [])
     return _image_titles([r.get("title", "") for r in results])
 
@@ -78,20 +84,52 @@ def _image_from_titles(titles: list[str]) -> dict | None:
     return None
 
 
-def _fetch_art(category: str, name: str | None = None) -> dict | None:
+def _fetch_art(
+    category: str,
+    name: str | None = None,
+    alt_categories: list[str] | None = None,
+    search_terms: list[str] | None = None,
+) -> dict | None:
     """
-    Find a usable image for a constellation. Tries the configured category
-    first; if that is empty/wrong, falls back to a name search on Commons so a
-    bad category no longer blanks the panel. None on any problem.
+    Multi-strategy Wikimedia image lookup. Stops at first hit:
+    1. Primary category
+    2. Alt categories (in order)
+    3. Explicit search terms (in order)
+    4. Generic name-based search
+    5. Historical atlas corpus (Uranometria, Flamsteed, Hevelius)
     """
     try:
         titles = _category_titles(category)
         art = _image_from_titles(titles) if titles else None
-        if art is None and name:
-            stitles = _search_titles(name)
-            if stitles:
-                art = _image_from_titles(stitles)
-        return art
+        if art:
+            return art
+
+        for alt_cat in (alt_categories or []):
+            titles = _category_titles(alt_cat)
+            art = _image_from_titles(titles) if titles else None
+            if art:
+                return art
+
+        for term in (search_terms or []):
+            titles = _search_titles(term)
+            art = _image_from_titles(titles) if titles else None
+            if art:
+                return art
+
+        if name:
+            titles = _search_titles(f"{name} constellation mythology art")
+            art = _image_from_titles(titles) if titles else None
+            if art:
+                return art
+
+        if name:
+            for atlas in ("Uranometria", "Flamsteed", "Hevelius"):
+                titles = _search_titles(f"{name} {atlas}")
+                art = _image_from_titles(titles) if titles else None
+                if art:
+                    return art
+
+        return None
     except Exception:
         logger.exception("Wikimedia art fetch failed for %s", category)
         return None
@@ -106,7 +144,10 @@ def get_constellation_art(name: str, category: str) -> dict | None:
     cached = _CACHE.get(name)
     if cached and (time.time() - cached[0]) < CACHE_TTL_SECONDS:
         return cached[1]
-    art = _fetch_art(category, name)
+    entry = _MYTH_ART.get(name, {})
+    alt_categories = entry.get("alt_categories", [])
+    search_terms = entry.get("search_terms", [])
+    art = _fetch_art(category, name, alt_categories, search_terms)
     if art is not None:
         _CACHE[name] = (time.time(), art)
     return art
