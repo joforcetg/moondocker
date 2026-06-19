@@ -118,5 +118,179 @@
     "title": "The Soucouyant",
     "culture": "Trinidad and Tobago",
     "text": "By day she is an old woman you might pass in the market. By night she sheds her skin, hides it under a mortar, and flies as a ball of fire across the island, entering houses through keyholes to drink blood. Scatter rice or salt — she must count every grain before sunrise, and dawn will take her skin before she can return to it."
+  },
+  {
+    "id": "obayifo",
+    "title": "The Obayifo",
+    "culture": "Akan (Ghana)",
+    "text": "The obayifo is a witch who leaves her body at night, flying as a ball of light through the darkness to find sleeping children. She does not kill outright but drains them slowly — a child who grows pale and listless over many nights, whose crops wither in the same season, may be sustaining an obayifo without knowing it. The light she travels in is her own life-force made visible, and to see it crossing the sky after midnight is to know someone in the village is under attack. Iron placed under a child's sleeping mat is one of the few protections the old knowledge offers."
+  },
+  {
+    "id": "pishtaco",
+    "title": "The Pishtaco",
+    "culture": "Quechua (Andes)",
+    "text": "The pishtaco is a pale stranger who appears on mountain roads and in market towns, offering help or company to travellers who fall behind their group. He carries a blade of exceptional sharpness and is not after blood but after fat — the rendered human fat he needs for machinery, for churches, for purposes that have never been fully explained. Those who survive describe waking in a ditch with a wound so precise it does not hurt until much later, and a heaviness in their limbs that does not leave for months. In the high Andean communities, travellers still warn each other not to accept company from those they do not know."
+  },
+  {
+    "id": "taniwha",
+    "title": "The Taniwha",
+    "culture": "Māori (New Zealand)",
+    "text": "Taniwha are great beings of river, lake, and sea — some are protectors of specific clans, binding agreements to the land's geography; others are predators who drown fishermen and capsize canoes. They shift shape between the form of a log drifting in the current, a shark, a whale, or something with no name at all. A river that has claimed many lives is presumed to have a taniwha that has not been properly acknowledged. The correct approach is not to fight but to negotiate — to speak the right words at the water's edge and establish a relationship that makes passage possible. Those who ignore this do not often get a second opportunity."
+  },
+  {
+    "id": "night-marchers",
+    "title": "The Night Marchers",
+    "culture": "Hawaiian",
+    "text": "On certain nights — particularly those corresponding to the phases of the moon held sacred by the old religion — the spirits of ancient Hawaiian warriors march in procession across the islands, following paths their feet wore into the earth centuries ago. They carry torches; their drums can be heard before they are seen; the smell of decay precedes them. Anyone who looks upon them directly, or who crosses their path, dies. The only exceptions are those whose own ancestors march in the procession — recognising their descendant, they will pass over them. The instruction passed down for centuries is simple: if you hear the drums at night, lie flat, face down, do not look, and do not move."
+  },
+  {
+    "id": "phi-krasue",
+    "title": "Phi Krasue",
+    "culture": "Thai",
+    "text": "The phi krasue is a woman's head that separates from its body at dusk, trailing luminous organs beneath it as it drifts through the night in search of blood and matter that living people would prefer not to name. By day she appears entirely normal; only at night does she reveal what she has become, either through a curse, a magical practice gone wrong, or a punishment whose terms have never been clearly stated. She is most dangerous to pregnant women and to newborns, and the light she emits in darkness is not beautiful but cold. Those who see the glow moving below the treeline have learned not to follow it to find the source."
+  },
+  {
+    "id": "leak",
+    "title": "The Leak",
+    "culture": "Balinese (Indonesia)",
+    "text": "In Balinese tradition, a leak is a sorcerer or sorceress who has learned a dark form of transformation: at night they remove their head, leaving the body behind, and fly through the darkness with their organs trailing, searching for prey. They feed on foetuses and the newly dead, and they can take the shapes of demons, balls of fire, or animals of unusual size. They are not always strangers — the leak in the old stories is often a neighbour, a relative, someone whose grief or desire or rage turned inward and corrupted over many years. A fire left burning overnight and the smell of certain flowers are the traditional deterrents, but no one has ever claimed they are reliable."
+  },
+  {
+    "id": "bunyip",
+    "title": "The Bunyip",
+    "culture": "Aboriginal Australian",
+    "text": "The bunyip lives in the billabongs and waterholes of the Australian interior, in the still dark water beneath the reeds. It bellows in the night — a sound described by those who have heard it as unlike any animal and unlike any human voice — and those who go to investigate the sound at the water's edge rarely return. Its appearance is not fixed in the old knowledge: it is sometimes described as having fur, sometimes feathers, sometimes neither, as if its true form resists description. The waterholes it inhabits are not cursed; they are simply occupied. The appropriate response to finding one has always been to leave before dark."
+  },
+  {
+    "id": "al-demon",
+    "title": "The Al",
+    "culture": "Persian",
+    "text": "The Al is a demon specifically hostile to women in childbirth and to newborns, a thing of iron teeth and claws of brass that enters the birth room when the women's attention is elsewhere. It steals the liver of the mother or the breath of the child; the signs are a sudden collapse with no visible cause, a child who was breathing and then is not. Iron is the universal protection — nails driven into doorframes, scissors left open beside the bed, a knife kept within reach — but the Al can only be stopped by iron it has not already touched. In the oldest texts it is described as having been present at the first birth and is not expected to stop."
+  },
+  {
+    "id": "ghoul",
+    "title": "The Ghoul",
+    "culture": "Arabian",
+    "text": "The ghoul haunts burial grounds and the roads between towns after dark, taking the shape of whatever it last consumed. It is patient in a way that living creatures are not — it will wait for days beside a corpse before eating, simply watching, as if it finds something of value in the process of decay. Travellers who meet a beautiful woman at a crossroads in the desert at night are advised to consider the possibility that she is a ghoul who has recently eaten well. The name became the term for a specific category of being across many traditions: the thing that feeds on the dead, that is neither demon nor spirit nor animal, that exists in the margin between life and what comes after."
+  },
+  {
+    "id": "alux",
+    "title": "The Alux",
+    "culture": "Maya (Mexico)",
+    "text": "The aluxob are small beings — knee-high, or smaller, depending on who is telling — that are called into existence through clay figures and a specific set of rituals, then assigned to guard a particular field or piece of land. They are neither good nor evil but they are exact: they expect offerings and acknowledgment, and they hold to the terms of the agreement with a rigidity that humans often forget and regret. A field whose alux has been neglected does not simply stop producing; the alux begins to work against the farmer — spoiling crops, waking the family at night with sounds that cannot be located, making animals ill. The only resolution is to build a small house for the alux and resume the offerings, which it may or may not choose to accept."
+  },
+  {
+    "id": "camazotz",
+    "title": "Camazotz",
+    "culture": "Maya",
+    "text": "Camazotz is the bat deity of death in the Maya underworld, one of the lords of Xibalba who rules the House of Bats, a place of total darkness through which the dead hero twins Hunahpu and Xbalanque were forced to travel. The name means death bat or snatch bat; his weapon is a stone knife shaped like a crescent blade. When Hunahpu put his head outside the blowgun tube he was hiding in, Camazotz decapitated him in a single movement. The head was used as the ball in the next day's game against the lords of the underworld, until Xbalanque recovered it with the help of a turtle he had substituted in its place. Bats are still associated in Mesoamerican tradition with the movement between the living world and what lies beneath it."
+  },
+  {
+    "id": "supay",
+    "title": "Supay",
+    "culture": "Inca (Andes)",
+    "text": "Supay was the lord of the Incan underworld, Ukhu Pacha, which lay beneath the surface of the earth and received the dead. He was not purely malevolent in the pre-colonial understanding — he was simply the one who governed the lower world, as the sun governed the upper — but the Spanish missionaries found it convenient to identify him with the Christian devil and the name absorbed that meaning over the colonial centuries. In the oldest Quechua traditions, Supay required acknowledgment and tribute like any great lord; the dead who arrived with the proper preparations were received and given a place. Those who arrived without them found a different reception. The threshold between his world and ours is open in certain places, on certain nights, and things pass both ways through it."
+  },
+  {
+    "id": "liderc",
+    "title": "The Lüdérc",
+    "culture": "Hungarian",
+    "text": "The lüdérc hatches from a black hen's egg kept warm under the armpit for the required number of days — the exact number varies by region. What emerges is small and may take the form of a person or of a light, and it attaches itself to its owner with total devotion, bringing them gifts and money in exchange for companionship and, eventually, their life. The lüdérc is never satisfied; it comes at night and cannot be refused, and the host grows thinner and paler with each visit while the creature grows more substantial. The only way to be rid of it is to give it an impossible task — counting every grain in a sack of millet before dawn — after which it is obliged to leave. It does not take rejection well."
+  },
+  {
+    "id": "karabasan",
+    "title": "The Karabasan",
+    "culture": "Turkish",
+    "text": "The karabasan — the dark one that presses down — comes in the hours between sleep and waking when the body cannot move but the mind is entirely present. It takes the form of something heavy sitting on the chest, a weight that is not weight, a presence that is not quite visible at the corner of the eye. Those who have felt it describe not pain but an absolute certainty that whatever is sitting on them has been sitting on people in this precise way since before any city was built. Protective objects placed near the bed — certain verses written on paper, iron, the smell of coffee — are said to discourage it, but the karabasan has been there longer than any of those measures and returns at its own discretion."
+  },
+  {
+    "id": "jiangshi",
+    "title": "The Jiangshi",
+    "culture": "Chinese",
+    "text": "The jiangshi is a corpse that rises from the grave with its arms extended and its body stiff, hopping through the night because rigor mortis has locked its joints into the position they held at death. It drains the life force — qi — from the living through their breath, and those it reaches first will not be found until morning. It cannot smell; it hunts by sensing the breath of the living, which is why those who encounter one in darkness are instructed to hold their breath completely until it passes. Yellow paper inscribed with the correct characters and pasted to the jiangshi's forehead is the classical method of stopping one. The word for it passed into the language long before any of the current methods were devised."
+  },
+  {
+    "id": "empusa",
+    "title": "The Empusa",
+    "culture": "Greek",
+    "text": "The empusa was sent by Hecate to the crossroads where roads met and directions were uncertain, taking the shape of a beautiful young woman, or of a dog, or of a cow with one brass leg and one leg of dung. She approached travellers at night, particularly young men travelling alone, and the seduction was not always visible for what it was until it was complete. Her purpose was consumption — she fed on blood and flesh and the particular vitality of the young. The only method of dispersal described in the ancient sources is to shout at her with insults — she was said to flee from mockery — but those who have recorded this note that it must have seemed at the time like an extremely poor idea."
+  },
+  {
+    "id": "each-uisge",
+    "title": "The Each-uisge",
+    "culture": "Scottish",
+    "text": "The each-uisge — the water horse — rises from the Scottish lochs in the form of a magnificent grey horse, grazing calmly beside the shore as if it belongs there. A rider who mounts it will find they cannot dismount — their hands adhere to its hide, their legs lock against its sides — and the horse walks into the water without pausing. Only the liver floats up the following day. The each-uisge can also take the form of a handsome young man who courts women who live alone near water; the sign that something is wrong is wet sand in his hair, which he cannot entirely conceal. The lochs it inhabits are deep and cold and have not been properly surveyed."
+  },
+  {
+    "id": "hwch-ddu-gwta",
+    "title": "Hwch Ddu Gwta",
+    "culture": "Welsh",
+    "text": "The Hwch Ddu Gwta — the Black Sow with No Tail — pursues stragglers on the night of Calan Gaeaf, the Welsh winter's eve. Bonfires were lit on hilltops and the community gathered around them; when the fire burned low, everyone ran for home together, because to be the last one left at the fire was to be taken. The sow is not seen until she is almost upon you, which is the point: she comes from behind, from the dark that exists between the fire and the door, and those she takes are not found. Children in Wales were told this story not as a horror story but as a practical instruction — stay with the group, keep moving, do not look back."
+  },
+  {
+    "id": "mora",
+    "title": "The Mora",
+    "culture": "Serbian",
+    "text": "The mora is the spirit of a woman who has died and returns in the form of a black moth, a black fly, or a strand of hair that slips through a keyhole to settle on the chest of a sleeping person and press the breath from them. The victim wakes gasping and sweating, aware that something was there, uncertain whether it was a dream. Prolonged visits from a mora result in exhaustion and eventual death; the creature does not hurry because it does not need to. Red thread tied across the doorway, a broom laid crosswise on the threshold, and a knife left open are the traditional deterrents — the mora must count every straw in the broom before entering, and by dawn it must return to wherever it sleeps."
+  },
+  {
+    "id": "gwisin",
+    "title": "The Gwisin",
+    "culture": "Korean",
+    "text": "The gwisin is the ghost of a person who died with unresolved business — an injustice unaddressed, a relationship uncompleted, a death that came too suddenly for any preparation. They haunt the location where they died, or the person most connected to their grievance, and they do not rest until something is resolved or until someone is destroyed trying to provide that resolution. They appear as the person looked in life, often in white funeral clothes, and they are recognisable to those who knew them — which is part of the difficulty. Ignoring a gwisin does not make it leave; it makes it more insistent. The traditional resolution involved a shaman, a ritual, and a negotiation whose terms the gwisin itself had to agree to."
+  },
+  {
+    "id": "churel",
+    "title": "The Churel",
+    "culture": "Indian",
+    "text": "A woman who dies during childbirth or during the festival of Diwali, particularly if she has been mistreated by her husband's family, may return as a churel — a spirit with her feet reversed, heels facing forward, who walks backward through the world. She targets the male relatives of the household where she suffered, luring them away from company at night with an appearance of beauty that is correct in every detail except the feet, which those who know the stories check for first. Those she takes grow old overnight and are found in the morning with their life already used up. The rituals performed at a difficult death are partly for the deceased and partly for the living who remain in the house."
+  },
+  {
+    "id": "yara-ma-yha-who",
+    "title": "The Yara-ma-yha-who",
+    "culture": "Aboriginal Australian",
+    "text": "The yara-ma-yha-who is a small red man who lives in fig trees and drops onto those who rest in the shade below, fastening the suckers on his hands to the victim's skin and drawing out the blood. When he has fed he swallows the person whole, drinks water, sleeps, and regurgitates them — alive, but shorter than before. Those who are taken multiple times are eventually regurgitated as a yara-ma-yha-who themselves. The way to survive the encounter is to remain limp and appear dead during the process; an active victim is more interesting to it, a passive one is more likely to be left after the first or second time. The stories are told to children who must learn to rest carefully and to choose their shade tree with attention."
+  },
+  {
+    "id": "qalupalik",
+    "title": "The Qalupalik",
+    "culture": "Inuit",
+    "text": "The qalupalik lives beneath the sea ice and makes a humming sound that rises through the frozen surface on cold days — a sound children are warned not to follow to the edge. It has green skin, long fingernails, and carries an amauti, the traditional child-carrying pouch, into which it places children who disobey their parents or who wander too close to the ice edge alone. What happens to them beneath the ice is not described in detail because the point of the story is the warning, not the outcome. The ice is the boundary between the world that can sustain life and the world that cannot, and the qalupalik is what waits on the other side of that boundary for those who do not take it seriously."
+  },
+  {
+    "id": "stikini",
+    "title": "The Stikini",
+    "culture": "Muscogee (Oklahoma)",
+    "text": "The stikini is a person who transforms at night by vomiting out their organs, leaving them temporarily stored in a hollow tree, before taking the form of a great horned owl and flying to find sleeping humans whose hearts it can extract and eat. The person appears entirely normal during the day — the neighbours do not know, which is the point. The way to destroy a stikini is to find the hidden organs before the creature returns and salt them or expose them to sunlight; when the stikini tries to resume its human form and finds its organs ruined, it dies. The sound of a great horned owl calling near a house at night was, in the old tradition, not a neutral observation about wildlife."
+  },
+  {
+    "id": "sigbin",
+    "title": "The Sigbin",
+    "culture": "Philippine Visayan",
+    "text": "The sigbin walks backward with its head lowered between its legs, releasing a foul smell that travels ahead of it through the dark. It feeds first on shadow — it drains the shadow of a sleeping person, which they do not notice until they are already weakened — and then on blood. Witches keep sigbin as familiars in clay pots sealed with beeswax, releasing them at night to do their work and recalling them before dawn. A person who has had their shadow stolen grows thin and cold over weeks; the recovery, if it is possible, requires locating the sigbin's jar and breaking it, which is difficult to do without knowing whose house to search. The sigbin is most active during Holy Week, which is one of the details that makes it particularly unsettling to those for whom that period carries other significance."
+  },
+  {
+    "id": "gjenganger",
+    "title": "The Gjenganger",
+    "culture": "Norwegian",
+    "text": "The gjenganger is the revenant of a person who died violently, by suicide, or without proper Christian burial — the one whose unfinished existence drives them back into the world of the living. Unlike the draugr, the gjenganger looks entirely human during the day, and its most characteristic action is small: it pinches the living on the arm or shoulder while they sleep, leaving a blue bruise. The bruise is not the injury; the injury is the illness that follows — a wasting sickness that looks like nothing diagnosable and ends, weeks later, in death. The gjenganger spreads its condition from person to person through touch, and an outbreak could move through a household before anyone understood the pattern. The blue marks on the skin of the dying were the diagnostic sign."
+  },
+  {
+    "id": "duppy",
+    "title": "The Duppy",
+    "culture": "Jamaican",
+    "text": "When a person dies, two spirits leave the body: one ascends to face judgment and the other — the duppy — remains near the grave for three days before it can be made to depart. If the burial was improper, if a grievance was left unresolved, or if someone with knowledge of the old practices summons it, the duppy does not depart and becomes dangerous: it can be sent against enemies, it can drive people mad, it can cause accidents. The traditional deterrents involve rum poured at the grave and certain tobacco rituals, but these negotiate with the duppy rather than destroy it — the understanding is that you are acknowledging it has legitimate claims and you are asking it to choose otherwise. Most duppies do. The ones that do not are a different matter."
+  },
+  {
+    "id": "loup-garou",
+    "title": "The Loup-garou",
+    "culture": "Haitian and Cajun",
+    "text": "The loup-garou sheds their skin at night, leaving it carefully folded in a hidden place, and ranges through the darkness as a fireball or as an animal of unusual size, feeding on whatever they need to sustain the transformation. The way to stop one is to find the skin before dawn and rub it with salt; when the loup-garou tries to put it back on, the salt burns and the creature is destroyed. But finding the skin requires knowing where the person has hidden it, which requires knowing who the loup-garou is, which is the difficulty — they are always neighbours, always someone whose face you know in daylight. In Cajun country the condition was considered both a curse and a punishment for specific sins, and the number of years one must range before being released was fixed and known."
+  },
+  {
+    "id": "almas",
+    "title": "The Almas",
+    "culture": "Mongolian",
+    "text": "The almas walks the high mountain passes of Central Asia, covered in reddish hair, humanoid but not human, and it is said to know in advance the names of those who will die in the coming winter — something it acquired not through any supernatural power but through long observation of the world that the living have not learned to read. Those who have encountered one and survived describe a creature that did not attack but watched with an attention that felt like inventory. Nomadic communities in the Altai and the Mongolian highlands have included the almas in their understanding of what shares the landscape with them for long enough that it has ceased to be simply a monster in their telling and has become something more like a neighbour that it is wise not to disturb."
   }
 ]
