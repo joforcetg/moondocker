@@ -186,6 +186,18 @@ Moon SVG rendering, fetch logic, highlight system, layout structure — all soun
 
 ---
 
+---
+
+## 7. `app/static/index.html` — Wordmark rename
+
+Change `moondocker` → `Moonseek` in:
+- `<title>Moonseek</title>`
+- `<span class="wordmark">Moonseek</span>`
+
+No other files reference the display name.
+
+---
+
 ## Out of scope
 
 - No API endpoint changes
