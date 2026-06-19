@@ -2,187 +2,271 @@
   {
     "id": "orion-scorpius",
     "title": "The Hunter and the Scorpion",
-    "text": "Orion boasted he could slay every beast on earth. Gaia sent a scorpion that stung him dead; the two were set in the sky on opposite sides so the hunter still flees as the scorpion rises.",
+    "text": "Orion was the greatest hunter the world had known — son of Poseidon, who could walk upon the waves — and he boasted he would hunt every beast upon the earth until nothing living remained. Gaia, mother of all creatures, heard the boast and sent a scorpion from the cracks in the ground, armoured with a shell no blade could pierce. It stung him at the heel, the only place his divine blood had not fully hardened, and Orion fell. Zeus set them both in the sky, but could not reconcile them even there: when Scorpius rises in the east, Orion sinks below the western horizon, still retreating. Sailors called this opposition the most reliable of seasonal clocks — the hunter's exit marked the coming of summer heat.",
     "cast": ["Orion", "Scorpius"]
   },
   {
     "id": "perseus-andromeda",
     "title": "The Chained Princess",
-    "text": "Cassiopeia's boast doomed her daughter Andromeda to the sea-monster Cetus. Perseus, still carrying the Gorgon's head, turned the beast to stone and freed her.",
+    "text": "Cassiopeia, queen of Ethiopia, declared her own beauty and her daughter Andromeda's surpassed the Nereids, Poseidon's sea-nymphs. The god sent the sea-monster Cetus to devour the coast, and the oracle ruled that only Andromeda's sacrifice would end the destruction. She was chained naked to a sea-cliff to await the beast when Perseus arrived overhead, returning from Libya with Medusa's severed head still dripping in its sack. He struck a bargain with her parents — her hand in marriage for her life — then held the head above the waves as Cetus surfaced, turning the creature to stone before it could reach her. All five figures in the myth — Perseus, Andromeda, Cassiopeia, Cepheus, and the sea-monster — were placed in the sky to preserve the story.",
     "cast": ["Perseus", "Andromeda", "Cassiopeia"]
   },
   {
     "id": "callisto-bears",
     "title": "The Bear Mother",
-    "text": "Callisto was changed into a bear and nearly slain by her own son before Zeus cast them both into the sky as the Great and Little Bears, circling forever without rest.",
+    "text": "Callisto was a huntress in Artemis's company who had sworn to remain a virgin, but Zeus came to her in disguise and fathered a child. When the pregnancy showed, Artemis expelled her; Hera, jealous even of a forced union, transformed her into a bear. Callisto wandered the forest for years — a bear with a woman's mind — until her grown son Arcas levelled a spear at the shaggy creature without knowing it was his mother. Zeus intervened at the last moment, sweeping them both upward to become the Great Bear and the Little Bear, placed at the pole to circle together forever, never allowed to sink below the horizon and sleep.",
     "cast": ["Ursa Major", "Ursa Minor", "Boötes"]
   },
   {
     "id": "orpheus-lyre",
     "title": "The Lyre of Orpheus",
-    "text": "Orpheus charmed stones and rivers with his playing, and descended to Hades itself to reclaim his wife. When he was torn apart by the Maenads, the gods placed his golden lyre among the stars so its music would never be silenced.",
+    "text": "Orpheus was given a lyre by Apollo and taught by the Muses; when he played, rivers paused in their courses, rocks moved to hear him, and wild beasts lay down their savagery. When his wife Eurydice died of a serpent's bite, he descended to the underworld and played before Persephone and Hades until they wept — an unprecedented thing — and Eurydice was returned to him on the condition he not look back until they had reached the surface. He looked. Grief-maddened, he wandered the hills of Thrace refusing all other love, until the Maenads tore him apart. His head floated down the Hebrus river still singing; the gods placed his lyre in the sky so its music would never be silenced.",
     "cast": ["Lyra"]
   },
   {
     "id": "cygnus-phaethon",
     "title": "Swan of Grief",
-    "text": "When Phaethon fell blazing from the sky after losing control of the sun-chariot, his friend Cycnus wandered the riverbank weeping until the gods pitied him and transformed him into a swan, lifting him into the heavens.",
+    "text": "Phaethon was the son of Helios and had always doubted his divine parentage; when Helios granted him any wish, he asked to drive the sun-chariot for one day. The horses, sensing an unfamiliar hand, bolted; the chariot scorched the deserts of Libya, then plunged toward the north and froze the Scythian plains. Zeus struck Phaethon from the car with a thunderbolt before the world could be consumed, and the boy fell blazing into the river Eridanus. His dearest companion Cycnus wandered the riverbank for the rest of his days weeping until the gods took pity, transformed him into a swan, and lifted him into the sky.",
     "cast": ["Cygnus"]
   },
   {
     "id": "zeus-eagle",
     "title": "The Eagle of Zeus",
-    "text": "Aquila was the great eagle that Zeus dispatched to carry his thunderbolts and to abduct the beautiful shepherd Ganymede from the hills of Troy, bringing him to Olympus to serve as cupbearer to the gods.",
+    "text": "Aquila was the messenger and weapons-carrier of Zeus, the eagle that bore the divine thunderbolts through the sky between storms. Zeus dispatched the bird to abduct the beautiful Trojan shepherd Ganymede from the slopes of Mount Ida, lifting the boy in its talons and bearing him to Olympus to serve as cupbearer to the gods. There Ganymede poured nectar at the feasts of the immortals, replacing Hebe, daughter of Hera — an insult the goddess never forgave. The eagle was placed in the heavens in honour of its service, and Ganymede's figure follows nearby, ever-pouring, a figure of grace at the edge of the celestial court.",
     "cast": ["Aquila", "Aquarius"]
   },
   {
     "id": "castor-pollux",
     "title": "The Twin Stars",
-    "text": "Castor and Pollux were born of the same mother but different fathers — one mortal, one divine. When Castor fell in battle, Pollux begged Zeus to share his immortality with his brother; the god placed them together in the sky, shining side by side for eternity.",
+    "text": "Castor and Pollux were born from the same mother, Leda of Sparta, but from different fathers — Castor from the mortal king Tyndareus, Pollux from Zeus who visited Leda in the shape of a swan. They were inseparable in life: soldiers, horsemen, and patron saints of shipwrecked sailors, who looked for them in the electrical fire that plays at a ship's masthead in a storm. When Castor was killed in a cattle raid, Pollux could not bear to take sole possession of the immortality his divine blood had given him. He begged Zeus to let him share it with his dead brother; the god placed them together in the sky, their stars shining side by side through all the winter nights.",
     "cast": ["Gemini"]
   },
   {
     "id": "zeus-europa",
     "title": "The Bull Across the Sea",
-    "text": "Zeus disguised himself as a snow-white bull to enchant the Phoenician princess Europa. She climbed upon his back, and he carried her across the wine-dark sea to Crete, where he revealed his true form. The bull that bore her was set among the stars as Taurus.",
+    "text": "Zeus took the form of a white bull, perfect and gentle, to approach the Phoenician princess Europa as she gathered flowers by the shore. She placed garlands on its horns, climbed its broad back on a whim, and the bull walked into the sea and began to swim — crossing the entire width of the Mediterranean without pausing, carrying Europa to the island of Crete. There Zeus revealed his true form; from their union came Minos, Rhadamanthus, and Sarpedon, three kings who shaped the ancient world. The bull's starry form was set in the sky, half-submerged as if still rising from the waves.",
     "cast": ["Taurus"]
   },
   {
     "id": "demeter-virgo",
     "title": "The Harvest Goddess",
-    "text": "When Persephone was taken to the underworld, her mother Demeter wandered the earth in grief and all crops withered. Some say the figure holding a sheaf of grain among the stars is Demeter herself, keeping watch for the half of the year her daughter walks in darkness.",
+    "text": "When Persephone was taken to the underworld, her mother Demeter laid aside her divine duties and wandered the world as a mortal woman, too deep in grief to govern the harvest. The crops withered, cattle died, and humankind faced starvation until Zeus brokered the bargain that returned Persephone for half of every year. The figure of Virgo holding a sheaf of grain is interpreted by most as Demeter herself; others say it is Persephone, returning each spring. She holds the bright star Spica in her left hand — the ripened wheat-ear — a reminder that the harvest's plenty depends on a mother's conditional consent.",
     "cast": ["Virgo"]
   },
   {
     "id": "nemean-lion",
     "title": "The Unconquerable Beast",
-    "text": "The Nemean Lion could not be wounded by any weapon; its hide turned blades aside like smoke. Hercules wrestled it to death with his bare hands and wore its pelt ever after. Hera placed the lion in the sky as a memorial to the beast her champion had defeated.",
+    "text": "The Nemean Lion was no natural creature but an offspring of the divine monsters Typhon and Echidna, placed by Hera in the hills outside Nemea to terrorize the countryside. Its hide turned away every weapon — bronze, iron, and obsidian all failed. Hercules arrived on his first labor and tried arrows and sword before he understood; he wrestled the beast with bare hands and strangled it. He then used the lion's own claws — the only things that could cut its hide — to skin it, draping the pelt across his shoulders for the rest of his mortal life. Hera placed the lion's image in the sky as a memorial to the one thing her chosen monster had failed to destroy.",
     "cast": ["Leo", "Hercules"]
   },
   {
     "id": "erichthonius-chariot",
     "title": "The Lame King and His Chariot",
-    "text": "Erichthonius, lame from birth, was said to have invented the four-horse chariot so he could move as swiftly as the gods. Some say Auriga the charioteer is his image, fixed forever in the stars as a reward for gifting that invention to humankind.",
+    "text": "Erichthonius was born from the earth itself — lame from his first breath — and refused to be confined. He studied the movement of horses and invented the four-horse chariot, building a vehicle that gave his crippled body the speed the gods had denied him. Athena looked on his ingenuity with favour; when he became king of Athens he introduced the Panathenaic games. His image among the stars is that of a charioteer, whip in one hand, sometimes shown carrying the she-goat Amalthea to explain the scattered nearby stars.",
     "cast": ["Auriga"]
   },
   {
     "id": "orion-canis",
     "title": "The Faithful Hounds",
-    "text": "When Orion strode across the heavens hunting, his great hound Sirius ran at his heel, brightest of all the star-dogs. Canis Major was said to be this faithful companion, bounding at the heel of the immortal hunter through the winter sky.",
+    "text": "Orion's great hound bore the name Sirius, brightest of all stars, and ran at his master's heel through every hunt. Sirius was said to rise with the sun in summer, adding its own heat to the day and causing the sweltering weeks the Greeks called the Dog Days — the same weeks when rivers shrank and fevers spread. When Orion was placed in the sky, his faithful companion followed: Canis Major at his heel, the brilliance of Sirius blazing so fiercely that ancient astronomers credited it with the drying of rivers in August. The two figures stride together across the winter sky.",
     "cast": ["Orion", "Canis Major"]
   },
   {
     "id": "sagittarius-chiron",
     "title": "The Wise Archer",
-    "text": "Chiron was the gentlest of centaurs — healer, teacher, and archer — who tutored Achilles and Asclepius in the art of medicine. Accidentally wounded by a poisoned arrow, he surrendered his immortality to end the agony and was placed among the stars as the Archer.",
+    "text": "Chiron was unlike other centaurs: son of the Titan Cronus and gentle where his kin were violent, a master of medicine, music, archery, and prophecy who tutored the greatest heroes — Achilles, Jason, and Asclepius among them. He was accidentally struck by one of Hercules' arrows tipped with the lethal blood of the Lernaean Hydra, and found himself dying in agony, unable to die permanently because of his immortality. He surrendered his divinity to Prometheus in exchange for release from the pain. Zeus placed his figure among the stars in recognition of his selfless bargain — the healer who chose death rather than endless suffering.",
     "cast": ["Sagittarius"]
   },
   {
     "id": "hercules-labors",
     "title": "The Labors Written in Stars",
-    "text": "After madness drove Hercules to slaughter his own family, he was condemned to twelve labors to expiate the crime. He killed the Nemean lion, bound Cerberus, and stole the apples of the Hesperides. When he died and was consumed on a pyre, Zeus raised him to the sky to shine forever.",
+    "text": "Hercules committed his gravest act in a moment of madness sent by Hera: he killed his wife Megara and their children. When the fit passed and he understood what he had done, he went to the oracle at Delphi to learn how to expiate the crime. The oracle sent him to serve King Eurystheus for twelve years, performing whatever labors the king devised — he slew the Nemean lion and the nine-headed Hydra, captured the Cretan bull and the mares of Diomedes, descended to the underworld and led Cerberus out on a chain. When he died and was burned on Mount Oeta, his mortal portion was consumed in the flames and his divine nature rose to take its place among the stars.",
     "cast": ["Hercules"]
   },
   {
     "id": "bootes-ploughman",
     "title": "The Ploughman Who Would Not Stop",
-    "text": "Boötes is sometimes called Arcas, son of Callisto, who unknowingly chased his mother through the forest before Zeus froze both of them in the sky. Others say he is a ploughman who invented the wagon and was honoured with a place among the stars.",
+    "text": "Boötes is called the Herdsman or the Ploughman, and different traditions assign him different identities. Some say he is Arcas, the son of Callisto, who invented the plough and the oxen-yoke and was placed in the sky for giving agriculture to humankind. Others name him Icarius, the first man to whom Dionysus taught wine-making; when Icarius shared wine with shepherds who did not know its power, they killed him thinking he had poisoned them. His dog Maera led his daughter Erigone to the body; all three were placed in the sky together. He follows the Great Bear across the northern sky, his bright star Arcturus the fourth-brightest in all the heavens.",
     "cast": ["Boötes", "Ursa Major"]
   },
   {
     "id": "perseus-gorgon",
     "title": "The Head That Turned Worlds to Stone",
-    "text": "Perseus was sent to fetch the head of Medusa, whose gaze turned all who looked upon her to stone. He used a mirrored shield to approach her as she slept, struck her neck, and fled with the head in a sealed bag. The blood that dripped from it as he flew over Libya became the desert's serpents.",
+    "text": "Perseus was sent by King Polydectes to bring back Medusa's head — a mission intended to be a death sentence. He received gifts from the gods: a mirrored shield from Athena, winged sandals from Hermes, and a helmet of invisibility from Hades. He approached the sleeping Medusa looking only at her reflection in the shield, cut off her head, and sealed it in a sack before he could meet her gaze. As he flew back across Libya, drops of blood fell from the sack and became the desert's serpents; from Medusa's neck sprang the winged horse Pegasus. He used the head to save Andromeda and to turn the Titan Atlas to stone before giving it to Athena, who placed it on her shield.",
     "cast": ["Perseus"]
   },
   {
     "id": "cassiopeia-pride",
     "title": "The Queen in Her Chair",
-    "text": "Cassiopeia was so proud of her own beauty that she claimed to outshine the Nereids, daughters of the sea. Poseidon punished her by chaining her daughter to a rock and placing the queen herself in the sky, forced to circle the pole and spend half her time hanging upside down as punishment for her vanity.",
+    "text": "Cassiopeia was queen of the Ethiopian coast and could not resist the comparison: she claimed her own beauty and her daughter Andromeda's surpassed the sea-nymphs of Poseidon's court. The Nereids complained to the sea-god, who sent the monster Cetus to devastate the coastline and demand Andromeda's sacrifice. Perseus intervened and saved her, but Cassiopeia's punishment was not yet finished. She was placed in the sky circling the pole, seated on her throne, and for half of every night she hangs upside down — a humiliating reminder that no mortal beauty can be called greater than the divine.",
     "cast": ["Cassiopeia", "Andromeda"]
   },
   {
     "id": "scorpius-artemis",
     "title": "Artemis and the Scorpion",
-    "text": "When Orion threatened to hunt every beast on earth to extinction, Artemis — who loved him — was powerless to stop Gaia's wrath. The scorpion she sent rose to meet him and both were placed in the sky, forever chasing each other around the horizon so they never meet.",
+    "text": "Orion's pride extended not only to his hunting but to his friendship with Artemis, goddess of the hunt, and some say she loved him. When he declared he would rid the earth of every beast, Gaia interceded; some accounts say Artemis herself, manipulated by her jealous brother Apollo, fired the arrow that ended Orion's life — Apollo pointing out a dark shape in the water that was in fact the hunter's head. However it happened, both Orion and the scorpion Gaia sent were placed in opposing parts of the sky. When one rises, the other must set; they never share the same horizon.",
     "cast": ["Scorpius", "Orion"]
   },
   {
     "id": "cygnus-zeus",
     "title": "Zeus and Leda",
-    "text": "Zeus took the form of a swan to visit Leda of Sparta beside the river. From that union came eggs that hatched Castor and Pollux, and Helen of Troy. The swan's shape was honoured with a place among the stars — some say in thanks, others as a reminder of divine cunning.",
+    "text": "Zeus came to Leda of Sparta in the form of a swan, and from that encounter she bore four children — some from eggs, in the oldest tellings. Castor and Pollux came from one egg; Helen and Clytemnestra from another. Helen's abduction from Sparta by the Trojan prince Paris set in motion the greatest war of the ancient world, a cascade of destruction that began with a swan on a riverbank. The swan's shape was honoured with a place among the stars — some say in thanks, others as a reminder that the gods reach into mortal life in shapes the unwary cannot recognise.",
     "cast": ["Cygnus", "Gemini"]
   },
   {
     "id": "aquarius-deucalion",
     "title": "The Water-Bearer and the Flood",
-    "text": "Zeus decreed a great flood to purge the world of a wicked generation. Deucalion, warned by his father Prometheus, built a chest and survived nine days on the waters. Some name the Water-Bearer in the sky as Deucalion himself, forever pouring out the waters that once swallowed the world.",
+    "text": "The human race had grown wicked and Zeus resolved to wash them away with a great flood. He warned only Prometheus, who passed the warning to his son Deucalion; Deucalion and his wife Pyrrha built a great chest and survived on the waters for nine days and nights until the peaks of Parnassus emerged. To repopulate the earth, they were told to throw the bones of their mother behind them; taking this to mean the stones of the earth, they did so, and where each stone landed a new human being arose. Some say the figure of Aquarius pouring his endless jar is Deucalion himself, still pouring out the waters of the flood long after it has passed.",
     "cast": ["Aquarius"]
   },
   {
     "id": "taurus-pleiades",
     "title": "The Bull and the Seven Sisters",
-    "text": "The Pleiades were daughters of Atlas who caught the eye of Orion; Zeus placed them in the bull's shoulder to protect them, but Orion still pursues them across the sky. Sailors of the ancient world steered by their rising, calling them the rainy ones for the storms their setting brought.",
+    "text": "The Pleiades were seven sisters, daughters of Atlas the Titan, who caught the eye of the hunter Orion. To protect them from his pursuit, Zeus transformed them first into doves and then into stars, placing them in the shoulder of the Bull so the constellation itself would deter Orion from approaching. He did not stop: the Pleiades rise in the east ahead of Orion each spring, and he follows until winter comes. Sailors of the Mediterranean dated their sailing season by the Pleiades' rising and feared the storms of their setting; the loss of one sister — Electra, or Merope, depending on the teller — explains why only six stars are clearly visible.",
     "cast": ["Taurus", "Orion"]
   },
   {
     "id": "ursa-minor-pole",
     "title": "The Unchanging Star",
-    "text": "Ursa Minor circles so close to the pole that it barely moves across the sky. Sailors called its tail's tip the Pole Star and steered all courses by it. In myth the Little Bear is sometimes Arcas, the son who was raised by hunters and never knew his mother had been transformed into the beast he nearly slew.",
+    "text": "Ursa Minor circles so close to the celestial pole that her brightest star scarcely moves across the night sky. Phoenician and later Greek sailors steered all courses by this star, which they called Cynosura — the dog's tail — from the constellation's appearance. The myth behind the figure is usually the same as Ursa Major: Callisto and her son Arcas, placed at the pole to circle together forever. The bear cannot sleep, cannot sink below the horizon; the gods who set her there gave her no rest.",
     "cast": ["Ursa Minor"]
   },
   {
     "id": "leo-nemean",
     "title": "Child of Echidna",
-    "text": "The Nemean Lion was no natural beast but offspring of the monsters Typhon and Echidna, placed by Hera to ravage the countryside. Its golden hide was impenetrable; no spear could touch it. Hercules throttled it with his hands and its image was raised into the sky as testimony to a deed no other mortal could have done.",
+    "text": "The Nemean Lion was placed by Hera in the hills of Nemea to be a test no mortal could survive, and for a time none did. The beast was proof against weapons — its golden hide turned aside every blade — and it fed freely on the livestock and people of the region. Hercules arrived on his first labor, tried arrows first, watching them bounce aside, then his sword, then his club, before he drove the lion into a cave and wrestled it with bare hands. He skinned it with its own claws and wore the hide for the rest of his mortal life. Hera placed the lion among the stars as proof that even her greatest instrument had not been enough.",
     "cast": ["Leo"]
   },
   {
     "id": "lyra-sirens",
     "title": "Music Against the Darkness",
-    "text": "When the Argonauts sailed past the island of the Sirens, Orpheus played his lyre so loudly that the sailors could hear nothing else — and so they passed in safety where others had perished. His music held death at bay until the day it could not, and the lyre was given a place in the heavens.",
+    "text": "When Jason and the Argonauts sailed past the island of the Sirens — women whose song drew sailors irresistibly to their deaths on the rocks — it was Orpheus who saved them. He took up his lyre and played so loudly, with a melody so compelling, that the crew of the Argo heard only his music and rowed past in safety. Only one man, Butes, leapt into the sea to swim toward the Sirens' voices; Aphrodite plucked him from the waves before he reached them. The lyre that held death at bay for the Argonauts was eventually placed in the sky after Orpheus's death, positioned near the eagle so the music of the lyre could harmonise forever with the eagle's cry.",
     "cast": ["Lyra"]
   },
   {
     "id": "virgo-persephone",
     "title": "The Maiden Returned",
-    "text": "Persephone was plucked from a meadow by Hades and carried to the underworld. Her mother's grief turned the world to winter. A bargain was struck: six months below, six above. The figure of Virgo appears each spring as Persephone returns to the living world, then fades as she descends again.",
+    "text": "Persephone was gathering narcissus flowers in a meadow when the earth split open and Hades rode up in his chariot to take her below. Demeter searched for nine days without stopping before Helios told her what he had seen. She withdrew her gifts from the earth — crops failed, animals refused to breed, and the dead began to outnumber the living. Zeus brokered a compromise: Persephone had eaten six pomegranate seeds in the underworld, so she would spend six months below and six months above. Virgo rises in spring with Persephone's return and fades from the autumn sky as she descends.",
     "cast": ["Virgo"]
   },
   {
     "id": "auriga-myrtilus",
     "title": "The Cursed Charioteer",
-    "text": "Myrtilus was the charioteer of Oenomaus, bribed to sabotage his master's axle with wax so that Pelops could win the fatal race. When Pelops threw him into the sea rather than pay the promised reward, Myrtilus cursed the house of Pelops as he drowned. His form was lifted to the stars as witness to that treachery.",
+    "text": "Myrtilus was the charioteer of King Oenomaus, who had declared that only a man who could beat him in a chariot race could marry his daughter Hippodamia — and then had the suitors killed when they lost. Pelops bribed Myrtilus to replace the bronze linchpins of his master's chariot wheels with wax; the wheels came off at speed and Oenomaus was dragged to his death. Pelops married Hippodamia as promised but refused to pay Myrtilus the reward they had agreed. When Pelops threw him from a cliff into the sea, Myrtilus cursed the house of Pelops as he drowned — a curse that ran down through the generations into the story of Agamemnon and Orestes. The charioteer's figure was placed in the sky as witness to the original act of treachery.",
     "cast": ["Auriga"]
   },
   {
     "id": "aquila-prometheus",
     "title": "The Eagle of Punishment",
-    "text": "After Prometheus stole fire from the gods, Zeus had him chained to a mountain and sent an eagle to devour his liver each day. Each night the liver regrew; each dawn the eagle returned. The torture continued until Hercules killed the eagle with an arrow and broke the chains.",
+    "text": "Prometheus stole fire from the forge of Hephaestus on Olympus and carried it down to humanity in the hollow of a fennel stalk. Zeus's punishment was exemplary and eternal: Prometheus was chained to a rock on the Caucasus mountains, and each dawn the eagle flew down to tear out his liver, which grew back each night so the punishment could never end. The rock was chosen because it was too high for any mortal to climb. When Hercules performed his labors and passed through the Caucasus, he killed the eagle with an arrow from below and broke the chains. Zeus placed the eagle in the sky to commemorate the long service — others say as a memorial to his own defeated revenge.",
     "cast": ["Aquila", "Hercules"]
   },
   {
     "id": "canis-major-laelaps",
     "title": "The Hound That Always Caught Its Quarry",
-    "text": "Laelaps was a magical dog destined never to miss its prey. When it was set to chase the Teumessian Fox — a beast destined never to be caught — Zeus froze them both in stone to resolve the paradox and placed them in the sky, the hound still running at Orion's heel.",
+    "text": "Laelaps was a hunting dog given by Zeus to Europa, passed through several hands until it came to Procris, wife of Cephalus, bearing the divine property of never missing its quarry. When it was set to hunt the Teumessian Fox — a monstrous beast sent by Dionysus that was destined never to be caught — Zeus looked down at the paradox of an unerring dog hunting an uncatchable fox and saw that it had no resolution. He turned both animals to stone and placed them in the heavens. Canis Major carries Sirius, the brightest star in the night sky, at its snout — the immortal hound still pointing, the hunt permanently interrupted.",
     "cast": ["Canis Major"]
   },
   {
     "id": "sagittarius-dionysus",
     "title": "The Satyr Who Taught the Vine",
-    "text": "Crotus, son of Pan and companion of the Muses, was said to have invented the art of archery on the slopes where Dionysus tended his vines. The Muses petitioned Zeus to honour their friend, and he placed the great archer among the stars, bow drawn toward the heart of the galaxy.",
+    "text": "Crotus was the son of Pan and grew up on the slopes of Mount Helicon among the Muses, who taught him their arts. He was said to be the first archer, inventing the technique of shooting with a rhythmic beat to steady the hand. He accompanied Dionysus across Asia, learning the art of the vine and protecting the god's retinue with his bow. When he died, the nine Muses petitioned Zeus together — an unusual occurrence — to place their companion in the sky. Zeus agreed and gave him a position straddling the great band of the Milky Way, his arrow pointing toward Antares in the heart of the Scorpion.",
     "cast": ["Sagittarius"]
   },
   {
     "id": "perseus-atlas",
     "title": "The Gorgon and the Titan",
-    "text": "On his return flight from Libya, Perseus passed the garden of Atlas, who refused him hospitality. Perseus drew Medusa's head from his bag and the Titan was turned to stone; his shoulders became the mountains and his beard the forests, and he stood forever bearing the sky above the western sea.",
+    "text": "After killing Medusa and rescuing Andromeda, Perseus flew west across the Libyan desert and reached the garden of the Hesperides at the world's edge, where Atlas stood holding the vault of heaven on his shoulders. Perseus asked for hospitality; Atlas refused, having been warned by a prophecy that a son of Zeus would come and steal the golden apples of the Hesperides. Perseus drew the Gorgon's head from its bag and held it up; Atlas, weighing more than any mountain, turned to stone where he stood, and his petrified body became the Atlas mountain range that still bears the weight of the sky on its ridges.",
     "cast": ["Perseus"]
   },
   {
     "id": "bootes-arcas",
     "title": "The Son Who Did Not Know",
-    "text": "Arcas grew up to be a hunter without knowing his mother Callisto had been turned into a bear. He nearly speared her in the forest before Zeus intervened. The king of the gods placed them both in the sky, Arcas as Boötes the guardian, forever circling his mother who ambles endlessly around the pole.",
+    "text": "Arcas was raised by his grandfather after his mother Callisto was transformed into a bear, and he grew up to be a skilled hunter with no knowledge of what had happened to her. He crossed the path of the Great Bear in the forest one day, his spear already raised — he had been taught to fear bears. Zeus intervened in the single instant before the spear left Arcas's hand. Both were swept into the sky: Callisto became Ursa Major, Arcas became Boötes the guardian, and the sky arranged itself so that Arcas circles his mother for all eternity, his bright star Arcturus burning behind her. Hera, still angry, persuaded Tethys and Oceanus never to allow the two bears to sink below the horizon and rest.",
     "cast": ["Boötes", "Ursa Major", "Ursa Minor"]
+  },
+  {
+    "id": "orion-al-jabbar",
+    "title": "Al-Jabbar, the Giant",
+    "text": "Arab astronomers called Orion's brightest stars al-Jabbar — the Giant — and constructed a figure quite different from the Greek hunter. The three belt stars were known as the String of Pearls or the Beam of the Scales. Medieval Arab star-catalogues preserved the names we still use: Betelgeuse from Ibt al-Jauza, armpit of the central one; Rigel from Rijl al-Jauza, foot of the central one. Some early traditions saw the central figure as a woman, al-Jauza, before later astronomy settled on the male giant. The constellation marked the beginning of winter in Arabic astronomical calendars and its rising was used to time the planting of certain crops.",
+    "cast": ["Orion"]
+  },
+  {
+    "id": "scorpius-girtablullu",
+    "title": "Girtablullu, the Scorpion-Man",
+    "text": "The Babylonians knew Scorpius as the place of the scorpion-men, the Girtablullu, guardians who stood at the entrance to the underworld in the Epic of Gilgamesh. Their heads touched the sky and their feet reached the underworld; they guarded the mountain passes at the edge of the world where the sun sets each evening. When Gilgamesh came to them on his quest for immortality after the death of his friend Enkidu, he had to persuade them to let him pass through the tunnel beneath the mountains where the sun travels at night. The heart of the Scorpion — the red star Antares — was the brightest object in the southern midsummer sky and marked the summer solstice region in the oldest Babylonian star lists.",
+    "cast": ["Scorpius"]
+  },
+  {
+    "id": "taurus-bull-of-heaven",
+    "title": "The Bull of Heaven",
+    "text": "In the Babylonian Epic of Gilgamesh, the goddess Ishtar fell in love with the hero and was rejected. Furious, she demanded her father Anu send the Bull of Heaven to destroy him and his friend Enkidu. The bull stamped three times and the earth opened; hundreds of men fell into the pits, and its breath was a whirlwind. Gilgamesh and Enkidu fought it together: Enkidu seized it by the horns while Gilgamesh drove his sword between the shoulder and the neck. When they killed it, the gods mourned. The bull's heart was placed in the sky as tribute to a creature that had been both weapon and sacrifice.",
+    "cast": ["Taurus"]
+  },
+  {
+    "id": "leo-xuanxiao",
+    "title": "The Vermilion Bird of the South",
+    "text": "In Chinese celestial tradition, the stars of Leo fall within the domain of the Vermilion Bird, the Zhu Que, guardian of the southern sky. The bright star Regulus was known as Xuanyuan — the Yellow Emperor — a star so important that battles were timed to its movements and the fall of dynasties was read in its dimming. The Chinese lunar mansions passing through this region — Zhang, Xing, and Liu — were assigned to the wings, neck, and beak of the great red bird. When Regulus brightened, it was taken as a sign of military success; when it was dim or accompanied by guest stars, the emperor's astrologers counselled caution.",
+    "cast": ["Leo"]
+  },
+  {
+    "id": "orion-lakota-hand",
+    "title": "The Hand That Reached Too Far",
+    "text": "The Lakota people of the Great Plains saw in Orion's belt and sword the severed hand of a chief who reached too greedily into the spirit world. The formation is the place where the hand fell from the sky, its fingers pointing down. It appears in winter, the season of the long dark, and Lakota winter count calendars often mark its appearance as a signal to begin the ceremonies of the cold months. The story varies by community, but the core image recurs across the Siouan traditions of the northern plains: the reaching hand, the consequence of overreach, the mark left in the stars.",
+    "cast": ["Orion"]
+  },
+  {
+    "id": "ursa-major-bier",
+    "title": "The Stretcher and the Mourners",
+    "text": "The Lakota saw the four bowl-stars of the Great Bear not as a bear but as a burial bier carrying a body, with three mourning figures following behind — corresponding to the three handle-stars. The slowly rotating formation of these stars around the pole was interpreted as a procession of grief traveling through the year. In some traditions the bier carries the body of a great warrior who must be carried through the sky until a particular ceremony releases the soul. The path of the procession, circling without end, means the mourning is not complete — it will continue until the proper rites are performed.",
+    "cast": ["Ursa Major"]
+  },
+  {
+    "id": "aquarius-ea",
+    "title": "Ea and the Waters of Wisdom",
+    "text": "The Babylonians identified the Water-Bearer as Ea, the god of the underground sweet-water ocean called the Abzu. Ea was the wisest of gods, patron of craftsmen, exorcists, and the arts of civilization; his symbol was the flowing streams of water, which represented wisdom poured out into the world. In the myth of Adapa, Ea's human son was summoned before the sky-god Anu but Ea advised him not to eat or drink anything he was offered — not knowing Anu planned to offer him immortality. The waters that Aquarius pours are Ea's wisdom flowing perpetually downward into human affairs. The constellation sat over the region the Babylonians called the Sea, surrounded by other water-figures in a quadrant of sky they interpreted as a great celestial ocean.",
+    "cast": ["Aquarius"]
+  },
+  {
+    "id": "sagittarius-pabilsag",
+    "title": "Pabilsag, the Ancestral God",
+    "text": "Sagittarius corresponds to the Babylonian figure of Pabilsag, whose name means something like chief ancestor. He was depicted as a hybrid creature: a man's torso, a horse's legs, an eagle's tail-feathers, a scorpion's sting at the rear, a dog's head behind his shoulder, and a drawn bow at the front. In Babylonian medical texts, diseases of the head were attributed to him, and rituals to counter his influence invoked the star at the centaur's heart. The Babylonian map of the sky places him in the southern heavens among the figures of the Sea, and his arrow points toward Antares — the heart of the Scorpion — just as the Greek archer aims at the same target.",
+    "cast": ["Sagittarius"]
+  },
+  {
+    "id": "hercules-gilgamesh",
+    "title": "Gilgamesh, King of Uruk",
+    "text": "The Babylonians identified the kneeling figure of Hercules as Gilgamesh himself — the great king of Uruk who was two-thirds divine, the builder of walls, the one who saw all things. He is depicted in the sky kneeling with one foot on the head of the Dragon, and his story is the first great quest narrative we know: the search for the plant of eternal life after the death of his friend Enkidu. He found the plant at the bottom of the sea and lost it immediately to a serpent who shed its skin and became young again. The kneeling figure in the sky is frozen at the moment before the wrestling match begins, or perhaps the moment after the serpent swam away with immortality.",
+    "cast": ["Hercules"]
+  },
+  {
+    "id": "lyra-weaving-girl",
+    "title": "The Weaving Girl and the Cowherd",
+    "text": "Vega, the brightest star of Lyra, is in Chinese tradition the Weaving Girl, Zhinü, a daughter of the Jade Emperor who wove the clouds of heaven. She fell in love with a mortal cowherd and the two were separated by the Milky Way when the Emperor decreed that divine and mortal should not mix. Once each year, on the seventh day of the seventh lunar month, the magpies of the world fly up together to form a bridge across the river of stars so the two can meet. If it rains on that night, the tears are theirs. The festival of Qixi, held on this date, is still celebrated across East Asia as a festival of lovers and of skill in needlework.",
+    "cast": ["Lyra"]
+  },
+  {
+    "id": "virgo-chinese-horn",
+    "title": "The Horn Star",
+    "text": "The star we call Spica, brightest in Virgo, was to Chinese astronomers the first and most important of the twenty-eight lunar mansions: Jiao, the Horn. It marked the spring equinox in early Chinese astronomy, and its position was used to calibrate the entire celestial calendar. The Horn star was the home of the Heavenly Dragon's left horn, the beginning of the great Green Dragon constellation of the east, one of the four mythological beasts that guard the quadrants of the sky. An eclipse of Jiao or the arrival of a comet near it was considered among the worst of all omens for the imperial throne. The Chinese astronomer Liu Xin set Jiao as the zero-point of the heavens in the first century BCE.",
+    "cast": ["Virgo"]
+  },
+  {
+    "id": "canis-major-xolotl",
+    "title": "The Dog That Guides the Dead",
+    "text": "The Aztec dog-god Xolotl was the guide of the dead on their four-year journey through the nine underworld levels to Mictlan. Hairless and deformed like a lightning bolt, Xolotl was also the god of twins and the evening star. When the sun descended each night into the underworld, it was Xolotl who guided it safely through the darkness to rise again in the east. The bright star Sirius — Mamalhuaztli to the Aztecs, the fire-drill — was watched carefully for its morning rising, which the Aztec solar calendar used to calibrate one of its great cycle counts. The dog among the stars was the escort of the dead and the guardian of the nighttime sun.",
+    "cast": ["Canis Major"]
+  },
+  {
+    "id": "scorpius-citlaltlachtli",
+    "title": "The Star Ball-Court",
+    "text": "The Aztec name for the Scorpius region of the sky was Citlaltlachtli — the Star Ball-Court — because the tail of the constellation curving upward into the Milky Way resembled the I-shaped court of the sacred ball game. The Pleiades and Scorpius were the two key figures in the Aztec Calendar Round count that aligned the 260-day ritual calendar with the 365-day solar year. Their positions in the sky at the first hour of the night on the first day of the solar year determined whether the fire-new ceremony could proceed; if the Pleiades passed the zenith successfully, the world would continue for another 52-year cycle. The heart of the Scorpion — Antares — was associated with the sacrificial fire lit at the center of the ball court.",
+    "cast": ["Scorpius"]
+  },
+  {
+    "id": "andromeda-maori",
+    "title": "The Net of Māui",
+    "text": "Māori navigation placed importance on star formations quite different from those of European tradition, using the entire sky as a compass for deep-sea voyaging across the Pacific. In some traditions the stars of the northern sky, including the Andromeda region, form part of the great net of Māui, the demigod who fished up the North Island of New Zealand. The faint smear of light in this region that can be seen on dark nights — the Andromeda Galaxy — was noticed by Māori astronomers and considered evidence that the sea of stars extended further than the visible band of the Milky Way. Navigators used latitude and the whole sky dome to determine their position and their destination.",
+    "cast": ["Andromeda"]
   }
 ]
