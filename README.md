@@ -2,7 +2,7 @@
 
 A self-contained Docker service that displays tonight's moon phase, a night sky map, and the constellations visible from your current location — no external API keys required.
 
-![moondocker panels: moon phase, night sky SVG map, constellation list, mythology](https://github.com/joforcetg/moondocker/raw/main/docs/screenshot.png)
+![moondocker panels: moon phase, night sky SVG map, constellation list, folklore legend](https://github.com/joforcetg/moondocker/raw/main/docs/screenshot.png)
 
 ---
 
@@ -68,10 +68,10 @@ If neither browser geolocation nor `LAT`/`LON` are available, the page shows a m
 
 ## What it shows
 
-- **Moon** — phase name, Unicode glyph, illumination %, and today's rise / transit / set times (UTC). At polar latitudes where the moon never crosses the horizon, it shows "Circumpolar" or "Below horizon all day" instead.
-- **Night sky map** — SVG projection of stars brighter than magnitude 5.5 with constellation stick figures, cardinal directions, and zenith at center.
-- **Constellations** — list of 20 constellations sorted by whether they are above the horizon (▲) or rising/setting (▽).
-- **Mythology** — a daily rotation of mythology entries, seeded by date (same entry for all users on the same day).
+- **Moon** — phase name, an SVG-rendered moon showing the lit fraction, illumination %, today's rise / transit / set times (UTC), and the dates of the next new and full moon. At polar latitudes where the moon never crosses the horizon, it shows "Circumpolar" or "Below horizon all day" instead.
+- **Night sky map** — SVG projection of stars brighter than magnitude 5.5 with constellation stick figures, cardinal directions, and zenith at center. Each segment is tagged with its constellation so clicking a card can highlight it.
+- **Constellations** — list of 20 constellations sorted by whether they are above the horizon (▲) or rising/setting (▽). Cards with a myth are clickable.
+- **Legend** — by default, a daily rotation of dark world-folklore, seeded by date (same entry for all users on the same day). Clicking a constellation card swaps it for a daily-fixed myth featuring that constellation, highlights the figure in the sky map, and loads a classical artwork from Wikimedia Commons (cached 7 days; the page works fine offline without it).
 
 ---
 
@@ -115,12 +115,15 @@ SKYFIELD_DATA=.skyfield-data .venv/bin/python -m uvicorn app.main:app --port 743
 ## Architecture
 
 ```
-app/main.py          — FastAPI app: serves /, /api/sky, and /static
-app/astronomy.py     — Skyfield computation: moon phase, rise/set, constellation visibility
-app/skymap.py        — SVG renderer: alt/az star positions → 400×400 SVG
+app/main.py          — FastAPI app: serves /, /api/sky, /api/myth/{constellation}, and /static
+app/astronomy.py     — Skyfield computation: moon phase + next-phase dates, rise/set, constellation visibility, folklore/myth pickers
+app/skymap.py        — SVG renderer: alt/az star positions → 400×400 SVG, tagged with data-constellation
+app/mythart.py       — Wikimedia Commons artwork client with a 7-day cache (stdlib urllib; only network path)
 app/static/          — Frontend (index.html, style.css, app.js)
 data/constellations.json  — 20 constellations: HIP star IDs and stick-figure lines
-data/mythology.json       — Mythology blurbs per constellation
+data/dark_folklore.json   — default-legend pool: dark world-folklore, not constellation-tied
+data/myths.json           — constellation myths with role-ordered cast
+data/myth_art.json        — constellation → Wikimedia Commons category
 ```
 
-`GET /api/sky?lat=…&lon=…` returns a single JSON payload with moon data, visible constellations, the SVG sky map, and a mythology entry. The browser makes one request and renders everything client-side.
+`GET /api/sky?lat=…&lon=…` returns a single JSON payload with moon data (incl. next-phase dates), visible constellations (each flagged `has_myth`), the SVG sky map, and a `legend` (the default folklore entry). The browser makes one request and renders everything client-side. Clicking a constellation card then calls `GET /api/myth/{constellation}`, which returns the daily myth plus a Wikimedia artwork (or `null`); unknown names return 404. Only this endpoint touches the network — `/api/sky` is fully offline-capable.
