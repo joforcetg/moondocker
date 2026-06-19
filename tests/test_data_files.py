@@ -40,6 +40,8 @@ def test_every_art_constellation_has_a_myth():
     assert set(art) <= names
     # every art constellation must be castable
     assert set(art) <= cast_names, set(art) - cast_names
+    # every cast name must be a real constellation (guards typos)
+    assert cast_names <= names, cast_names - names
 
 
 def test_mythology_json_removed():
