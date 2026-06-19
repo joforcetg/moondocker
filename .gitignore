@@ -10,3 +10,8 @@ dist/
 build/
 .skyfield-data/
 demo-skymap.svg
+.aider*
+
+# font-install leftovers (not part of the app)
+ex_fonts/
+*.tgz
