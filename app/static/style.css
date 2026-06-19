@@ -28,12 +28,9 @@
   --dim:    var(--bone-dim);
   --mid:    var(--bone-dim);
   --bright: var(--bone);
-  --accent: var(--gold);
-  --blood:  var(--oxblood);
   --error:  #b5503f;
   --line:   #1c1c22;
   --line-2: #252530;
-  --glow:   0 0 7px rgba(208, 162, 74, 0.25);
 }
 
 *, *::before, *::after {
