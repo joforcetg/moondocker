@@ -15,21 +15,24 @@
 }
 
 :root {
-  --bg:       #08080a;
-  --ink:      #14131a;
-  --bone:     #e8e2d0;
-  --bone-dim: #9b958a;
-  --gold:     #d0a24a;
+  /* Cold horror / black-and-white palette */
+  --bg:       #060607;
+  --ink:      #0d0d0f;
+  --bone:     #cacace;   /* cool light-grey body text */
+  --bone-dim: #7e7e85;   /* muted cold grey */
+  --gold:     #f1f1f4;   /* repurposed: cold bright highlight (kept var name) */
+  --rune:     #9a9aa2;   /* runic line above titles */
   --font-title: "Grimoire Title", "Times New Roman", serif;
   --font-body:  "Grimoire Body", Georgia, serif;
+  --font-rune:  "Noto Sans Runic", "Segoe UI Historic", "Segoe UI Symbol", "Apple Symbols", system-ui, sans-serif;
 
   /* Legacy aliases — keep selectors below compiling without a full rename pass */
   --dim:    var(--bone-dim);
   --mid:    var(--bone-dim);
   --bright: var(--bone);
-  --error:  #b5503f;
-  --line:   #1c1c22;
-  --line-2: #252530;
+  --error:  #a33b3b;
+  --line:   #161618;
+  --line-2: #232327;
 }
 
 *, *::before, *::after {
@@ -42,12 +45,12 @@ body {
   background: var(--bg);
   color: var(--bone);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   padding: 1.25rem;
 }
 
-/* Near-monochrome candlelight: subtle top warmth, vignette at edges */
+/* Cold horror light: a faint colourless glow up top, heavy black vignette */
 body::before {
   content: "";
   position: fixed;
@@ -56,12 +59,12 @@ body::before {
   z-index: 9999;
   background:
     radial-gradient(120% 90% at 50% -10%,
-      rgba(208, 162, 74, 0.06) 0%,
-      rgba(208, 162, 74, 0.02) 30%,
+      rgba(220, 226, 232, 0.05) 0%,
+      rgba(220, 226, 232, 0.015) 30%,
       rgba(0, 0, 0, 0) 60%),
-    radial-gradient(140% 120% at 50% 45%,
-      rgba(0, 0, 0, 0) 55%,
-      rgba(0, 0, 0, 0.55) 100%);
+    radial-gradient(140% 120% at 50% 42%,
+      rgba(0, 0, 0, 0) 48%,
+      rgba(0, 0, 0, 0.7) 100%);
 }
 
 /* Faint parchment grain — fixed + pointer-events-none so it never repaints on
@@ -72,12 +75,12 @@ body::after {
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.04;
+  opacity: 0.07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 #app {
-  max-width: 620px;
+  max-width: 740px;
   margin: 0 auto;
   min-height: calc(100vh - 2.5rem);
   display: flex;
@@ -144,14 +147,35 @@ body::after {
   flex-direction: column;
 }
 
+.panel-rune {
+  font-family: var(--font-rune);
+  color: var(--rune);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 0.25rem;
+  line-height: 1;
+  user-select: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes glitch {
+    0%, 88%, 100% { transform: none; text-shadow: none; clip-path: none; }
+    90%  { transform: translate(-2px, 0); text-shadow:  2px 0 rgba(255,255,255,0.25); }
+    92%  { transform: translate( 2px, 0); text-shadow: -2px 0 rgba(200,200,210,0.2); clip-path: inset(0 0 60% 0); }
+    94%  { transform: translate(-1px, 1px); clip-path: inset(40% 0 0 0); }
+    96%  { transform: none; text-shadow: none; clip-path: none; }
+  }
+  .panel-hdr {
+    animation: glitch 9s ease-in-out infinite;
+  }
+}
+
 .panel-hdr {
   font-family: var(--font-title);
   padding: 0 0 0.45rem 0;
   margin-bottom: 0.8rem;
-  /* faint gold manuscript rule rather than a flat grey hairline */
-  border-bottom: 1px solid rgba(208, 162, 74, 0.28);
+  border-bottom: 1px solid rgba(190, 190, 200, 0.18);
   color: var(--bone);
-  /* blackletter is drawn tight — near-zero tracking, larger size to breathe */
   letter-spacing: 0.015em;
   font-size: clamp(1.3rem, 1.05rem + 0.9vw, 1.7rem);
   line-height: 1.1;
@@ -361,7 +385,7 @@ body::after {
   object-position: center 30%;
   display: block;
   border: 1px solid var(--line-2);
-  filter: grayscale(0.15) contrast(1.05);
+  filter: grayscale(0.5) contrast(1.15);
 }
 
 .myth-figure figcaption {
@@ -402,7 +426,7 @@ body::after {
    Sky map becomes a tall hero on the left; readouts stack on the right. */
 @media (min-width: 900px) {
   #app {
-    max-width: 1100px;
+    max-width: 1280px;
   }
   #panels {
     grid-template-columns: 1.5fr 1fr;
