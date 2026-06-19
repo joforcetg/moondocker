@@ -228,7 +228,7 @@
       card.className = 'const-card ' + (c.above_horizon ? 'above' : 'below') +
                        (c.has_myth ? '' : ' no-myth');
       card.innerHTML =
-        '<span class="const-marker">' + (c.above_horizon ? '▲' : '▽') + '</span>' +
+        '<span class="const-marker">' + (c.above_horizon ? '·' : '∘') + '</span>' +
         '<span class="const-name"></span>' +
         '<span class="const-abbr"></span>';
       card.querySelector('.const-name').textContent = c.name;
