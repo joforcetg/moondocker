@@ -44,7 +44,7 @@ def generate_skymap(
             lines_svg.append(
                 f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
                 f'data-constellation="{name}" '
-                f'stroke="#6b6256" stroke-width="0.8" stroke-opacity="0.7"/>'
+                f'stroke="#4a4a52" stroke-width="0.8" stroke-opacity="0.7"/>'
             )
             fig_members.setdefault(a, set()).add(name)
             fig_members.setdefault(b, set()).add(name)
@@ -59,12 +59,12 @@ def generate_skymap(
             stars_svg.append(
                 f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" '
                 f'data-constellation="{tag}" class="figstar" '
-                f'fill="#ece7da" fill-opacity="0.95"/>'
+                f'fill="#cacace" fill-opacity="0.95"/>'
             )
         else:
             stars_svg.append(
                 f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" '
-                f'fill="#cfc8b8" fill-opacity="0.85"/>'
+                f'fill="#9a9aa8" fill-opacity="0.6"/>'
             )
 
     cardinals = [("N", 0), ("E", 90), ("S", 180), ("W", 270)]
@@ -75,7 +75,7 @@ def generate_skymap(
         lx = CX + (x - CX) * scale
         ly = CY + (y - CY) * scale
         cardinal_svg.append(
-            f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#8a8276" font-size="10" '
+            f'<text x="{lx:.1f}" y="{ly:.1f}" fill="#7e7e85" font-size="10" '
             f'text-anchor="middle" dominant-baseline="middle" '
             f'font-family="serif">{label}</text>'
         )
