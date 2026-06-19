@@ -1,22 +1,222 @@
 {
-  "Orion":       { "category": "Category:Orion in art" },
-  "Ursa Major":  { "category": "Category:Ursa Major in art" },
-  "Cassiopeia":  { "category": "Category:Cassiopeia (mythology)" },
-  "Leo":         { "category": "Category:Leo (constellation) in art" },
-  "Scorpius":    { "category": "Category:Scorpius (constellation) in art" },
-  "Cygnus":      { "category": "Category:Zeus metamorphoses" },
-  "Lyra":        { "category": "Category:Orpheus in art" },
-  "Aquila":      { "category": "Category:Zeus metamorphoses" },
-  "Gemini":      { "category": "Category:Dioscuri in art" },
-  "Taurus":      { "category": "Category:Europa and the bull" },
-  "Virgo":       { "category": "Category:Demeter in art" },
-  "Boötes":      { "category": "Category:Boötes (constellation)" },
-  "Perseus":     { "category": "Category:Perseus in art" },
-  "Auriga":      { "category": "Category:Auriga (constellation)" },
-  "Canis Major": { "category": "Category:Canis Major (constellation)" },
-  "Aquarius":    { "category": "Category:Aquarius (constellation) in art" },
-  "Sagittarius": { "category": "Category:Sagittarius (constellation) in art" },
-  "Hercules":    { "category": "Category:Hercules in art" },
-  "Ursa Minor":  { "category": "Category:Ursa Minor in art" },
-  "Andromeda":   { "category": "Category:Andromeda (mythology)" }
+  "Orion": {
+    "category": "Category:Orion in art",
+    "alt_categories": [
+      "Category:Orion (mythology) in art",
+      "Category:Uranometria"
+    ],
+    "search_terms": [
+      "Orion constellation Bayer Uranometria",
+      "Orion hunter mythology engraving"
+    ]
+  },
+  "Ursa Major": {
+    "category": "Category:Ursa Major in art",
+    "alt_categories": [
+      "Category:Callisto (mythology)",
+      "Category:Urania's Mirror"
+    ],
+    "search_terms": [
+      "Ursa Major constellation Flamsteed",
+      "Great Bear constellation engraving"
+    ]
+  },
+  "Cassiopeia": {
+    "category": "Category:Cassiopeia (mythology)",
+    "alt_categories": [
+      "Category:Cassiopeia (constellation) in art",
+      "Category:Firmamentum Sobiescianum"
+    ],
+    "search_terms": [
+      "Cassiopeia constellation Hevelius",
+      "Cassiopeia queen mythology engraving"
+    ]
+  },
+  "Leo": {
+    "category": "Category:Leo (constellation) in art",
+    "alt_categories": [
+      "Category:Nemean lion",
+      "Category:Uranometria"
+    ],
+    "search_terms": [
+      "Leo constellation Bayer Uranometria",
+      "Nemean lion Hercules mythology art"
+    ]
+  },
+  "Scorpius": {
+    "category": "Category:Scorpius (constellation) in art",
+    "alt_categories": [
+      "Category:Scorpius (constellation)",
+      "Category:Uranometria"
+    ],
+    "search_terms": [
+      "Scorpius constellation Bayer engraving",
+      "scorpion mythology constellation art"
+    ]
+  },
+  "Cygnus": {
+    "category": "Category:Zeus metamorphoses",
+    "alt_categories": [
+      "Category:Cygnus (constellation) in art",
+      "Category:Leda and the swan"
+    ],
+    "search_terms": [
+      "Cygnus constellation Bayer Uranometria",
+      "swan Zeus mythology art"
+    ]
+  },
+  "Lyra": {
+    "category": "Category:Orpheus in art",
+    "alt_categories": [
+      "Category:Lyra (constellation) in art",
+      "Category:Eurydice (mythology)"
+    ],
+    "search_terms": [
+      "Lyra constellation Flamsteed",
+      "Orpheus lyre mythology engraving"
+    ]
+  },
+  "Aquila": {
+    "category": "Category:Zeus metamorphoses",
+    "alt_categories": [
+      "Category:Aquila (constellation) in art",
+      "Category:Ganymede (mythology)"
+    ],
+    "search_terms": [
+      "Aquila constellation Hevelius engraving",
+      "eagle Zeus Ganymede mythology art"
+    ]
+  },
+  "Gemini": {
+    "category": "Category:Dioscuri in art",
+    "alt_categories": [
+      "Category:Castor and Pollux",
+      "Category:Urania's Mirror"
+    ],
+    "search_terms": [
+      "Gemini constellation engraving Flamsteed",
+      "Dioscuri twins mythology art"
+    ]
+  },
+  "Taurus": {
+    "category": "Category:Europa and the bull",
+    "alt_categories": [
+      "Category:Taurus (constellation) in art",
+      "Category:Uranometria"
+    ],
+    "search_terms": [
+      "Taurus constellation Bayer Uranometria",
+      "Zeus Europa bull mythology engraving"
+    ]
+  },
+  "Virgo": {
+    "category": "Category:Demeter in art",
+    "alt_categories": [
+      "Category:Virgo (constellation) in art",
+      "Category:Persephone in art"
+    ],
+    "search_terms": [
+      "Virgo constellation Flamsteed",
+      "Demeter Persephone mythology harvest art"
+    ]
+  },
+  "Boötes": {
+    "category": "Category:Boötes (constellation)",
+    "alt_categories": [
+      "Category:Boötes (constellation) in art",
+      "Category:Arcas (mythology)"
+    ],
+    "search_terms": [
+      "Bootes constellation Hevelius engraving",
+      "Bootes herdsman constellation Firmamentum"
+    ]
+  },
+  "Perseus": {
+    "category": "Category:Perseus in art",
+    "alt_categories": [
+      "Category:Perseus (mythology) in art",
+      "Category:Andromeda and Perseus"
+    ],
+    "search_terms": [
+      "Perseus constellation Bayer Uranometria",
+      "Perseus Medusa mythology engraving"
+    ]
+  },
+  "Auriga": {
+    "category": "Category:Auriga (constellation)",
+    "alt_categories": [
+      "Category:Auriga (constellation) in art",
+      "Category:Firmamentum Sobiescianum"
+    ],
+    "search_terms": [
+      "Auriga charioteer constellation Hevelius",
+      "Auriga constellation Uranometria engraving"
+    ]
+  },
+  "Canis Major": {
+    "category": "Category:Canis Major (constellation)",
+    "alt_categories": [
+      "Category:Canis Major (constellation) in art",
+      "Category:Sirius (star)"
+    ],
+    "search_terms": [
+      "Canis Major constellation Bayer Uranometria",
+      "Sirius dog star mythology engraving"
+    ]
+  },
+  "Aquarius": {
+    "category": "Category:Aquarius (constellation) in art",
+    "alt_categories": [
+      "Category:Aquarius (constellation)",
+      "Category:Ganymede (mythology)"
+    ],
+    "search_terms": [
+      "Aquarius constellation Flamsteed engraving",
+      "water bearer mythology art constellation"
+    ]
+  },
+  "Sagittarius": {
+    "category": "Category:Sagittarius (constellation) in art",
+    "alt_categories": [
+      "Category:Sagittarius (constellation)",
+      "Category:Chiron (mythology)"
+    ],
+    "search_terms": [
+      "Sagittarius constellation Bayer Uranometria",
+      "centaur archer mythology engraving"
+    ]
+  },
+  "Hercules": {
+    "category": "Category:Hercules in art",
+    "alt_categories": [
+      "Category:Hercules (mythology) in art",
+      "Category:Twelve Labours of Hercules"
+    ],
+    "search_terms": [
+      "Hercules constellation Hevelius Firmamentum",
+      "Hercules labors mythology art engraving"
+    ]
+  },
+  "Ursa Minor": {
+    "category": "Category:Ursa Minor in art",
+    "alt_categories": [
+      "Category:Ursa Minor (constellation) in art",
+      "Category:Urania's Mirror"
+    ],
+    "search_terms": [
+      "Ursa Minor constellation Flamsteed",
+      "Little Bear constellation engraving"
+    ]
+  },
+  "Andromeda": {
+    "category": "Category:Andromeda (mythology)",
+    "alt_categories": [
+      "Category:Andromeda (constellation) in art",
+      "Category:Perseus rescuing Andromeda"
+    ],
+    "search_terms": [
+      "Andromeda constellation Bayer Uranometria",
+      "Andromeda chained mythology art engraving"
+    ]
+  }
 }
