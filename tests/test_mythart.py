@@ -57,3 +57,43 @@ def test_fetch_art_parses_api(monkeypatch):
 def test_fetch_art_empty_category(monkeypatch):
     monkeypatch.setattr(ma, "_get_json", lambda url: {"query": {"categorymembers": []}})
     assert ma._fetch_art("Category:Empty") is None
+
+
+def test_fetch_art_skips_nonimage_and_urlless(monkeypatch):
+    # A .pdf is filtered out before query; a urlless file is skipped for the
+    # candidate that actually carries an image url. (The reliability fix.)
+    members = {"query": {"categorymembers": [
+        {"title": "File:Doc.pdf"},
+        {"title": "File:Bad.jpg"},
+        {"title": "File:Good.png"},
+    ]}}
+    info = {"query": {"pages": {
+        "1": {"title": "File:Bad.jpg", "imageinfo": [{}]},          # no url
+        "2": {"title": "File:Good.png", "imageinfo": [{
+            "url": "https://upload.wikimedia.org/Good.png",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Good.png",
+            "extmetadata": {"LicenseShortName": {"value": "CC0"}},
+        }]},
+    }}}
+    calls = iter([members, info])
+    monkeypatch.setattr(ma, "_get_json", lambda url: next(calls))
+    out = ma._fetch_art("Category:Mixed")
+    assert out is not None
+    assert out["url"].endswith("Good.png")
+    assert out["license"] == "CC0"
+
+
+def test_fetch_art_falls_back_to_search(monkeypatch):
+    # Empty/wrong category → search Commons by name instead of blanking.
+    empty_cat = {"query": {"categorymembers": []}}
+    search = {"query": {"search": [{"title": "File:Lyra art.jpg"}]}}
+    info = {"query": {"pages": {"3": {"title": "File:Lyra art.jpg", "imageinfo": [{
+        "url": "https://upload.wikimedia.org/Lyra.jpg",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Lyra art.jpg",
+        "extmetadata": {"LicenseShortName": {"value": "Public domain"}},
+    }]}}}}
+    calls = iter([empty_cat, search, info])
+    monkeypatch.setattr(ma, "_get_json", lambda url: next(calls))
+    out = ma._fetch_art("Category:Empty", "Lyra")
+    assert out is not None
+    assert out["url"].endswith("Lyra.jpg")

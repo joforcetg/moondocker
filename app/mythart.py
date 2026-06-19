@@ -27,26 +27,47 @@ def _api(params: dict) -> dict:
     return _get_json(API + "?" + urllib.parse.urlencode(params))
 
 
-def _fetch_art(category: str) -> dict | None:
-    """One random file from `category`, with imageinfo. None on any problem."""
-    try:
-        members = _api({
-            "action": "query", "list": "categorymembers",
-            "cmtitle": category, "cmtype": "file", "cmlimit": "100",
-        }).get("query", {}).get("categorymembers", [])
-        if not members:
-            return None
-        title = random.choice(members)["title"]
-        pages = _api({
-            "action": "query", "prop": "imageinfo", "titles": title,
-            "iiprop": "url|extmetadata",
-        }).get("query", {}).get("pages", {})
-        page = next(iter(pages.values()), {})
+_IMAGE_EXTS = (".jpg", ".jpeg", ".png", ".gif", ".webp", ".tif", ".tiff")
+
+
+def _image_titles(titles: list[str]) -> list[str]:
+    return [t for t in titles if t.lower().endswith(_IMAGE_EXTS)]
+
+
+def _category_titles(category: str) -> list[str]:
+    members = _api({
+        "action": "query", "list": "categorymembers",
+        "cmtitle": category, "cmtype": "file", "cmlimit": "100",
+    }).get("query", {}).get("categorymembers", [])
+    return _image_titles([m.get("title", "") for m in members])
+
+
+def _search_titles(name: str) -> list[str]:
+    """Fallback when a configured category is wrong/empty: search Commons files
+    by constellation name, biased toward artwork."""
+    results = _api({
+        "action": "query", "list": "search",
+        "srsearch": f"{name} mythology", "srnamespace": "6", "srlimit": "40",
+    }).get("query", {}).get("search", [])
+    return _image_titles([r.get("title", "") for r in results])
+
+
+def _image_from_titles(titles: list[str]) -> dict | None:
+    """Batch-query candidates, return the first that carries a real image url."""
+    sample = random.sample(titles, min(15, len(titles)))
+    pages = _api({
+        "action": "query", "prop": "imageinfo", "titles": "|".join(sample),
+        "iiprop": "url|extmetadata",
+    }).get("query", {}).get("pages", {})
+    candidates = list(pages.values())
+    random.shuffle(candidates)
+    for page in candidates:
         info = (page.get("imageinfo") or [{}])[0]
         url = info.get("url")
         if not url:
-            return None
+            continue
         ext = info.get("extmetadata", {})
+        title = page.get("title") or url.rsplit("/", 1)[-1]
         return {
             "url": url,
             "title": title.removeprefix("File:"),
@@ -54,6 +75,23 @@ def _fetch_art(category: str) -> dict | None:
             "license": ext.get("LicenseShortName", {}).get("value", ""),
             "credit_url": info.get("descriptionurl", ""),
         }
+    return None
+
+
+def _fetch_art(category: str, name: str | None = None) -> dict | None:
+    """
+    Find a usable image for a constellation. Tries the configured category
+    first; if that is empty/wrong, falls back to a name search on Commons so a
+    bad category no longer blanks the panel. None on any problem.
+    """
+    try:
+        titles = _category_titles(category)
+        art = _image_from_titles(titles) if titles else None
+        if art is None and name:
+            stitles = _search_titles(name)
+            if stitles:
+                art = _image_from_titles(stitles)
+        return art
     except Exception:
         logger.exception("Wikimedia art fetch failed for %s", category)
         return None
@@ -68,7 +106,7 @@ def get_constellation_art(name: str, category: str) -> dict | None:
     cached = _CACHE.get(name)
     if cached and (time.time() - cached[0]) < CACHE_TTL_SECONDS:
         return cached[1]
-    art = _fetch_art(category)
+    art = _fetch_art(category, name)
     if art is not None:
         _CACHE[name] = (time.time(), art)
     return art
