@@ -81,9 +81,11 @@ def generate_skymap(
         )
 
     parts = [
-        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'<svg xmlns="http://www.w3.org/2000/svg" role="img" '
+        f'aria-label="Night sky map: stars and constellation figures above the horizon" '
         f'viewBox="0 0 {VIEWBOX_SIZE} {VIEWBOX_SIZE}" '
         f'width="{VIEWBOX_SIZE}" height="{VIEWBOX_SIZE}" style="background:#08080a">',
+        '<title>Night sky map</title>',
         f'<circle cx="{CX:.1f}" cy="{CY:.1f}" r="{R:.1f}" fill="#08080a" '
         f'stroke="#2a2a2e" stroke-width="1"/>',
         *lines_svg,

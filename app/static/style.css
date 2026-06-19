@@ -20,7 +20,6 @@
   --bone:     #e8e2d0;
   --bone-dim: #9b958a;
   --gold:     #d0a24a;
-  --oxblood:  #7a2a26;
   --font-title: "Grimoire Title", "Times New Roman", serif;
   --font-body:  "Grimoire Body", Georgia, serif;
 
@@ -352,6 +351,22 @@ body::before {
 
 .myth-figure a {
   color: var(--bone-dim);
+}
+
+/* ── Panel entrance (reduced-motion users get the panels instantly) ──── */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes panel-rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+  }
+  #panels:not([hidden]) .panel {
+    animation: panel-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .panel-moon   { animation-delay: 0.05s; }
+  .panel-sky    { animation-delay: 0.12s; }
+  .panel-const  { animation-delay: 0.19s; }
+  .panel-legend { animation-delay: 0.26s; }
 }
 
 /* ── Responsive ──────────────────────────────────────── */
