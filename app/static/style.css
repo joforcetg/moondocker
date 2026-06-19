@@ -13,6 +13,12 @@
   src: url("/static/fonts/ebgaramond-italic.woff2") format("woff2");
   font-weight: 400; font-style: italic; font-display: swap;
 }
+@font-face {
+  font-family: "Noto Sans Runic";
+  src: url("/static/fonts/noto-sans-runic-runic-400-normal.woff2") format("woff2");
+  font-weight: 400; font-display: block;
+  unicode-range: U+16A0-U+16FF;
+}
 
 :root {
   /* Cold horror / black-and-white palette */
@@ -150,12 +156,11 @@ body::after {
 .panel-rune {
   font-family: var(--font-rune);
   color: var(--rune);
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
-  margin-bottom: 0.12rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  margin-bottom: 0.18rem;
   line-height: 1;
   user-select: none;
-  opacity: 0.75;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -431,37 +436,49 @@ body::after {
 
 /* Wide screens: spread into a grid instead of one tall column.
    Sky map becomes a tall hero on the left; readouts stack on the right. */
+/* Medium screens: single-column but with roomier sky map */
+@media (min-width: 600px) and (max-width: 899px) {
+  #skymap svg { max-width: min(580px, 75vw); }
+  .panel-sky > div { padding: 1.5rem; }
+}
+
 @media (min-width: 900px) {
   #app {
     max-width: 1280px;
   }
   #panels {
-    grid-template-columns: 1.5fr 1fr;
-    /* rows size to content; the sky cell (spanning all three) stays the hero.
-       No 1fr row, so the legend can't stretch tall when artwork loads. */
+    grid-template-columns: 1.35fr 1fr;
     grid-template-rows: auto auto auto;
     grid-template-areas:
       "sky moon"
       "sky const"
       "sky legend";
     align-content: start;
+    gap: 1.75rem;
   }
   .panel-sky    { grid-area: sky; align-self: start; }
   .panel-moon   { grid-area: moon; }
   .panel-const  { grid-area: const; }
   .panel-legend { grid-area: legend; }
   #skymap svg {
-    max-width: min(640px, 78vh);
+    max-width: min(700px, 80vh);
   }
 
-  /* Give the readout panels more presence on roomy screens */
   #panels        { font-size: 16px; }
-  .panel > div   { padding: 1.15rem; }
+  .panel > div   { padding: 1.4rem; }
   .moon-glyph    { font-size: 3rem; }
   .moon-times span { margin-right: 2rem; }
   #constellations { gap: 0.6rem 1.3rem; }
   .const-card .const-abbr { font-size: 13px; }
   .myth-text     { font-size: 16px; line-height: 1.9; }
+}
+
+/* Extra breathing room on very wide screens */
+@media (min-width: 1100px) {
+  .panel > div { padding: 1.6rem; }
+  #panels      { gap: 2rem; }
+  .panel-rune  { font-size: 1rem; }
+  .panel-hdr   { font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.85rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
