@@ -42,8 +42,8 @@ body {
   background: var(--bg);
   color: var(--bone);
   font-family: var(--font-body);
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.65;
   padding: 1.25rem;
 }
 
@@ -62,6 +62,18 @@ body::before {
     radial-gradient(140% 120% at 50% 45%,
       rgba(0, 0, 0, 0) 55%,
       rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* Faint parchment grain — fixed + pointer-events-none so it never repaints on
+   scroll. SVG fractal noise (no asset, no dependency). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 #app {
@@ -96,8 +108,9 @@ body::before {
 .wordmark {
   font-family: var(--font-title);
   color: var(--bone);
-  letter-spacing: 0.06em;
-  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem);
+  line-height: 1;
 }
 
 .coords {
@@ -133,12 +146,15 @@ body::before {
 
 .panel-hdr {
   font-family: var(--font-title);
-  padding: 0 0 0.4rem 0;
-  margin-bottom: 0.7rem;
-  border-bottom: 1px solid var(--line-2);
+  padding: 0 0 0.45rem 0;
+  margin-bottom: 0.8rem;
+  /* faint gold manuscript rule rather than a flat grey hairline */
+  border-bottom: 1px solid rgba(208, 162, 74, 0.28);
   color: var(--bone);
-  letter-spacing: 0.10em;
-  font-size: 15px;
+  /* blackletter is drawn tight — near-zero tracking, larger size to breathe */
+  letter-spacing: 0.015em;
+  font-size: clamp(1.3rem, 1.05rem + 0.9vw, 1.7rem);
+  line-height: 1.1;
 }
 
 .panel > div {
@@ -338,8 +354,13 @@ body::before {
 
 .myth-figure img {
   width: 100%;
-  height: auto;
+  /* Cap height so a tall portrait can't stretch the legend column and,
+     on the wide grid, drag the whole layout taller. */
+  max-height: clamp(180px, 34vh, 340px);
+  object-fit: cover;
+  object-position: center 30%;
   display: block;
+  border: 1px solid var(--line-2);
   filter: grayscale(0.15) contrast(1.05);
 }
 
@@ -385,24 +406,25 @@ body::before {
   }
   #panels {
     grid-template-columns: 1.5fr 1fr;
-    grid-template-rows: auto auto 1fr;
+    /* rows size to content; the sky cell (spanning all three) stays the hero.
+       No 1fr row, so the legend can't stretch tall when artwork loads. */
+    grid-template-rows: auto auto auto;
     grid-template-areas:
       "sky moon"
       "sky const"
       "sky legend";
-    align-content: stretch;
+    align-content: start;
   }
-  .panel-sky    { grid-area: sky; }
+  .panel-sky    { grid-area: sky; align-self: start; }
   .panel-moon   { grid-area: moon; }
   .panel-const  { grid-area: const; }
   .panel-legend { grid-area: legend; }
   #skymap svg {
-    max-width: min(640px, 80vh);
+    max-width: min(640px, 78vh);
   }
 
   /* Give the readout panels more presence on roomy screens */
   #panels        { font-size: 16px; }
-  .panel-hdr     { font-size: 16px; padding: 0.45rem 1rem; }
   .panel > div   { padding: 1.15rem; }
   .moon-glyph    { font-size: 3rem; }
   .moon-times span { margin-right: 2rem; }
