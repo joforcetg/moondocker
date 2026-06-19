@@ -155,9 +155,39 @@ New unit tests in `tests/test_mythart.py`:
 
 ---
 
+## 5. `app/skymap.py` — Aesthetic alignment
+
+### Problem
+Skymap SVG uses warm sepia tones, clashing with the cold horror CSS palette.
+
+### Changes (color values only, no logic)
+
+| Element | Current | New |
+|---|---|---|
+| Constellation lines stroke | `#6b6256` | `#4a4a52` |
+| Figure stars fill | `#ece7da` | `#cacace` |
+| Background stars fill | `#cfc8b8` | `#9a9aa8` |
+| Background stars fill-opacity | `0.85` | `0.6` |
+| Cardinal text fill | `#8a8276` | `#7e7e85` |
+| Boundary circle stroke | `#2a2a2e` | unchanged |
+| Background fill | `#08080a` | unchanged |
+
+No projection, logic, or API changes.
+
+---
+
+## 6. `app/static/app.js` — Minor polish
+
+### Constellation card markers
+Change `▲` / `▽` to `·` / `∘` — quieter, less chunky, fits grimoire aesthetic.
+
+### Everything else
+Moon SVG rendering, fetch logic, highlight system, layout structure — all sound, no changes.
+
+---
+
 ## Out of scope
 
-- No UI changes (existing card/image layout unchanged)
 - No API endpoint changes
 - No new runtime dependencies
-- No changes to `astronomy.py`, `skymap.py`, or `main.py`
+- No changes to `astronomy.py` or `main.py`
