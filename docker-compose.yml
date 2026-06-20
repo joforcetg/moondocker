@@ -1,8 +1,15 @@
 services:
   moondocker:
-    build: .
+    image: ghcr.io/joforcetg/moondocker:latest
+    restart: unless-stopped
     ports:
       - "7432:7432"
     environment:
-      LAT: ""   # fallback latitude; leave blank to use browser geolocation
-      LON: ""   # fallback longitude
+      LAT: ""   # optional fallback latitude; leave blank to use browser geolocation
+      LON: ""   # optional fallback longitude
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7432/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
