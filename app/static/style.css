@@ -440,6 +440,11 @@ body::after {
   body { padding: 0.75rem; }
   .panel > div, .panel-sky > div { padding: 0.7rem; }
   .moon-times span { margin-right: 1rem; display: inline-block; }
+  .moon-next span  { margin-right: 1rem; display: inline-block; }
+}
+
+@media (max-width: 380px) {
+  .coords { display: none; }
 }
 
 /* Wide screens: spread into a grid instead of one tall column.
