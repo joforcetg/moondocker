@@ -19,4 +19,7 @@ jobs:
 
       - run: pip install -r requirements-dev.txt
 
+      - name: Security audit
+        run: pip audit
+
       - run: python -m pytest -v
