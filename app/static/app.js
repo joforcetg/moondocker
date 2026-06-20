@@ -201,7 +201,8 @@
     card.classList.add('active');
     highlight(name);
     showConstellationMyth(name);
-    var legendPanel = document.getElementById('legend').closest('.panel');
+    var legendEl = document.getElementById('legend');
+    var legendPanel = legendEl && legendEl.closest('.panel');
     if (legendPanel) legendPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
