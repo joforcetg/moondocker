@@ -97,3 +97,9 @@ def test_myth_endpoint_unknown_404():
     from app.main import app
     r = TestClient(app).get("/api/myth/NotAConstellation")
     assert r.status_code == 404
+
+
+def test_health(client):
+    resp = client.get("/health")
+    assert resp.status_code == 200
+    assert resp.json() == {"status": "ok"}
