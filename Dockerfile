@@ -23,7 +23,7 @@ hipparcos.load_dataframe(load.open(hipparcos.URL))" && \
 COPY data/ ./data/
 COPY app/ ./app/
 
-RUN useradd -r -u 1001 appuser
+RUN useradd -r -u 1001 appuser && chown -R appuser:appuser /skyfield-data
 USER appuser
 
 ENV LAT="" LON="" PORT=7432 SKYFIELD_DATA=/skyfield-data
