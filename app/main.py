@@ -64,6 +64,11 @@ if _INDEX_HTML == _raw_html:
     logger.warning("index.html has no </head> tag — window.__FALLBACK__ was not injected")
 
 
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+
 @app.get("/", response_class=HTMLResponse)
 async def index() -> str:
     return _INDEX_HTML
