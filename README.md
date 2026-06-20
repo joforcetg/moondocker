@@ -1,5 +1,8 @@
 # moondocker
 
+[![CI](https://github.com/joforcetg/moondocker/actions/workflows/test.yml/badge.svg)](https://github.com/joforcetg/moondocker/actions/workflows/test.yml)
+[![Docker](https://ghcr-badge.egpl.dev/joforcetg/moondocker/size)](https://github.com/joforcetg/moondocker/pkgs/container/moondocker)
+
 A self-contained Docker service that displays tonight's moon phase, a night sky map, and the constellations visible from your current location — no external API keys required.
 
 ![moondocker panels: moon phase, night sky SVG map, constellation list, folklore legend](https://github.com/joforcetg/moondocker/raw/main/docs/screenshot.png)
@@ -50,6 +53,34 @@ services:
     environment:
       LAT: ""
       LON: ""
+```
+
+---
+
+## VPS deploy
+
+```bash
+# pull and start in background
+docker compose up -d
+```
+
+To put it behind a domain with automatic HTTPS, add a [Caddyfile](https://caddyserver.com/docs/quick-starts/reverse-proxy):
+
+```
+moondocker.example.com {
+    reverse_proxy localhost:7432
+}
+```
+
+Then `caddy reload`.
+
+---
+
+## Updating
+
+```bash
+docker compose pull
+docker compose up -d
 ```
 
 ---

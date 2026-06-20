@@ -1,6 +1,7 @@
 services:
   moondocker:
     image: ghcr.io/joforcetg/moondocker:latest
+    # build: .  # uncomment to build from source instead of pulling
     restart: unless-stopped
     ports:
       - "7432:7432"

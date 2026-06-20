@@ -1,7 +1,12 @@
-FROM python:3.12-slim
+FROM python:3.12.11-slim
 WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+
 # Pre-download skyfield data at build time so the container runs offline.
 # Uses python -c (not a heredoc) so it works with both the legacy builder and BuildKit.
 # hip_main.dat is fetched via hipparcos.URL — load.open(filename) only opens local files.
@@ -14,8 +19,17 @@ load('de421.bsp'); \
 hipparcos.load_dataframe(load.open(hipparcos.URL))" && \
     test -s /skyfield-data/de421.bsp && \
     test -s /skyfield-data/hip_main.dat
+
 COPY data/ ./data/
 COPY app/ ./app/
+
+RUN useradd -r -u 1001 appuser && chown -R appuser:appuser /skyfield-data
+USER appuser
+
 ENV LAT="" LON="" PORT=7432 SKYFIELD_DATA=/skyfield-data
 EXPOSE 7432
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD curl -f http://localhost:${PORT}/health || exit 1
+
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT}"]
