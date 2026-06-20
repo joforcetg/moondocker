@@ -1,4 +1,7 @@
 FROM python:3.12.11-slim
+LABEL org.opencontainers.image.source="https://github.com/joforcetg/moondocker" \
+      org.opencontainers.image.description="Tonight's moon phase and night sky map" \
+      org.opencontainers.image.licenses="MIT"
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends curl \

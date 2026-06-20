@@ -147,5 +147,7 @@ def get_constellation_art(name: str) -> dict | None:
         return None
     art = _fetch_art(entry["category"], name, entry.get("alt_categories", []), entry.get("search_terms", []))
     if art is not None:
+        if len(_CACHE) >= 200:  # ponytail: ~20 constellations in practice, ceiling for safety
+            _CACHE.clear()
         _CACHE[name] = (time.time(), art)
     return art
