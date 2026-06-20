@@ -494,6 +494,14 @@ body::after {
   .panel-hdr   { font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.85rem); }
 }
 
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-left:   max(1.25rem, env(safe-area-inset-left));
+    padding-right:  max(1.25rem, env(safe-area-inset-right));
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cursor { animation: none; }
   #skymap line.hl, #skymap circle.hl { transition: none; }
