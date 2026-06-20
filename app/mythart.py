@@ -65,9 +65,7 @@ def _image_from_titles(titles: list[str]) -> dict | None:
         "action": "query", "prop": "imageinfo", "titles": "|".join(sample),
         "iiprop": "url|extmetadata",
     }).get("query", {}).get("pages", {})
-    candidates = list(pages.values())
-    random.shuffle(candidates)
-    for page in candidates:
+    for page in list(pages.values()):
         info = (page.get("imageinfo") or [{}])[0]
         url = info.get("url")
         if not url:
@@ -140,14 +138,14 @@ def _strip(html: str) -> str:
     return re.sub(r"<[^>]+>", "", html).strip()
 
 
-def get_constellation_art(name: str, category: str) -> dict | None:
+def get_constellation_art(name: str) -> dict | None:
     cached = _CACHE.get(name)
     if cached and (time.time() - cached[0]) < CACHE_TTL_SECONDS:
         return cached[1]
-    entry = _MYTH_ART.get(name, {})
-    alt_categories = entry.get("alt_categories", [])
-    search_terms = entry.get("search_terms", [])
-    art = _fetch_art(category, name, alt_categories, search_terms)
+    entry = _MYTH_ART.get(name)
+    if not entry:
+        return None
+    art = _fetch_art(entry["category"], name, entry.get("alt_categories", []), entry.get("search_terms", []))
     if art is not None:
         _CACHE[name] = (time.time(), art)
     return art
