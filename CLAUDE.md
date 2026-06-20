@@ -1,22 +1,22 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (claude.ai/code) when working in this repo.
 
 ## Project
 
-**moondocker** is a self-contained Docker service that displays tonight's moon phase, a night sky map, and the constellations visible from the user's current geographic location. It is designed to be imported into a `docker-compose.yml` as a single service.
+**moondocker** — self-contained Docker service. Shows tonight's moon phase, night sky map, constellations visible from user's location. Import into `docker-compose.yml` as single service.
 
 ## Goal
 
-Produce a Docker image that:
-- Accepts the user's location (via browser geolocation or env-var lat/lon fallback)
-- Computes the current moon phase and illumination
-- Renders visible constellations for that location and date/time
-- Serves everything as a web UI (no external API keys required if possible)
+Docker image that:
+- Accepts user location (browser geolocation or env-var lat/lon fallback)
+- Computes moon phase + illumination
+- Renders visible constellations for that location + date/time
+- Serves as web UI (no external API keys if possible)
 
 ## Commands
 
-All Python commands must use `.venv/bin/python` — the system Python lacks the project's dependencies.
+All Python commands use `.venv/bin/python` — system Python lacks project deps.
 
 ```bash
 # Run all tests
@@ -56,13 +56,13 @@ data/myths.json           — Constellation myths with role-ordered cast (conste
 data/myth_art.json        — Constellation → Wikimedia Commons category for artwork lookup
 ```
 
-**Request flow:** Browser calls `/api/sky?lat=…&lon=…` → `main.py` calls three functions from `astronomy.py` (`get_moon_data`, `get_visible_constellations`, `get_skymap_stars`), one from `skymap.py` (`generate_skymap`), and `pick_default_folklore`; it returns a single JSON response with moon data (incl. next-phase dates), the visible-constellation list (each tagged `has_myth`), the SVG, and a `legend` entry (default folklore). Clicking a constellation card calls `GET /api/myth/{constellation}` → daily-fixed myth + live/cached Wikimedia artwork (`image`, or `null`); unknown names return 404.
+**Request flow:** Browser → `/api/sky?lat=…&lon=…` → `main.py` calls `get_moon_data`, `get_visible_constellations`, `get_skymap_stars` (from `astronomy.py`), `generate_skymap` (from `skymap.py`), `pick_default_folklore`; returns JSON: moon data (incl. next-phase dates), visible-constellation list (each tagged `has_myth`), SVG, `legend` (default folklore). Constellation card click → `GET /api/myth/{constellation}` → daily-fixed myth + live/cached Wikimedia artwork (`image` or `null`); unknown names 404.
 
-**Skyfield data:** `astronomy.py` lazy-loads two large files (`de421.bsp` ephemeris and `hip_main.dat` Hipparcos star catalog) from the path in `SKYFIELD_DATA` (defaults to `/skyfield-data`, the container path). The Dockerfile pre-downloads these at build time. For local runs outside Docker, download both files and set `SKYFIELD_DATA` to their directory. Unit tests mock all skyfield calls and do not need this.
+**Skyfield data:** `astronomy.py` lazy-loads `de421.bsp` (ephemeris) + `hip_main.dat` (Hipparcos catalog) from `SKYFIELD_DATA` (defaults to `/skyfield-data`). Dockerfile pre-downloads at build time. Local runs: download both files, set `SKYFIELD_DATA` to their dir. Unit tests mock all skyfield calls — no data needed.
 
-**Test mocking:** `tests/conftest.py` patches `app.main.get_moon_data`, `app.main.get_visible_constellations`, `app.main.get_skymap_stars`, `app.main.generate_skymap`, and `app.main.pick_default_folklore` — i.e., names in `app.main`'s namespace. Tests that exercise `/api/myth` patch `app.main.pick_constellation_myth` and `app.main.get_constellation_art`. If you add new imports, patch the `app.main.*` binding, not the source module.
+**Test mocking:** `tests/conftest.py` patches `app.main.get_moon_data`, `app.main.get_visible_constellations`, `app.main.get_skymap_stars`, `app.main.generate_skymap`, `app.main.pick_default_folklore` — names in `app.main` namespace. `/api/myth` tests patch `app.main.pick_constellation_myth` + `app.main.get_constellation_art`. New imports: patch `app.main.*` binding, not source module.
 
 ## Known issues / open tasks
 
-- **Mock binding (T6.1):** `conftest.py` patches are on `app.main.*` (e.g. `app.main.pick_default_folklore`, `app.main.pick_constellation_myth`, `app.main.get_constellation_art`); ensure `main.py` keeps using `from .astronomy import …` / `from .mythart import …` (direct name binding) so the patches stay effective. If you switch to `astronomy.get_moon_data(...)` style calls, update the patch targets to `app.astronomy.*`.
-- **Constellation visibility time (D1):** The spec says "at local midnight" but `get_visible_constellations` uses `ts.now()`. This is intentional — `now` is more useful for a live sky view.
+- **Mock binding (T6.1):** `conftest.py` patches on `app.main.*` (e.g. `app.main.pick_default_folklore`, `app.main.pick_constellation_myth`, `app.main.get_constellation_art`); keep `main.py` using `from .astronomy import …` / `from .mythart import …` (direct name binding) for patches to work. Switch to `astronomy.get_moon_data(...)` style → update patch targets to `app.astronomy.*`.
+- **Constellation visibility time (D1):** Spec says "at local midnight" but `get_visible_constellations` uses `ts.now()`. Intentional — `now` more useful for live sky view.
