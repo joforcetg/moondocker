@@ -14,16 +14,16 @@ def _clear_cache():
 def test_returns_fetch_result_and_caches():
     payload = {"url": "u", "title": "t", "author": "a", "license": "PD", "credit_url": "c"}
     with patch.object(ma, "_fetch_art", return_value=payload) as fake:
-        a = ma.get_constellation_art("Orion", "Category:Orion in art")
-        b = ma.get_constellation_art("Orion", "Category:Orion in art")
+        a = ma.get_constellation_art("Orion")
+        b = ma.get_constellation_art("Orion")
     assert a == payload and b == payload
     assert fake.call_count == 1  # second call served from cache
 
 
 def test_failure_returns_none_and_not_cached():
     with patch.object(ma, "_fetch_art", return_value=None) as fake:
-        assert ma.get_constellation_art("Orion", "cat") is None
-        assert ma.get_constellation_art("Orion", "cat") is None
+        assert ma.get_constellation_art("Orion") is None
+        assert ma.get_constellation_art("Orion") is None
     assert fake.call_count == 2  # not cached → refetched
 
 
@@ -31,7 +31,7 @@ def test_stale_cache_refetches():
     payload = {"url": "u", "title": "t", "author": "a", "license": "PD", "credit_url": "c"}
     ma._CACHE["Orion"] = (time.time() - ma.CACHE_TTL_SECONDS - 1, payload)
     with patch.object(ma, "_fetch_art", return_value=payload) as fake:
-        ma.get_constellation_art("Orion", "cat")
+        ma.get_constellation_art("Orion")
     assert fake.call_count == 1
 
 
@@ -182,7 +182,7 @@ def test_get_constellation_art_reads_alt_categories_from_myth_art(monkeypatch):
     monkeypatch.setattr(ma, "_MYTH_ART", fake_myth_art)
     with patch.object(ma, "_fetch_art", return_value=payload) as mock_fetch:
         ma._CACHE.clear()
-        result = ma.get_constellation_art("Orion", "Category:Orion in art")
+        result = ma.get_constellation_art("Orion")
     mock_fetch.assert_called_once_with(
         "Category:Orion in art", "Orion",
         ["Category:AltOrion"], ["orion art"]

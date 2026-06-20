@@ -30,9 +30,6 @@ with open(DATA_DIR / "dark_folklore.json", encoding="utf-8") as _f:
     FOLKLORE_DATA: list[dict] = json.load(_f)
 with open(DATA_DIR / "myths.json", encoding="utf-8") as _f:
     MYTHS_DATA: list[dict] = json.load(_f)
-with open(DATA_DIR / "myth_art.json", encoding="utf-8") as _f:
-    MYTH_ART_DATA: dict[str, dict] = json.load(_f)
-
 CONSTELLATION_NAMES = {c["name"] for c in CONSTELLATION_DATA}
 
 
@@ -98,10 +95,7 @@ async def get_myth(constellation: str) -> dict:
     if constellation not in CONSTELLATION_NAMES:
         raise HTTPException(status_code=404, detail="unknown constellation")
     myth = pick_constellation_myth(constellation, MYTHS_DATA)
-    image = None
-    art_cfg = MYTH_ART_DATA.get(constellation)
-    if art_cfg:
-        image = get_constellation_art(constellation, art_cfg["category"])
+    image = get_constellation_art(constellation)
     return {
         "constellation": constellation,
         "title": myth["title"] if myth else None,
