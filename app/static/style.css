@@ -344,12 +344,20 @@ body::after {
 
 .const-card[role="button"] {
   cursor: pointer;
+  min-height: 44px;
+  align-items: center;
+  touch-action: manipulation;
+  padding: 0.4rem 0.7rem;
 }
 
 .const-card[role="button"]:hover,
 .const-card[role="button"]:focus-visible {
   border-bottom-color: var(--gold);
   outline: none;
+}
+
+.const-card[role="button"]:active {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .const-card.active {
