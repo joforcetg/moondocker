@@ -8,6 +8,12 @@ services:
     environment:
       LAT: ""   # optional fallback latitude; leave blank to use browser geolocation
       LON: ""   # optional fallback longitude
+    mem_limit: 512m
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:7432/health"]
       interval: 30s
