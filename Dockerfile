@@ -7,8 +7,8 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements.lock .
+RUN pip install --no-cache-dir -r requirements.lock
 
 # Pre-download skyfield data at build time so the container runs offline.
 # Uses python -c (not a heredoc) so it works with both the legacy builder and BuildKit.
