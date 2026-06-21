@@ -32,12 +32,12 @@ def test_phase_name_from_elongation(elongation, expected_name, expected_glyph):
 
 # ── polar_visibility_note ─────────────────────────────────────────────────────
 
-def test_polar_note_none_when_moon_rises():
-    assert polar_visibility_note("13:20", None, -5.0) is None
+def test_polar_note_does_not_set_today():
+    assert polar_visibility_note("13:20", None, -5.0) == "Does not set today"
 
 
-def test_polar_note_none_when_moon_sets():
-    assert polar_visibility_note(None, "03:09", 20.0) is None
+def test_polar_note_does_not_rise_today():
+    assert polar_visibility_note(None, "03:09", 20.0) == "Does not rise today"
 
 
 def test_polar_note_circumpolar_when_transit_above_horizon():

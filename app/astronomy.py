@@ -38,15 +38,20 @@ def polar_visibility_note(
     rise: str | None, set_: str | None, transit_alt: float | None
 ) -> str | None:
     """
-    Classify the moon when it neither rises nor sets in the search window.
+    Classify the moon when rise or set is missing from the search window.
 
     At high latitudes the moon can stay above (circumpolar) or below the horizon
-    for the whole day, so there is no rise/set event. The transit (highest point)
-    altitude distinguishes the two. Returns None when a normal rise or set exists.
+    for the whole day, or rise/set only once. Returns None for a normal rise+set.
     """
-    if rise is None and set_ is None and transit_alt is not None:
+    if rise is not None and set_ is not None:
+        return None
+    if transit_alt is None:
+        return None
+    if rise is None and set_ is None:
         return "Circumpolar (up all day)" if transit_alt > 0 else "Below horizon all day"
-    return None
+    if set_ is None:
+        return "Does not set today"
+    return "Does not rise today"
 
 
 # ── Mythology selection ───────────────────────────────────────────────────────

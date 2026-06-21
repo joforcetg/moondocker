@@ -1,3 +1,4 @@
+import html
 import json
 import logging
 import random
@@ -14,7 +15,7 @@ USER_AGENT = "moondocker/1.0 (+https://github.com/joforcetg/moondocker)"
 TIMEOUT = 5.0
 CACHE_TTL_SECONDS = 7 * 24 * 3600
 
-_CACHE: dict[str, tuple[float, dict]] = {}
+_CACHE: dict[str, tuple[float, dict | None]] = {}
 
 _MYTH_ART_PATH = Path(__file__).parent.parent / "data" / "myth_art.json"
 try:
@@ -133,9 +134,9 @@ def _fetch_art(
         return None
 
 
-def _strip(html: str) -> str:
+def _strip(html_str: str) -> str:
     """Crude tag strip — Artist value is often wrapped in <a>…</a>."""
-    return re.sub(r"<[^>]+>", "", html).strip()
+    return html.unescape(re.sub(r"<[^>]+>", "", html_str)).strip()
 
 
 def get_constellation_art(name: str) -> dict | None:
@@ -146,8 +147,7 @@ def get_constellation_art(name: str) -> dict | None:
     if not entry:
         return None
     art = _fetch_art(entry["category"], name, entry.get("alt_categories", []), entry.get("search_terms", []))
-    if art is not None:
-        if len(_CACHE) >= 200:  # ponytail: ~20 constellations in practice, ceiling for safety
-            _CACHE.clear()
-        _CACHE[name] = (time.time(), art)
+    if len(_CACHE) >= 200:  # ponytail: FIFO evict one key, avoids thundering herd from clear()
+        _CACHE.pop(next(iter(_CACHE)))
+    _CACHE[name] = (time.time(), art)  # cache None too — prevents repeat HTTP storms on misses
     return art
