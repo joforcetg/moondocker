@@ -20,11 +20,11 @@ def test_returns_fetch_result_and_caches():
     assert fake.call_count == 1  # second call served from cache
 
 
-def test_failure_returns_none_and_not_cached():
+def test_failure_returns_none_and_is_cached():
     with patch.object(ma, "_fetch_art", return_value=None) as fake:
         assert ma.get_constellation_art("Orion") is None
         assert ma.get_constellation_art("Orion") is None
-    assert fake.call_count == 2  # not cached → refetched
+    assert fake.call_count == 1  # None cached → no repeat HTTP storm
 
 
 def test_stale_cache_refetches():
