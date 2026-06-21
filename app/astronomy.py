@@ -11,6 +11,7 @@ SKYFIELD_DATA_DIR = os.environ.get("SKYFIELD_DATA", "/skyfield-data")
 _loader = None
 _eph = None
 _stars_df = None
+_ts = None
 
 # ── Phase mapping ─────────────────────────────────────────────────────────────
 
@@ -94,6 +95,14 @@ def _get_loader():
         from skyfield.api import Loader
         _loader = Loader(SKYFIELD_DATA_DIR)
     return _loader
+
+
+def get_timescale():
+    global _ts
+    if _ts is None:
+        from skyfield.api import load as _sf_load
+        _ts = _sf_load.timescale()
+    return _ts
 
 
 def _get_eph():

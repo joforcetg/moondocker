@@ -6,14 +6,13 @@ from pathlib import Path
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from skyfield.api import load as skyfield_load
-
 from .astronomy import (
     get_moon_data,
     get_visible_constellations,
     get_skymap_stars,
     pick_default_folklore,
     pick_constellation_myth,
+    get_timescale,
 )
 from .skymap import generate_skymap
 from .mythart import get_constellation_art
@@ -42,8 +41,6 @@ def _parse_coord(val: str) -> float | None:
 
 FALLBACK_LAT = _parse_coord(os.environ.get("LAT", ""))
 FALLBACK_LON = _parse_coord(os.environ.get("LON", ""))
-
-ts = skyfield_load.timescale()
 
 app = FastAPI(title="moondocker")
 
@@ -76,6 +73,7 @@ async def get_sky(
     lat: float = Query(..., ge=-90, le=90),
     lon: float = Query(..., ge=-180, le=180),
 ) -> dict:
+    ts          = get_timescale()
     t           = ts.now()
     moon        = get_moon_data(ts, lat, lon, t=t)
     consts      = get_visible_constellations(ts, lat, lon, CONSTELLATION_DATA, t=t)
