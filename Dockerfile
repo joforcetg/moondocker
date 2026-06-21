@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source="https://github.com/joforcetg/moondocker" 
       org.opencontainers.image.licenses="MIT"
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends curl \
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.lock .
