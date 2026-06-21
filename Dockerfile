@@ -1,10 +1,11 @@
-FROM python:3.12.11-slim
+# ponytail: digest-pinned for reproducible builds; update via Dependabot docker PRs
+FROM python:3.12.11-slim@sha256:47ae396f09c1303b8653019811a8498470603d7ffefc29cb07c88f1f8cb3d19f
 LABEL org.opencontainers.image.source="https://github.com/joforcetg/moondocker" \
       org.opencontainers.image.description="Tonight's moon phase and night sky map" \
       org.opencontainers.image.licenses="MIT"
 WORKDIR /app
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends curl \
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.lock .
