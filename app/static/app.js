@@ -154,6 +154,7 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (m) {
         if (!m || !m.text) return;
+        if (activeConst !== name) return;
         document.getElementById('legend-hdr').textContent = 'Legend : ' + name;
         var el = document.getElementById('legend');
         el.innerHTML = '';
@@ -184,7 +185,7 @@
 
   function highlight(name) {
     var sky = document.getElementById('skymap');
-    var sel = '[data-constellation~="' + name.replace(/"/g, '\\"') + '"]';
+    var sel = '[data-constellation~="' + name.replace(/ /g, '-').replace(/"/g, '\\"') + '"]';
     var nodes = sky.querySelectorAll(sel);
     if (!nodes.length) return;
     sky.classList.add('has-hl');
