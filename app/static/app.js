@@ -170,6 +170,8 @@
         el.appendChild(p);
         var fig = renderMythFigure(m.image);
         if (fig) el.appendChild(fig);
+        var panel = el.closest('.panel');
+        if (panel) { panel.classList.remove('flash'); void panel.offsetWidth; panel.classList.add('flash'); }
       })
       .catch(function () { /* text stays; no user-facing error */ });
   }
