@@ -1,3 +1,4 @@
+import html
 import math
 
 VIEWBOX_SIZE = 400
@@ -43,7 +44,7 @@ def generate_skymap(
             x2, y2 = hip_xy[b]
             lines_svg.append(
                 f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
-                f'data-constellation="{name.replace(" ", "-")}" '
+                f'data-constellation="{html.escape(name.replace(" ", "-"), quote=True)}" '
                 f'stroke="#4a4a52" stroke-width="0.8" stroke-opacity="0.7"/>'
             )
             fig_members.setdefault(a, set()).add(name)
@@ -55,7 +56,7 @@ def generate_skymap(
         r = star_radius(s["magnitude"])
         members = fig_members.get(s["hip_id"])
         if members:
-            tag = " ".join(m.replace(" ", "-") for m in sorted(members))
+            tag = html.escape(" ".join(m.replace(" ", "-") for m in sorted(members)), quote=True)  # ponytail: input trusted today; guards future data edits
             stars_svg.append(
                 f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" '
                 f'data-constellation="{tag}" class="figstar" '
