@@ -44,6 +44,21 @@ FALLBACK_LON = _parse_coord(os.environ.get("LON", ""))
 
 app = FastAPI(title="moondocker")
 
+
+@app.middleware("http")
+async def security_headers(request, call_next):
+    resp = await call_next(request)
+    resp.headers["X-Content-Type-Options"] = "nosniff"
+    resp.headers["X-Frame-Options"] = "DENY"
+    resp.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "img-src 'self' https://upload.wikimedia.org data:; "
+        "script-src 'self' 'unsafe-inline'; "
+        "style-src 'self' 'unsafe-inline'; "
+        "connect-src 'self'"
+    )
+    return resp
+
 # Pre-render the index page once at startup. FALLBACK coords are env-var
 # constants that never change while the process is running, so there is no
 # reason to re-read the file or rebuild the script on every request.
