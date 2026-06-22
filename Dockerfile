@@ -20,7 +20,7 @@ from skyfield.api import Loader; \
 from skyfield.data import hipparcos; \
 load = Loader('/skyfield-data'); \
 load('de421.bsp'); \
-hipparcos.load_dataframe(load.open(hipparcos.URL))" && \
+load.open(hipparcos.URL).close()" && \
     test -s /skyfield-data/de421.bsp && \
     test -s /skyfield-data/hip_main.dat
 
