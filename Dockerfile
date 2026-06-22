@@ -1,4 +1,5 @@
-FROM python:3.12.11-slim
+# ponytail: digest-pinned for reproducible builds; update via Dependabot docker PRs
+FROM python:3.14.6-slim@sha256:44dd04494ee8f3b538294360e7c4b3acb87c8268e4d0a4828a6500b1eff50061
 LABEL org.opencontainers.image.source="https://github.com/joforcetg/moondocker" \
       org.opencontainers.image.description="Tonight's moon phase and night sky map" \
       org.opencontainers.image.licenses="MIT"
@@ -19,7 +20,7 @@ from skyfield.api import Loader; \
 from skyfield.data import hipparcos; \
 load = Loader('/skyfield-data'); \
 load('de421.bsp'); \
-hipparcos.load_dataframe(load.open(hipparcos.URL))" && \
+load.open(hipparcos.URL).close()" && \
     test -s /skyfield-data/de421.bsp && \
     test -s /skyfield-data/hip_main.dat
 

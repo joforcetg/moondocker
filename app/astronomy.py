@@ -3,6 +3,7 @@ import hashlib
 import logging
 import os
 from datetime import date as _date
+import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -10,7 +11,8 @@ SKYFIELD_DATA_DIR = os.environ.get("SKYFIELD_DATA", "/skyfield-data")
 
 _loader = None
 _eph = None
-_stars_df = None
+_stars = None  # (hip_ids, ra_hours, dec_degrees, magnitudes, hip_to_idx)
+_ts = None
 
 # ── Phase mapping ─────────────────────────────────────────────────────────────
 
@@ -96,6 +98,14 @@ def _get_loader():
     return _loader
 
 
+def get_timescale():
+    global _ts
+    if _ts is None:
+        from skyfield.api import load as _sf_load
+        _ts = _sf_load.timescale()
+    return _ts
+
+
 def _get_eph():
     global _eph
     if _eph is None:
@@ -103,17 +113,44 @@ def _get_eph():
     return _eph
 
 
-def _get_stars_df():
-    global _stars_df
-    if _stars_df is None:
-        from skyfield.data import hipparcos
+def _parse_hip_catalog(f):
+    # ponytail: manual parser replaces pandas (saves 72MB image weight); parses pipe-delimited hip_main.dat
+    hip_ids, ra_h, dec_d, mags = [], [], [], []
+    for line in f:
+        if isinstance(line, bytes):
+            line = line.decode("ascii", errors="replace")
+        p = line.split("|")
+        if len(p) < 10:
+            continue
+        try:
+            hip_ids.append(int(p[1]))
+            ra_h.append(float(p[8]) / 15.0)  # RAdeg → ra_hours
+            dec_d.append(float(p[9]))
+            mags.append(float(p[5]))
+        except (ValueError, IndexError):
+            continue
+    return (
+        np.array(hip_ids, dtype="i4"),
+        np.array(ra_h),
+        np.array(dec_d),
+        np.array(mags, dtype="f4"),
+    )
+
+
+def _get_stars():
+    global _stars
+    if _stars is None:
         with _get_loader().open("hip_main.dat") as f:
-            df = hipparcos.load_dataframe(f)
-        dropped = df["ra_hours"].isna() | df["dec_degrees"].isna()
-        if dropped.any():
-            logger.warning("dropping %d Hipparcos stars with NaN ra/dec", dropped.sum())
-        _stars_df = df[~dropped]
-    return _stars_df
+            hip_ids, ra_hours, dec_degrees, magnitudes = _parse_hip_catalog(f)
+        nans = np.isnan(ra_hours) | np.isnan(dec_degrees)
+        if nans.any():
+            logger.warning("dropping %d Hipparcos stars with NaN ra/dec", nans.sum())
+        mask = ~nans
+        hip_ids, ra_hours, dec_degrees, magnitudes = (
+            hip_ids[mask], ra_hours[mask], dec_degrees[mask], magnitudes[mask]
+        )
+        _stars = (hip_ids, ra_hours, dec_degrees, magnitudes, {int(h): i for i, h in enumerate(hip_ids)})
+    return _stars
 
 
 _EMPTY_PHASES = {
@@ -221,25 +258,23 @@ def get_visible_constellations(
     from skyfield.api import wgs84, Star
 
     eph = _get_eph()
-    stars_df = _get_stars_df()
+    hip_ids, ra_hours, dec_degrees, magnitudes, hip_to_idx = _get_stars()
     observer = eph["earth"] + wgs84.latlon(lat, lon)
     if t is None:
         t = ts.now()
 
-    # Collect all unique HIP IDs across all constellations, then do a single
-    # vectorized observation instead of one Skyfield call per star.
     all_hip_ids = sorted({
         hip_id
         for const in constellation_data
         for hip_id in const["hip_ids"]
-        if hip_id in stars_df.index
+        if hip_id in hip_to_idx
     })
 
     if not all_hip_ids:
         return []
 
-    batch_df = stars_df.loc[all_hip_ids]
-    stars_obj = Star.from_dataframe(batch_df)
+    idx = np.array([hip_to_idx[h] for h in all_hip_ids])
+    stars_obj = Star(ra_hours=ra_hours[idx], dec_degrees=dec_degrees[idx], epoch="J1991.25")
     alt_arr, _, _ = observer.at(t).observe(stars_obj).apparent().altaz()
     hip_alt: dict[int, float] = {
         int(hip_id): float(a)
@@ -279,23 +314,21 @@ def get_skymap_stars(
     from skyfield.api import wgs84, Star
 
     eph = _get_eph()
-    stars_df = _get_stars_df()
+    hip_ids, ra_hours, dec_degrees, magnitudes, hip_to_idx = _get_stars()
     observer = eph["earth"] + wgs84.latlon(lat, lon)
     if t is None:
         t = ts.now()
 
-    bright = stars_df[stars_df["magnitude"] <= 5.5]
-    stars_obj = Star.from_dataframe(bright)
+    bright_mask = magnitudes <= 5.5
+    bright_hip = hip_ids[bright_mask]
+    stars_obj = Star(ra_hours=ra_hours[bright_mask], dec_degrees=dec_degrees[bright_mask], epoch="J1991.25")
     astrometric = observer.at(t).observe(stars_obj)
     alt_arr, az_arr, _ = astrometric.apparent().altaz()
 
-    # Vectorized filter to stars above the horizon. iterrows() is row-by-row
-    # Python and dominates this call for the ~1300 bright stars; numpy masking
-    # over the already-computed alt/az arrays is the same result, far faster.
     alts = alt_arr.degrees
     azs = az_arr.degrees
-    hip_ids = bright.index.to_numpy()
-    mags = bright["magnitude"].to_numpy()
+    hip_ids = bright_hip
+    mags = magnitudes[bright_mask]
     above_mask = alts > 0
 
     star_list: list[dict] = [
