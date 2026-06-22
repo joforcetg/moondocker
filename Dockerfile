@@ -1,5 +1,5 @@
 # ponytail: digest-pinned for reproducible builds; update via Dependabot docker PRs
-FROM python:3.12.11-slim@sha256:47ae396f09c1303b8653019811a8498470603d7ffefc29cb07c88f1f8cb3d19f
+FROM python:3.14.6-slim@sha256:44dd04494ee8f3b538294360e7c4b3acb87c8268e4d0a4828a6500b1eff50061
 LABEL org.opencontainers.image.source="https://github.com/joforcetg/moondocker" \
       org.opencontainers.image.description="Tonight's moon phase and night sky map" \
       org.opencontainers.image.licenses="MIT"
