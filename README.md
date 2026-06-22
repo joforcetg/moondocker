@@ -1,6 +1,6 @@
 # moondocker
 
-[![CI](https://github.com/joforcetg/moondocker/actions/workflows/test.yml/badge.svg)](https://github.com/joforcetg/moondocker/actions/workflows/test.yml)
+[![CI](https://github.com/joforcetg/moondocker/actions/workflows/ci.yml/badge.svg)](https://github.com/joforcetg/moondocker/actions/workflows/ci.yml)
 [![Docker](https://ghcr-badge.egpl.dev/joforcetg/moondocker/size)](https://github.com/joforcetg/moondocker/pkgs/container/moondocker)
 
 Self-contained Docker service — tonight's moon phase, a night sky map, and constellation myths for your location. No API keys required.
