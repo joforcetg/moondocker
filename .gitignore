@@ -16,3 +16,19 @@ demo-skymap.svg
 # font-install leftovers (not part of the app)
 ex_fonts/
 *.tgz
+
+# internal dev notes / backups (keep local, never commit)
+HANDOFF.md
+HANDOFF-security-scanners.md
+HANDOFF-public-release.md
+CLAUDE.md.original.md
+*.original.md
+
+# secrets
+*.env
+.env
+
+# editor / host-mount artifacts
+.claude/worktrees/
+.idea/
+.vscode/
