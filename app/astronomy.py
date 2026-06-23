@@ -123,12 +123,16 @@ def _parse_hip_catalog(f):
         if len(p) < 10:
             continue
         try:
-            hip_ids.append(int(p[1]))
-            ra_h.append(float(p[8]) / 15.0)  # RAdeg → ra_hours
-            dec_d.append(float(p[9]))
-            mags.append(float(p[5]))
+            hip_id = int(p[1])
+            ra = float(p[8]) / 15.0  # RAdeg → ra_hours
+            dec = float(p[9])
+            mag = float(p[5])
         except (ValueError, IndexError):
             continue
+        hip_ids.append(hip_id)
+        ra_h.append(ra)
+        dec_d.append(dec)
+        mags.append(mag)
     return (
         np.array(hip_ids, dtype="i4"),
         np.array(ra_h),
@@ -274,7 +278,7 @@ def get_visible_constellations(
         return []
 
     idx = np.array([hip_to_idx[h] for h in all_hip_ids])
-    stars_obj = Star(ra_hours=ra_hours[idx], dec_degrees=dec_degrees[idx], epoch="J1991.25")
+    stars_obj = Star(ra_hours=ra_hours[idx], dec_degrees=dec_degrees[idx], epoch=2448349.0625)
     alt_arr, _, _ = observer.at(t).observe(stars_obj).apparent().altaz()
     hip_alt: dict[int, float] = {
         int(hip_id): float(a)
@@ -321,7 +325,7 @@ def get_skymap_stars(
 
     bright_mask = magnitudes <= 5.5
     bright_hip = hip_ids[bright_mask]
-    stars_obj = Star(ra_hours=ra_hours[bright_mask], dec_degrees=dec_degrees[bright_mask], epoch="J1991.25")
+    stars_obj = Star(ra_hours=ra_hours[bright_mask], dec_degrees=dec_degrees[bright_mask], epoch=2448349.0625)
     astrometric = observer.at(t).observe(stars_obj)
     alt_arr, az_arr, _ = astrometric.apparent().altaz()
 
