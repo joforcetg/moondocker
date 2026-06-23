@@ -11,7 +11,7 @@ python -m venv .venv
 
 ## Run tests
 
-Tests mock all skyfield calls — no data download needed.
+Tests mock all skyfield calls, so no data download is needed.
 
 ```bash
 .venv/bin/python -m pytest -v

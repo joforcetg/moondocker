@@ -3,16 +3,16 @@
 [![CI](https://github.com/joforcetg/moondocker/actions/workflows/ci.yml/badge.svg)](https://github.com/joforcetg/moondocker/actions/workflows/ci.yml)
 [![Docker](https://ghcr-badge.egpl.dev/joforcetg/moondocker/size)](https://github.com/joforcetg/moondocker/pkgs/container/moondocker)
 
-Self-contained Docker service — tonight's moon phase, a night sky map, and constellation myths for your location. No API keys required.
+Self-contained Docker service: tonight's moon phase, a night sky map, and constellation myths for your location. No API keys required.
 
 ![moondocker: moon phase, night sky map, constellation myths](https://github.com/joforcetg/moondocker/raw/main/docs/screenshot.png)
 
 ## What you get
 
-- **Moon** — phase name, SVG moon showing the lit fraction, illumination %, rise/transit/set times (UTC), next new/full moon dates
-- **Night sky map** — SVG star map to magnitude 5.5 with constellation stick figures and cardinal directions; zenith at centre
-- **Constellations** — 20 constellations sorted above/below horizon; clickable cards open their myth
-- **Legend** — a daily dark-folklore entry by default; selecting a constellation swaps it for that constellation's myth, highlights it on the sky map, and fetches a classical artwork from Wikimedia Commons (7-day cache; graceful offline fallback)
+- **Moon:** phase name, SVG moon showing the lit fraction, illumination %, rise/transit/set times (UTC), next new/full moon dates
+- **Night sky map:** SVG star map to magnitude 5.5 with constellation stick figures and cardinal directions; zenith at centre
+- **Constellations:** 20 constellations sorted above/below horizon; clickable cards open their myth
+- **Legend:** a daily dark-folklore entry by default; selecting a constellation swaps it for that constellation's myth, highlights it on the sky map, and fetches a classical artwork from Wikimedia Commons (7-day cache; graceful offline fallback)
 
 ---
 
