@@ -1,5 +1,7 @@
 import pytest
 import app.astronomy as astro
+import io
+
 from app.astronomy import (
     phase_name_from_elongation,
     pick_default_folklore,
@@ -7,6 +9,7 @@ from app.astronomy import (
     polar_visibility_note,
     _date_seed,
     _build_const_lines,
+    _parse_hip_catalog,
 )
 
 
@@ -141,3 +144,28 @@ def test_const_lines_skip_below_horizon():
     consts = [{"name": "Orion", "lines": [[1, 2], [2, 9]]}]
     lines = _build_const_lines(consts, {1, 2})  # 9 missing
     assert lines == [{"hip_a": 1, "hip_b": 2, "constellation": "Orion"}]
+
+
+# ── _parse_hip_catalog ────────────────────────────────────────────────────────
+
+def _hip_row(hip, mag, ra_deg, dec_deg, extra="..."):
+    """Build a pipe-delimited hip_main.dat-style row."""
+    cols = ["H"] + [""] * 10
+    cols[1] = f" {hip} "
+    cols[5] = str(mag)
+    cols[8] = str(ra_deg)
+    cols[9] = str(dec_deg)
+    return "|".join(cols) + "\n"
+
+
+def test_parse_hip_catalog_arrays_equal_length_on_partial_failure():
+    good = _hip_row(1, 6.7, 1.234, 5.678)
+    bad  = _hip_row(2, "BAD", 9.0, 1.0)   # mag unparseable → whole row skipped
+    hip_ids, ra_h, dec_d, mags = _parse_hip_catalog(io.StringIO(good + bad))
+    assert len(hip_ids) == len(ra_h) == len(dec_d) == len(mags) == 1
+
+
+def test_parse_hip_catalog_skips_short_lines():
+    data = io.StringIO("H|1|too|short\n" + _hip_row(42, 5.0, 10.0, 20.0))
+    hip_ids, *_ = _parse_hip_catalog(data)
+    assert list(hip_ids) == [42]
