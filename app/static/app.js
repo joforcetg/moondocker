@@ -134,6 +134,7 @@
     img.src = image.url;
     img.alt = image.title || '';
     img.loading = 'lazy';
+    img.onload = function () { img.classList.add('loaded'); };
     fig.appendChild(img);
     var cap = document.createElement('figcaption');
     var bits = [image.title, image.author, image.license].filter(Boolean).join(' · ');
@@ -260,7 +261,6 @@
     renderConstellations(data.constellations);
     renderLegendDefault(data.legend);
     document.getElementById('status').textContent = '';
-    document.getElementById('panels').hidden = false;
   }
 
   function noLocation() {

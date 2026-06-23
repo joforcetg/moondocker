@@ -16,26 +16,42 @@
 
     <p id="status" role="status" aria-live="polite">locating…</p>
 
-    <div id="panels" hidden>
+    <div id="panels">
       <section class="panel panel-moon">
         <p class="panel-rune" aria-hidden="true">ᛗᛟᛟᚾ</p>
         <header class="panel-hdr">Moon</header>
-        <div id="moon"></div>
+        <div id="moon">
+          <div class="skeleton sk-circle"></div>
+          <div class="skeleton sk-line sk-w60"></div>
+          <div class="skeleton sk-line sk-w80"></div>
+          <div class="skeleton sk-line sk-w40"></div>
+        </div>
       </section>
       <section class="panel panel-sky">
         <p class="panel-rune" aria-hidden="true">ᚾᛁᚷᚺᛏ ᛋᚲᚤ</p>
         <header class="panel-hdr">Night Sky</header>
-        <div id="skymap"></div>
+        <div id="skymap"><div class="skeleton sk-map"></div></div>
       </section>
       <section class="panel panel-const">
         <p class="panel-rune" aria-hidden="true">ᚲᛟᚾᛋᛏᛖᛚᛚᚨᛏᛁᛟᚾᛋ</p>
         <header class="panel-hdr">Constellations</header>
-        <div id="constellations"></div>
+        <div id="constellations">
+          <div class="skeleton sk-line sk-w80"></div>
+          <div class="skeleton sk-line sk-w60"></div>
+          <div class="skeleton sk-line sk-w80"></div>
+          <div class="skeleton sk-line sk-w40"></div>
+          <div class="skeleton sk-line sk-w60"></div>
+        </div>
       </section>
       <section class="panel panel-legend">
         <p class="panel-rune" id="legend-rune" aria-hidden="true">ᛚᛖᚷᛖᚾᛞ</p>
         <header class="panel-hdr" id="legend-hdr">Legend</header>
-        <div id="legend"></div>
+        <div id="legend">
+          <div class="skeleton sk-line sk-w60"></div>
+          <div class="skeleton sk-line sk-w80"></div>
+          <div class="skeleton sk-line sk-w80"></div>
+          <div class="skeleton sk-line sk-w40"></div>
+        </div>
       </section>
     </div>
   </div>

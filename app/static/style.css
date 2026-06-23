@@ -387,15 +387,19 @@ body::after {
 
 .myth-figure img {
   width: 100%;
-  /* Cap height so a tall portrait can't stretch the legend column and,
-     on the wide grid, drag the whole layout taller. */
+  /* Fixed box prevents layout shift while image loads */
+  min-height: clamp(180px, 34vh, 340px);
   max-height: clamp(180px, 34vh, 340px);
   object-fit: cover;
   object-position: center 30%;
   display: block;
   border: 1px solid var(--line-2);
   filter: grayscale(0.5) contrast(1.15);
+  background: var(--line-2);
+  opacity: 0;
+  transition: opacity .4s ease;
 }
+.myth-figure img.loaded { opacity: 1; }
 
 .myth-figure figcaption {
   font-size: 0.75rem;
@@ -407,6 +411,27 @@ body::after {
   color: var(--bone-dim);
 }
 
+/* ── Skeleton loading placeholders ──────────────────────────────────── */
+
+.skeleton {
+  background: var(--line-2);
+  border-radius: 3px;
+}
+.sk-circle { width: 80px; height: 80px; border-radius: 50%; margin-bottom: .5rem; }
+.sk-map    { height: 300px; }
+.sk-line   { height: .85em; margin-top: .5rem; }
+.sk-w80    { width: 80%; }
+.sk-w60    { width: 60%; }
+.sk-w40    { width: 40%; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes sk-pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: .35; }
+  }
+  .skeleton { animation: sk-pulse 1.6s ease-in-out infinite; }
+}
+
 /* ── Panel entrance (reduced-motion users get the panels instantly) ──── */
 
 @media (prefers-reduced-motion: no-preference) {
@@ -414,7 +439,7 @@ body::after {
     from { opacity: 0; transform: translateY(8px); }
     to   { opacity: 1; transform: none; }
   }
-  #panels:not([hidden]) .panel {
+  #panels .panel {
     animation: panel-rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
   .panel-moon   { animation-delay: 0.05s; }

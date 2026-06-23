@@ -1,6 +1,8 @@
 import os
 import json
 import logging
+import threading
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 from fastapi import FastAPI, Query, HTTPException
@@ -13,6 +15,7 @@ from .astronomy import (
     pick_default_folklore,
     pick_constellation_myth,
     get_timescale,
+    warmup,
 )
 from .skymap import generate_skymap
 from .mythart import get_constellation_art
@@ -42,7 +45,13 @@ def _parse_coord(val: str) -> float | None:
 FALLBACK_LAT = _parse_coord(os.environ.get("LAT", ""))
 FALLBACK_LON = _parse_coord(os.environ.get("LON", ""))
 
-app = FastAPI(title="moondocker")
+@asynccontextmanager
+async def lifespan(app):
+    threading.Thread(target=warmup, daemon=True).start()
+    yield
+
+
+app = FastAPI(title="moondocker", lifespan=lifespan)
 
 
 @app.middleware("http")

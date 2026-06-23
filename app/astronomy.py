@@ -157,6 +157,15 @@ def _get_stars():
     return _stars
 
 
+def warmup():
+    try:
+        get_timescale()
+        _get_eph()
+        _get_stars()
+    except Exception:
+        logger.exception("warmup failed; will load lazily on first request")
+
+
 _EMPTY_PHASES = {
     "next_new_date": None, "next_new_in_days": None,
     "next_full_date": None, "next_full_in_days": None,
