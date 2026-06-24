@@ -35,6 +35,9 @@ jobs:
       attestations: write
       id-token: write
 
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
+
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
 
@@ -55,7 +58,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@80c7e94dd9b9319bd5eb7a0e0fe9291e23a2a2e9 # v6
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ${{ env.IMAGE }}
           tags: |
             type=raw,value=latest,enable={{is_default_branch}}
             type=sha,prefix=sha-,format=short
@@ -80,7 +83,7 @@ jobs:
         if: github.event.repository.visibility == 'public'
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4
         with:
-          subject-name: ghcr.io/${{ github.repository }}
+          subject-name: ${{ env.IMAGE }}
           subject-digest: ${{ steps.build.outputs.digest }}
           push-to-registry: true
 
@@ -90,21 +93,24 @@ jobs:
 
       - name: Sign image
         if: github.event.repository.visibility == 'public'
-        run: cosign sign --yes ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+        run: cosign sign --yes "$IMAGE@${{ steps.build.outputs.digest }}"
 
       - name: Scan image for CVEs
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
-          image-ref: ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+          image-ref: ${{ env.IMAGE }}@${{ steps.build.outputs.digest }}
           format: table
           exit-code: "1"
           severity: CRITICAL,HIGH
           ignore-unfixed: true
 
       - name: Clean up old untagged versions
-        uses: actions/delete-package-versions@e5bc658cc4c965c472efe991f8beea3981499c55 # v5.0.0
+        uses: snok/container-retention-policy@d3bdcf5ce9b05f685154e4a16c39233b245e3d53 # v3.1.0
+        continue-on-error: true
         with:
-          package-name: moondocker
-          package-type: container
-          min-versions-to-keep: 5
-          delete-only-untagged-versions: true
+          account: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          image-names: ${{ github.event.repository.name }}
+          tag-selection: untagged
+          cut-off: 2w
+          keep-n-most-recent: 5
