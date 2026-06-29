@@ -173,6 +173,10 @@
         if (fig) el.appendChild(fig);
         var panel = el.closest('.panel');
         if (panel) { panel.classList.remove('flash'); void panel.offsetWidth; panel.classList.add('flash'); }
+        // Scroll only after the text is in the DOM so we land on the loaded
+        // myth, not on where the empty panel used to be.
+        var hdr = document.getElementById('legend-hdr');
+        (hdr || panel || p).scrollIntoView({ behavior: 'smooth', block: 'start' });
       })
       .catch(function () { /* text stays; no user-facing error */ });
   }
@@ -204,10 +208,7 @@
     activeConst = name;
     card.classList.add('active');
     highlight(name);
-    showConstellationMyth(name);
-    var legendEl = document.getElementById('legend');
-    var legendPanel = legendEl && legendEl.closest('.panel');
-    if (legendPanel) legendPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    showConstellationMyth(name);  // scrolls itself once the myth text loads
   }
 
   function deselect() {

@@ -1,6 +1,11 @@
 @font-face {
   font-family: "Grimoire Title";
-  src: url("/static/fonts/unifrakturcook-bold.woff2") format("woff2");
+  src: url("/static/fonts/cinzel-400.woff2") format("woff2");
+  font-weight: 400; font-display: swap;
+}
+@font-face {
+  font-family: "Grimoire Title";
+  src: url("/static/fonts/cinzel-700.woff2") format("woff2");
   font-weight: 700; font-display: swap;
 }
 @font-face {
@@ -28,7 +33,9 @@
   --bone-dim: #7e7e85;   /* muted cold grey */
   --gold:     #f1f1f4;   /* repurposed: cold bright highlight (kept var name) */
   --rune:     #9a9aa2;   /* runic line above titles */
-  --font-title: "Grimoire Title", "Times New Roman", serif;
+  --blood:    #8a1c1c;   /* sickly accent — active glow, runes, drop-cap only */
+  --blood-lo: #5a1414;   /* dimmer blood, for frames/etching */
+  --font-title: "Grimoire Title", "Trajan Pro", "Times New Roman", serif;
   --font-body:  "Grimoire Body", Georgia, serif;
   --font-rune:  "Noto Sans Runic", "Segoe UI Historic", "Segoe UI Symbol", "Apple Symbols", system-ui, sans-serif;
 
@@ -47,6 +54,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--bg);
   color: var(--bone);
@@ -54,9 +65,13 @@ body {
   font-size: 18px;
   line-height: 1.65;
   padding: 1.25rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Cold horror light: a faint colourless glow up top, heavy black vignette */
+/* Candle-lit horror: a warm low glow up top, heavy black vignette. The glow
+   carries a faint blood tint so the page reads lit, not just grey. */
 body::before {
   content: "";
   position: fixed;
@@ -64,25 +79,46 @@ body::before {
   pointer-events: none;
   z-index: 9999;
   background:
-    radial-gradient(120% 90% at 50% -10%,
-      rgba(220, 226, 232, 0.05) 0%,
-      rgba(220, 226, 232, 0.015) 30%,
-      rgba(0, 0, 0, 0) 60%),
+    radial-gradient(120% 90% at 50% -8%,
+      rgba(232, 206, 180, 0.06) 0%,
+      rgba(138, 28, 28, 0.04) 26%,
+      rgba(0, 0, 0, 0) 58%),
     radial-gradient(140% 120% at 50% 42%,
-      rgba(0, 0, 0, 0) 48%,
-      rgba(0, 0, 0, 0.7) 100%);
+      rgba(0, 0, 0, 0) 44%,
+      rgba(0, 0, 0, 0.78) 100%);
 }
 
-/* Faint parchment grain — fixed + pointer-events-none so it never repaints on
-   scroll. SVG fractal noise (no asset, no dependency). */
+/* Analog-horror overlay: SVG fractal grain stacked with thin CRT scanlines.
+   Fixed + pointer-events-none so it never repaints on scroll.
+   # ponytail: two background layers on one pseudo-element — no DOM, no asset. */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 9998;
-  opacity: 0.07;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.45) 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* # ponytail: candle flicker = opacity jitter on the glow layer; vignette
+   breathes. Motion-gated so reduced-motion users get a steady image. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes candle-flicker {
+    0%, 100% { opacity: 1; }
+    18%      { opacity: 0.86; }
+    35%      { opacity: 0.97; }
+    52%      { opacity: 0.8; }
+    70%      { opacity: 0.94; }
+    85%      { opacity: 0.9; }
+  }
+  body::before { animation: candle-flicker 6s ease-in-out infinite; }
 }
 
 #app {
@@ -116,10 +152,13 @@ body::after {
 
 .wordmark {
   font-family: var(--font-title);
+  font-weight: 700;
   color: var(--gold);
-  letter-spacing: 0.02em;
-  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.2rem);
   line-height: 1;
+  text-shadow: 0 0 14px rgba(138, 28, 28, 0.4);
 }
 
 .coords {
@@ -148,10 +187,40 @@ body::after {
 
 /* ── Panels ──────────────────────────────────────────── */
 
+/* Aged-paper panel: layered dark gradients over the page, etched 1px frame,
+   inset shadow so it reads as carved into the grimoire rather than floating.
+   # ponytail: texture is pure gradients, no image asset. */
 .panel {
+  position: relative;
   display: flex;
   flex-direction: column;
+  padding: 1.1rem 1.15rem;
+  background:
+    radial-gradient(130% 90% at 50% -10%, rgba(138, 28, 28, 0.05) 0%, rgba(0, 0, 0, 0) 55%),
+    linear-gradient(180deg, rgba(26, 23, 27, 0.6) 0%, rgba(9, 9, 11, 0.6) 100%),
+    var(--bg);
+  border: 1px solid var(--line-2);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(200, 200, 210, 0.05),
+    0 2px 16px rgba(0, 0, 0, 0.5);
 }
+
+/* Corner sigils: small runes etched into the top corners of every panel. */
+.panel::before,
+.panel::after {
+  position: absolute;
+  top: 0.35rem;
+  font-family: var(--font-rune);
+  font-size: 0.7rem;
+  color: var(--blood-lo);
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+}
+.panel::before { content: "\16B1"; left: 0.5rem; }
+.panel::after  { content: "\16DF"; right: 0.5rem; }
 
 .panel-rune {
   font-family: var(--font-rune);
@@ -161,6 +230,7 @@ body::after {
   margin-bottom: 0.18rem;
   line-height: 1;
   user-select: none;
+  text-shadow: 0 0 6px rgba(138, 28, 28, 0.35);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -173,13 +243,17 @@ body::after {
 
 .panel-hdr {
   font-family: var(--font-title);
+  font-weight: 700;
   padding: 0 0 0.45rem 0;
   margin-bottom: 0.8rem;
-  border-bottom: 1px solid rgba(190, 190, 200, 0.18);
+  /* Engraved double rule: bright hairline over a blood shadow line */
+  border-bottom: 1px solid rgba(190, 190, 200, 0.22);
+  box-shadow: 0 2px 0 -1px rgba(138, 28, 28, 0.4);
   color: var(--bone);
-  letter-spacing: 0.015em;
-  font-size: clamp(1.3rem, 1.05rem + 0.9vw, 1.7rem);
-  line-height: 1.1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.7rem);
+  line-height: 1.15;
 }
 
 .panel > div {
@@ -258,17 +332,36 @@ body::after {
 }
 
 .panel-sky > div {
+  position: relative;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1.25rem 0.5rem;
+  overflow: hidden;
   background:
     radial-gradient(circle at center,
       rgba(210, 218, 228, 0.04) 0%,
       rgba(0, 0, 0, 0) 70%),
     var(--ink);
   border-radius: 2px;
+}
+
+/* Faint sigil watermark behind the star map. # ponytail: a single rune glyph,
+   no SVG asset. */
+.panel-sky > div::before {
+  content: "\16C1";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-rune);
+  font-size: 18rem;
+  line-height: 1;
+  color: var(--blood);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
 }
 
 #skymap {
@@ -281,23 +374,25 @@ body::after {
   display: block;
   width: 100%;
   height: auto;
-  max-width: min(520px, 70vh);
+  /* px/vw only — no vh, so landscape phones don't shrink the map */
+  max-width: min(520px, 92vw);
   margin: 0 auto;
+  position: relative;
   filter: drop-shadow(0 0 4px rgba(210, 218, 228, 0.1));
 }
 
 /* Constellation highlight: glow the picked figure, dim the rest */
 #skymap line.hl {
-  stroke: var(--gold);
-  stroke-width: 1.6;
+  stroke: #d23b3b;
+  stroke-width: 1.7;
   stroke-opacity: 1;
-  filter: drop-shadow(0 0 3px var(--gold));
+  filter: drop-shadow(0 0 4px var(--blood));
   transition: all 0.2s ease;
 }
 
 #skymap circle.hl {
-  fill: var(--gold);
-  filter: drop-shadow(0 0 3px var(--gold));
+  fill: #e85a5a;
+  filter: drop-shadow(0 0 4px var(--blood));
   transition: all 0.2s ease;
 }
 
@@ -371,15 +466,39 @@ body::after {
 /* ── Legend / mythology ──────────────────────────────── */
 
 .myth-text {
-  color: var(--bone-dim);
+  color: var(--bone);
   line-height: 1.8;
+}
+
+/* Illuminated-manuscript drop cap on the loaded myth. */
+.myth-text::first-letter {
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 3.1rem;
+  line-height: 0.8;
+  float: left;
+  margin: 0.1rem 0.55rem 0 0;
+  color: var(--blood);
+  text-shadow: 0 0 10px rgba(138, 28, 28, 0.4);
 }
 
 .legend-culture,
 .myth-title {
   font-family: var(--font-title);
+  font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--gold);
 }
+
+.myth-title {
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(138, 28, 28, 0.45);
+  margin-bottom: 0.5rem;
+}
+
+/* Constellation click scrolls here — leave room so it doesn't butt the top. */
+.panel-legend { scroll-margin-top: 1rem; }
+#legend-hdr   { scroll-margin-top: 1rem; }
 
 .myth-figure {
   margin: 0.8rem 0 0;
@@ -452,9 +571,11 @@ body::after {
 
 @media (max-width: 480px) {
   body { padding: 0.75rem; }
-  .panel > div, .panel-sky > div { padding: 0.7rem; }
+  .panel { padding: 0.85rem; }
+  .panel-sky > div { padding: 0.7rem; }
   .moon-times span { margin-right: 1rem; display: inline-block; }
   .moon-next span  { margin-right: 1rem; display: inline-block; }
+  .panel-sky > div::before { font-size: 12rem; }
 }
 
 @media (max-width: 380px) {
@@ -488,11 +609,11 @@ body::after {
   .panel-const  { grid-area: const; }
   .panel-legend { grid-area: legend; }
   #skymap svg {
-    max-width: min(700px, 80vh);
+    max-width: min(700px, 46vw);
   }
 
   #panels        { font-size: 18px; }
-  .panel > div   { padding: 1.4rem; }
+  .panel         { padding: 1.4rem; }
   .moon-glyph    { font-size: 3rem; }
   .moon-times span { margin-right: 2rem; }
   #constellations { gap: 0.6rem 1.3rem; }
@@ -502,7 +623,7 @@ body::after {
 
 /* Extra breathing room on very wide screens */
 @media (min-width: 1100px) {
-  .panel > div { padding: 1.6rem; }
+  .panel       { padding: 1.6rem; }
   #panels      { gap: 2rem; }
   .panel-rune  { font-size: 1rem; }
   .panel-hdr   { font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.85rem); }
