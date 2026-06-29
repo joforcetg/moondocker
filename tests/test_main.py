@@ -1,6 +1,7 @@
 import inspect
 import json
 from pathlib import Path
+from urllib.parse import urlparse
 from tests.conftest import MOCK_MOON, MOCK_LEGEND, MOCK_SVG
 from unittest.mock import patch, MagicMock
 import pytest
@@ -213,4 +214,5 @@ def test_myth_image_shape():
     assert r.status_code == 200
     img = r.json()["image"]
     assert set(img) >= {"url", "title", "author", "license", "credit_url"}
-    assert img["url"].startswith("https://upload.wikimedia.org")
+    parsed = urlparse(img["url"])
+    assert parsed.scheme == "https" and parsed.netloc == "upload.wikimedia.org"
