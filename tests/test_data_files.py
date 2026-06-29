@@ -46,3 +46,14 @@ def test_every_art_constellation_has_a_myth():
 
 def test_mythology_json_removed():
     assert not (DATA / "mythology.json").exists()
+
+
+def test_myth_art_entries_valid():
+    art = _load("myth_art.json")
+    assert len(art) > 0
+    for name, entry in art.items():
+        assert entry.get("category"), f"{name}: missing non-empty 'category'"
+        if "alt_categories" in entry:
+            assert isinstance(entry["alt_categories"], list), f"{name}: alt_categories must be list"
+        if "search_terms" in entry:
+            assert isinstance(entry["search_terms"], list), f"{name}: search_terms must be list"

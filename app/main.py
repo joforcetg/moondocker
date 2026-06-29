@@ -2,12 +2,15 @@ import os
 import json
 import logging
 import threading
+import time
 from contextlib import asynccontextmanager
+from functools import lru_cache
 from pathlib import Path
 
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.gzip import GZipMiddleware
 from .astronomy import (
     get_moon_data,
     get_visible_constellations,
@@ -52,6 +55,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="moondocker", lifespan=lifespan)
+app.add_middleware(GZipMiddleware, minimum_size=500)
 
 
 @app.middleware("http")
@@ -66,6 +70,11 @@ async def security_headers(request, call_next):
         "style-src 'self' 'unsafe-inline'; "
         "connect-src 'self'"
     )
+    path = request.url.path
+    if path.startswith("/static/fonts/"):
+        resp.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+    elif path.startswith("/static/"):
+        resp.headers["Cache-Control"] = "public, max-age=3600"
     return resp
 
 # Pre-render the index page once at startup. FALLBACK coords are env-var
@@ -92,33 +101,37 @@ async def index() -> str:
     return _INDEX_HTML
 
 
-@app.get("/api/sky")
-async def get_sky(
-    lat: float = Query(..., ge=-90, le=90),
-    lon: float = Query(..., ge=-180, le=180),
-) -> dict:
+@lru_cache(maxsize=256)
+def _compute_sky(lat2: float, lon2: float, bucket: int) -> dict:  # ponytail: bucket keys 30s windows; lru eviction is free
     ts          = get_timescale()
     t           = ts.now()
-    moon        = get_moon_data(ts, lat, lon, t=t)
-    consts      = get_visible_constellations(ts, lat, lon, CONSTELLATION_DATA, t=t)
+    moon        = get_moon_data(ts, lat2, lon2, t=t)
+    consts      = get_visible_constellations(ts, lat2, lon2, CONSTELLATION_DATA, t=t)
     for c in consts:
         c["has_myth"] = pick_constellation_myth(c["name"], MYTHS_DATA) is not None
     legend      = pick_default_folklore(FOLKLORE_DATA)
-    stars, segs = get_skymap_stars(ts, lat, lon, CONSTELLATION_DATA, t=t)
+    stars, segs = get_skymap_stars(ts, lat2, lon2, CONSTELLATION_DATA, t=t)
     svg         = generate_skymap(stars, segs)
-
     return {
         "moon":           moon,
         "constellations": consts,
         "skymap_svg":     svg,
         "legend":         legend,
         "computed_at":    t.utc_iso(),
-        "location":       {"lat": lat, "lon": lon},
+        "location":       {"lat": lat2, "lon": lon2},
     }
 
 
+@app.get("/api/sky")
+def get_sky(
+    lat: float = Query(..., ge=-90, le=90),
+    lon: float = Query(..., ge=-180, le=180),
+) -> dict:
+    return _compute_sky(round(lat, 2), round(lon, 2), int(time.time() // 30))
+
+
 @app.get("/api/myth/{constellation}")
-async def get_myth(constellation: str) -> dict:
+def get_myth(constellation: str) -> dict:
     if constellation not in CONSTELLATION_NAMES:
         raise HTTPException(status_code=404, detail="unknown constellation")
     myth = pick_constellation_myth(constellation, MYTHS_DATA)
