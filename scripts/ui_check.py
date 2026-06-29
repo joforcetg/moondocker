@@ -103,10 +103,19 @@ def run_checks(url):
         page.evaluate("document.fonts.ready")
         cinzel = page.evaluate("document.fonts.check('700 1rem \"Grimoire Title\"')")
         check(cinzel, "Cinzel title font loaded")
+        body_font = page.evaluate("document.fonts.check('1rem \"Grimoire Body\"')")
+        check(body_font, "EB Garamond body font loaded")
         smoothing = page.evaluate(
             "getComputedStyle(document.body).webkitFontSmoothing"
         )
         check(smoothing == "antialiased", f"font-smoothing antialiased ({smoothing})")
+        # readability: the wordmark must resolve to Cinzel, not the old blackletter
+        # or a serif fallback
+        wm_font = page.evaluate(
+            "getComputedStyle(document.querySelector('.wordmark')).fontFamily"
+        )
+        check("Grimoire Title" in wm_font and "UnifrakturCook" not in wm_font,
+              f"wordmark uses Cinzel, blackletter gone ({wm_font.split(',')[0]})")
 
         # --- theme richness ---
         blood = page.evaluate(
@@ -122,6 +131,20 @@ def run_checks(url):
             "getComputedStyle(document.querySelector('.panel')).backgroundImage"
         )
         check("gradient" in panel_bg, "panel has textured background")
+        panel_border = page.evaluate(
+            "getComputedStyle(document.querySelector('.panel')).borderTopWidth"
+        )
+        check(panel_border not in ("0px", ""), f"panels have a frame ({panel_border})")
+        # candle flicker keeps the page alive instead of static
+        flicker = page.evaluate(
+            "getComputedStyle(document.body, '::before').animationName"
+        )
+        check(flicker and flicker != "none", f"candle-flicker animation on ({flicker})")
+        # corner rune sigil actually renders content
+        sigil = page.evaluate(
+            "getComputedStyle(document.querySelector('.panel'), '::before').content"
+        )
+        check(sigil not in ("none", "normal", ""), f"panel corner sigil present ({sigil})")
 
         # --- scroll: click a constellation, land on the loaded myth text ---
         # Phone width: single column, legend is last, so there's room to scroll
@@ -134,7 +157,9 @@ def run_checks(url):
             check(False, "a constellation with a myth is available to click")
         else:
             card.scroll_into_view_if_needed()
-            page.evaluate("window.scrollTo(0, 0)")
+            page.evaluate("window.scrollTo({ top: 0, behavior: 'auto' })")
+            page.wait_for_timeout(300)
+            y_before = page.evaluate("window.scrollY")
             card.click()
             page.wait_for_selector(".myth-text", timeout=20000)
             # Poll until the smooth scroll settles the legend header near the top.
@@ -150,10 +175,28 @@ def run_checks(url):
             except Exception:
                 in_view = False
             check(in_view, "legend scrolled into view after myth loaded")
+            y_after = page.evaluate("window.scrollY")
+            check(y_after > y_before + 50,
+                  f"page actually scrolled down to the myth ({y_before}->{y_after})")
             active = page.evaluate(
                 "!!document.querySelector('.const-card.active')"
             )
             check(active, "clicked card marked active")
+            # readability: loaded myth text is bright (bone), not the old dim grey
+            myth_color = page.evaluate(
+                "getComputedStyle(document.querySelector('.myth-text')).color"
+            )
+            check(myth_color == "rgb(202, 202, 206)",
+                  f"myth text high contrast / bone ({myth_color})")
+            # drop cap renders large and blood-coloured
+            dc = page.evaluate(
+                """() => {
+                    const s = getComputedStyle(document.querySelector('.myth-text'), '::first-letter');
+                    return { size: parseFloat(s.fontSize), color: s.color };
+                }"""
+            )
+            check(dc["size"] >= 40 and dc["color"] == "rgb(138, 28, 28)",
+                  f"blood drop-cap on myth ({dc['size']}px {dc['color']})")
             page.screenshot(path=str(SHOTS / "myth-selected.png"), full_page=True)
 
         ctx.close()
