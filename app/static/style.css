@@ -600,7 +600,9 @@ body::after {
     align-content: start;
     gap: 1.75rem;
   }
-  .panel-sky    { grid-area: sky; align-self: start; }
+  /* stretch so the hero fills the right column's height instead of leaving a
+     gap below it; the map stays centered via the flex content box */
+  .panel-sky    { grid-area: sky; align-self: stretch; }
   .panel-moon   { grid-area: moon; }
   .panel-const  { grid-area: const; }
   .panel-legend { grid-area: legend; }
